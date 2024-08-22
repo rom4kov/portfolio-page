@@ -1,20 +1,20 @@
 import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
-import { Outlet } from "react-router-dom";
+import { Link, Outlet } from "react-router-dom";
 
 type previewProps = string;
 
 type previewState = {
   about: boolean;
   projects: boolean;
-  contact: boolean;
+  resume: boolean;
 };
 
 const Navigation = () => {
   const [showPreview, setShowPreview] = useState<previewState>({
     about: false,
     projects: false,
-    contact: false,
+    resume: false,
   });
 
   console.log(showPreview);
@@ -32,11 +32,17 @@ const Navigation = () => {
   return (
     <Fragment>
       <div className="w-fit h-[90vh] flex items-center">
-        <div className="flex flex-col items-start gap-3">
-          <div className="text-6xl font-extrabold mb-1">Roman Kowert</div>
-          <div className="text-2xl font-bold mb-4">Fullstack Web Engineer</div>
+        <div className="flex flex-col items-start">
+          <div className="hover:text-tokyoblue-500 transition-all">
+            <Link to="/">
+              <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
+              <div className="text-2xl text-left font-bold mb-8 font-normal">
+                Fullstack Web Engineer
+              </div>
+            </Link>
+          </div>
           <div
-            className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
+            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
             onMouseEnter={() => {
               handlePreview("about");
             }}
@@ -44,10 +50,10 @@ const Navigation = () => {
               handlePreview("about");
             }}
           >
-            About
+            <Link to="/about">About</Link>
           </div>
           <div
-            className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
+            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
             onMouseEnter={() => handlePreview("projects")}
             onMouseLeave={() => {
               handlePreview("projects");
@@ -56,49 +62,66 @@ const Navigation = () => {
             Projects
           </div>
           <div
-            className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
-            onMouseEnter={() => handlePreview("contact")}
+            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
+            onMouseEnter={() => handlePreview("resume")}
             onMouseLeave={() => {
-              handlePreview("contact");
+              handlePreview("resume");
             }}
           >
-            Contact
+            Resume
           </div>
         </div>
       </div>
       <div>
-        <div
-          className={
-            Object.values(showPreview).some(Boolean)
-              ? "opacity-0 transition-all"
-              : "opacity-100 transition-all mt-16"
-          }
-        >
-          <Outlet />
-        </div>
-        <div
-          className={
-            showPreview.about
-              ? "relative opacity-100 right-4 transition-all"
-              : "opacity-0 transition-all"
-          }
-        >
-          Preview of About Page
-        </div>
-          <div className={
-            showPreview.projects
-              ? "relative opacity-100 right-4 transition-all"
-              : "opacity-0 transition-all"
-          }
-        >
-          Preview of Projects Page
-        </div>
-          <div className={
-            showPreview.contact
-              ? "relative opacity-100 right-4 transition-all"
-              : "opacity-0 transition-all"
-          }>
-          Preview of Contact Page
+        <div className="relative -mt-6">
+          <div
+            className={
+              Object.values(showPreview).some(Boolean)
+                ? "relative opacity-0 translate-y-8 transition-all"
+                : "relative opacity-100 transition-all delay-100"
+            }
+          >
+            <Outlet />
+          </div>
+          <div
+            className={
+              showPreview.about
+                ? "absolute opacity-100 transition-all delay-200 -mt-60 ml-24"
+                : "absolute opacity-0 -translate-y-8 transition-all -mt-60 ml-24"
+            }
+          >
+            <p className="text-lg text-right leading-8">
+              Discover more about my journey into web development, my core
+              philosophies, and the principles guiding my approach to building
+              the web.
+            </p>
+          </div>
+          <div
+            className={
+              showPreview.projects
+                ? "absolute opacity-100 transition-all delay-200 -mt-60 ml-24"
+                : "absolute opacity-0 -translate-y-8 transition-all -mt-60 ml-24"
+            }
+          >
+            <p className="text-lg text-right leading-8 italic">
+              Explore my portfolio of web development projects, showcasing
+              innovative solutions, clean code, and a commitment to user-centric
+              design.
+            </p>
+          </div>
+          <div
+            className={
+              showPreview.resume
+                ? "absolute opacity-100 transition-all delay-200 -mt-60 ml-24"
+                : "absolute opacity-0 -translate-y-8 transition-all -mt-60 ml-24"
+            }
+          >
+            <p className="text-lg text-right leading-8 italic">
+              Review my professional journey and qualifications through my
+              comprehensive resume, highlighting my skills, experiences, and
+              achievements in web development.
+            </p>
+          </div>
         </div>
       </div>
     </Fragment>
