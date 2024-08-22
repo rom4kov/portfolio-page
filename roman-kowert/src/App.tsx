@@ -1,33 +1,49 @@
-import { useState, useEffect } from 'react'
-import { Routes, Route } from 'react-router-dom'
-import Navigation from './routes/navigation/navigation.component'
-import Home from './routes/home/home.component'
-import About from './routes/about/about.component'
-import axios from 'axios'
-import './App.css'
+import { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom";
+import Navigation from "./routes/navigation/navigation.component";
+import Home from "./routes/home/home.component";
+import About from "./routes/about/about.component";
+import axios from "axios";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [array, setArray] = useState([])
+  const [contentPosition, setContentPosition] = useState("items-center");
+
+  const [count, setCount] = useState(0);
+  const [array, setArray] = useState([]);
+
+  const location = useLocation();
+  console.log(location.pathname);
+
+  useEffect(() => {
+    if (location.pathname === "/") {
+      setContentPosition("mt-80");
+    } else {
+      setContentPosition("mt-12");
+    }
+  }, [location])
+
 
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:5000/api/users");
-    console.log(response.data.users)
-    setArray(response.data.users)
-  }
+    console.log(response.data.users);
+    setArray(response.data.users);
+  };
 
   useEffect(() => {
-    fetchAPI()
-  }, [])
+    fetchAPI();
+  }, []);
 
   return (
-    <Routes>
-      <Route path='/' element={<Navigation/>}>
-        <Route index element={<Home />} />
-        <Route path='about' element={<About />} />
-      </Route>
-    </Routes>
-  )
+    <div className={`flex justify-between ${contentPosition} h-[90vh] transition-all delay-300 duration-500`}>
+      <Routes>
+        <Route path="/" element={<Navigation />}>
+          <Route index element={<Home />} />
+          <Route path="about" element={<About />} />
+        </Route>
+      </Routes>
+    </div>
+  );
 }
 
-export default App
+export default App;
