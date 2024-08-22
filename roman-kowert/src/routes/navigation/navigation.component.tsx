@@ -4,15 +4,29 @@ import { Outlet } from "react-router-dom";
 
 type previewProps = string;
 
+type previewState = {
+  about: boolean;
+  projects: boolean;
+  contact: boolean;
+};
+
 const Navigation = () => {
-  const [showPreview, setShowPreview] = useState({
+  const [showPreview, setShowPreview] = useState<previewState>({
     about: false,
-    project: false,
+    projects: false,
     contact: false,
   });
 
-  const handlePreview = (page: previewProps) => {
-    console.log(page);
+  console.log(showPreview);
+
+  const handlePreview = (hoveredPage: previewProps) => {
+    setShowPreview((prev): previewState => {
+      return Object.keys(prev).reduce((acc, page) => {
+        acc[page as keyof previewState] =
+          page === hoveredPage ? !prev[page as keyof previewState] : false;
+        return acc;
+      }, {} as previewState);
+    });
   };
 
   return (
@@ -23,26 +37,70 @@ const Navigation = () => {
           <div className="text-2xl font-bold mb-4">Fullstack Web Engineer</div>
           <div
             className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
-            onMouseOver={() => handlePreview("about")}
+            onMouseEnter={() => {
+              handlePreview("about");
+            }}
+            onMouseLeave={() => {
+              handlePreview("about");
+            }}
           >
-            About{}
+            About
           </div>
-          <div className="hidden">Preview of About Page</div>
           <div
             className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
-            onMouseOver={() => handlePreview("projects")}
+            onMouseEnter={() => handlePreview("projects")}
+            onMouseLeave={() => {
+              handlePreview("projects");
+            }}
           >
             Projects
           </div>
-          <div className="hidden">Preview of Projects Page</div>
-          <div className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
-            onMouseOver={() => handlePreview("contact")}
+          <div
+            className="text-xl font-bold hover:text-red-400 hover:translate-x-4 transition-all cursor-pointer"
+            onMouseEnter={() => handlePreview("contact")}
+            onMouseLeave={() => {
+              handlePreview("contact");
+            }}
           >
             Contact
           </div>
         </div>
       </div>
-      <Outlet />
+      <div>
+        <div
+          className={
+            Object.values(showPreview).some(Boolean)
+              ? "opacity-0 transition-all"
+              : "opacity-100 transition-all mt-16"
+          }
+        >
+          <Outlet />
+        </div>
+        <div
+          className={
+            showPreview.about
+              ? "relative opacity-100 right-4 transition-all"
+              : "opacity-0 transition-all"
+          }
+        >
+          Preview of About Page
+        </div>
+          <div className={
+            showPreview.projects
+              ? "relative opacity-100 right-4 transition-all"
+              : "opacity-0 transition-all"
+          }
+        >
+          Preview of Projects Page
+        </div>
+          <div className={
+            showPreview.contact
+              ? "relative opacity-100 right-4 transition-all"
+              : "opacity-0 transition-all"
+          }>
+          Preview of Contact Page
+        </div>
+      </div>
     </Fragment>
   );
 };
