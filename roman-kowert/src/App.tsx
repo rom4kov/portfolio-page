@@ -7,13 +7,14 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [contentPosition, setContentPosition] = useState("items-center");
+  const [contentPosition, setContentPosition] = useState("mt-80");
 
   const [count, setCount] = useState(0);
   const [array, setArray] = useState([]);
 
   const location = useLocation();
   console.log(location.pathname);
+
 
   useEffect(() => {
     if (location.pathname === "/") {
@@ -37,7 +38,7 @@ function App() {
   return (
     <div className={`flex justify-between ${contentPosition} h-[90vh] transition-all delay-300 duration-500`}>
       <Routes>
-        <Route path="/" element={<Navigation />}>
+        <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
         </Route>

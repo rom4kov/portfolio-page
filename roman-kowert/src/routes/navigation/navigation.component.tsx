@@ -10,8 +10,11 @@ type previewState = {
   resume: boolean;
 };
 
-const Navigation = () => {
-  console.log("rendered");
+interface NavigationProps {
+  location: string;
+}
+
+const Navigation: React.FC<NavigationProps> = ({ location }) => {
   const [showPreview, setShowPreview] = useState<previewState>({
     about: false,
     projects: false,
@@ -57,7 +60,9 @@ const Navigation = () => {
             </Link>
           </div>
           <div
-            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
+            className={`py-2 text-xl font-bold ${
+              location === "/about" ? "text-tokyoblue-500 pl-4" : ""
+            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => {
               handlePreview("about");
             }}
@@ -107,7 +112,7 @@ const Navigation = () => {
               : "absolute top-0 right-0 w-64 opacity-0 -translate-y-8 transition-all ml-24"
           }
         >
-          <p className="text-lg text-right leading-8">
+          <p className="text-lg text-right leading-8 italic">
             Learn more about my journey into web development, my core
             philosophies, and the principles guiding my approach to building the
             web.
