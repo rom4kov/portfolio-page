@@ -3,6 +3,7 @@ import { Routes, Route, useLocation } from "react-router-dom";
 import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
 import About from "./routes/about/about.component";
+import Projects from "./routes/projects/projects.component";
 import axios from "axios";
 import "./App.css";
 
@@ -41,6 +42,7 @@ function App() {
         <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />
           <Route path="about" element={<About />} />
+          <Route path="projects" element={<Projects />} />
         </Route>
       </Routes>
     </div>

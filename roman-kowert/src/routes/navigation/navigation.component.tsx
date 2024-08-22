@@ -23,6 +23,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
   const [linkClicked, setLinkClicked] = useState(false);
 
   const handleLinkClicked = () => {
+    setLinkClicked(true);
     setShowPreview(
       (prev): previewState =>
         Object.keys(prev).reduce((acc, key) => {
@@ -30,7 +31,6 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
           return acc;
         }, {} as previewState),
     );
-    setLinkClicked(true);
   };
 
   const handlePreview = (hoveredPage: previewProps) => {
@@ -43,7 +43,9 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
         }, {} as previewState);
       });
     } else {
-      setLinkClicked(false);
+      setTimeout(() => {
+        setLinkClicked(false);
+      }, 500);
     }
   };
 
@@ -75,16 +77,22 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
             </Link>
           </div>
           <div
-            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
+            className={`py-2 text-xl font-bold ${
+              location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
+            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => handlePreview("projects")}
             onMouseLeave={() => {
               handlePreview("projects");
             }}
           >
-            Projects
+            <Link to="/projects" onClick={handleLinkClicked}>
+              Projects
+            </Link>
           </div>
           <div
-            className="py-2 text-xl font-bold hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"
+            className={`py-2 text-xl font-bold ${
+              location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
+            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => handlePreview("resume")}
             onMouseLeave={() => {
               handlePreview("resume");
