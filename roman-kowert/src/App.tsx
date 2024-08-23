@@ -16,15 +16,13 @@ function App() {
   const location = useLocation();
   console.log(location.pathname);
 
-
   useEffect(() => {
     if (location.pathname === "/") {
       setContentPosition("mt-80 h-[30vh]");
     } else {
       setContentPosition("mt-12 h-[80vh]");
     }
-  }, [location])
-
+  }, [location]);
 
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:5000/api/users");
@@ -37,12 +35,20 @@ function App() {
   }, []);
 
   return (
-    <div className={`flex justify-between ${contentPosition} transition-all duration-500`}>
+    <div
+      className={`flex justify-between ${contentPosition} transition-all duration-500`}
+    >
       <Routes>
         <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About location={location.pathname} />} />
-          <Route path="projects" element={<Projects location={location.pathname} />} />
+          <Route
+            path="about"
+            element={<About location={location.pathname} />}
+          />
+          <Route
+            path="projects"
+            element={<Projects location={location.pathname} />}
+          />
         </Route>
       </Routes>
     </div>

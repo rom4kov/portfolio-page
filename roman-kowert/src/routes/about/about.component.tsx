@@ -10,7 +10,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   useEffect(() => {
     if (location === "/about") {
       setTimeout(() => {
-        setHeight("h-[80vh]");
+        setHeight("h-fit");
       }, 300);
     } else {
       setHeight("h-0 hidden");

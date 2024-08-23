@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Link, Outlet } from "react-router-dom";
 
@@ -21,6 +21,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
     resume: false,
   });
   const [linkClicked, setLinkClicked] = useState(false);
+  const [titlePosition, setTitlePosition] = useState("")
 
   const handleLinkClicked = () => {
     setLinkClicked(true);
@@ -49,10 +50,22 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
     }
   };
 
+  useEffect(() => {
+    if (location === "/") {
+      setTitlePosition("")
+    } else {
+      setTimeout(() => {
+        setTitlePosition(location === "/" ? "" : "fixed top-20")
+      }, 500);
+    }
+  }, [location])
+
+  console.log(titlePosition);
+
   return (
     <Fragment>
       <div className="w-fit h-fit flex items-center">
-        <div className="flex flex-col items-start">
+        <div className={`flex flex-col t-20 items-start ${titlePosition}`}>
           <div className="hover:text-tokyoblue-500 transition-all">
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
@@ -62,7 +75,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
             </Link>
           </div>
           <div
-            className={`py-2 text-xl font-bold ${
+            className={`py-1 text-lg font-bold ${
               location === "/about" ? "text-tokyoblue-500 pl-4" : ""
             } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => {
@@ -77,7 +90,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
             </Link>
           </div>
           <div
-            className={`py-2 text-xl font-bold ${
+            className={`py-1 text-lg font-bold ${
               location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
             } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => handlePreview("projects")}
@@ -90,7 +103,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
             </Link>
           </div>
           <div
-            className={`py-2 text-xl font-bold ${
+            className={`py-1 text-lg font-bold ${
               location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
             } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
             onMouseEnter={() => handlePreview("resume")}
@@ -102,7 +115,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
           </div>
         </div>
       </div>
-      <div className="relative w-[30vw] flex items-center inline-block">
+      <div className="relative w-[30vw] flex justify-end items-start inline-block">
         <div className="relative invisible h-[25vh]"></div>
         <div
           className={
@@ -116,8 +129,8 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
         <div
           className={
             showPreview.about
-              ? "absolute top-0 right-0 w-64 opacity-100 transition-all delay-200 ml-24"
-              : "absolute top-0 right-0 w-64 opacity-0 -translate-y-8 transition-all ml-24"
+              ? "top-24 right-96 w-64 opacity-100 transition-all delay-200 ml-24"
+              : "top-24 right-96 w-64 opacity-0 -translate-y-8 transition-all ml-24"
           }
         >
           <p className="text-lg text-right leading-8 italic select-none z-0">
