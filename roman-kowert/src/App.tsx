@@ -19,9 +19,9 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("mt-80");
+      setContentPosition("mt-80 h-[30vh]");
     } else {
-      setContentPosition("mt-12");
+      setContentPosition("mt-12 h-[80vh]");
     }
   }, [location])
 
@@ -37,12 +37,12 @@ function App() {
   }, []);
 
   return (
-    <div className={`flex justify-between ${contentPosition} h-[90vh] transition-all delay-300 duration-500`}>
+    <div className={`flex justify-between ${contentPosition} transition-all duration-500`}>
       <Routes>
         <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />
-          <Route path="about" element={<About />} />
-          <Route path="projects" element={<Projects />} />
+          <Route path="about" element={<About location={location.pathname} />} />
+          <Route path="projects" element={<Projects location={location.pathname} />} />
         </Route>
       </Routes>
     </div>

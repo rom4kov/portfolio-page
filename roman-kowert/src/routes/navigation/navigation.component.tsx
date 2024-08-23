@@ -120,7 +120,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
               : "absolute top-0 right-0 w-64 opacity-0 -translate-y-8 transition-all ml-24"
           }
         >
-          <p className="text-lg text-right leading-8 italic">
+          <p className="text-lg text-right leading-8 italic select-none z-0">
             Learn more about my journey into web development, my core
             philosophies, and the principles guiding my approach to building the
             web.
