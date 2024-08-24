@@ -9,7 +9,7 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [contentPosition, setContentPosition] = useState("mt-80");
+  const [contentPosition, setContentPosition] = useState("mt-72");
 
   const [count, setCount] = useState(0);
   const [array, setArray] = useState([]);
@@ -19,7 +19,7 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("mt-80 h-[30vh]");
+      setContentPosition("mt-72 h-[30vh]");
     } else {
       setContentPosition("mt-12 h-[80vh]");
     }

@@ -33,7 +33,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
         <div className="flex gap-6">
           <img className="w-32 h-16 rounded-lg" src={image} alt="" />{" "}
           <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1">
+            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Piano Teacher
             </h3>
             <p className="text-md">
@@ -49,7 +49,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
         <div className="flex gap-6">
           <img className="w-32 h-16 rounded-lg" src={image2} alt="" />{" "}
           <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1">
+            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Psychotherapist
             </h3>
             <p className="text-md">
@@ -66,7 +66,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
         <div className="flex gap-6">
           <img className="w-32 h-16 rounded-lg" src={image3} alt="" />{" "}
           <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1">
+            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Psychotherapist
             </h3>
             <p className="text-md">
@@ -83,7 +83,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
         <div className="flex gap-6">
           <img className="w-32 h-16 rounded-lg" src={image4} alt="" />{" "}
           <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1">
+            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               E-Commerce Clothing Website
             </h3>
             <p className="text-md">
@@ -99,7 +99,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
         <div className="flex gap-6">
           <img className="w-32 h-16 rounded-lg" src={image5} alt="" />{" "}
           <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1">Campground Review Website</h3>
+            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">Campground Review Website</h3>
             <p className="text-md">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
               labore, hic, ab quisquam quam maxime excepturi nisi maiores

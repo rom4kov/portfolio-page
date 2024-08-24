@@ -2,17 +2,16 @@ import React from "react";
 
 const SocialMediaLinks = () => {
   return (
-    <ul className="ml-1 mt-8 flex items-center" aria-label="Social media">
+    <ul className="mt-8 mb-[0.6rem] flex items-end" aria-label="Social media">
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-slate-200"
+          className="block hover:text-tokyoblue-500 transition-colors"
           href="https://github.com/rom4kov"
           target="_blank"
           rel="noreferrer noopener"
           aria-label="GitHub (opens in a new tab)"
           title="GitHub"
         >
-          <span className="sr-only">GitHub</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 16 16"
@@ -26,14 +25,13 @@ const SocialMediaLinks = () => {
       </li>
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-slate-200"
+          className="block hover:text-tokyoblue-500 transition-colors"
           href="https://www.linkedin.com/in/roman-kowert-8887599a/"
           target="_blank"
           rel="noreferrer noopener"
           aria-label="LinkedIn (opens in a new tab)"
           title="LinkedIn"
         >
-          <span className="sr-only">LinkedIn</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 24 24"
@@ -47,14 +45,13 @@ const SocialMediaLinks = () => {
       </li>
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-slate-200"
+          className="block hover:text-tokyoblue-500 transition-colors"
           href="https://instagram.com/ruinsofreason"
           target="_blank"
           rel="noreferrer noopener"
           aria-label="Instagram (opens in a new tab)"
           title="Instagram"
         >
-          <span className="sr-only">Instagram</span>
           <svg
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 1000 1000"

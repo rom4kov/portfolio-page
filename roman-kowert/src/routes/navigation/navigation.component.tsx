@@ -12,9 +12,9 @@ type previewState = Record<Page, boolean>;
 
 type NavigationProps = {
   location: string;
-}
+};
 
-const Navigation= ({ location }: NavigationProps) => {
+const Navigation = ({ location }: NavigationProps) => {
   const [showPreview, setShowPreview] = useState<previewState>({
     about: false,
     projects: false,
