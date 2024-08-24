@@ -4,11 +4,12 @@ import { Link, Outlet } from "react-router-dom";
 
 import PageLinks from "../../components/page-links/page-links.component";
 import SocialMediaLinks from "../../components/social-media/social-media.component";
+import PagePreviews from "../../components/page-previews/page-previews.component.tsx";
 
 export type previewProps = string;
 
 export type Page = "about" | "projects" | "resume";
-type previewState = Record<Page, boolean>;
+export type previewState = Record<Page, boolean>;
 
 type NavigationProps = {
   location: string;
@@ -48,7 +49,6 @@ const Navigation = ({ location }: NavigationProps) => {
 
   const unblockPreview = () => {
     setLinkClicked(false);
-    console.log(linkClicked);
   };
 
   useEffect(() => {
@@ -82,58 +82,11 @@ const Navigation = ({ location }: NavigationProps) => {
           <SocialMediaLinks />
         </div>
       </div>
-      <div className="relative w-[30vw] flex justify-end items-start inline-block">
-        <div className="relative invisible h-[25vh]"></div>
-        <div
-          className={
-            Object.values(showPreview).some(Boolean)
-              ? "absolute top-0 right-0 h-fit opacity-0 translate-y-8 transition-all"
-              : "absolute top-0 right-0 h-fit opacity-100 transition-all delay-100"
-          }
-        >
-          <Outlet />
-        </div>
-        <div
-          className={
-            showPreview.about
-              ? "top-24 right-96 w-64 opacity-100 transition-all delay-200"
-              : "top-24 right-96 w-64 opacity-0 -translate-y-8 transition-all"
-          }
-        >
-          <p className="text-lg text-right leading-8 italic select-none z-0">
-            Learn more about my journey into web development, my core
-            philosophies, and the principles guiding my approach to building the
-            web.
-          </p>
-        </div>
-        <div
-          className={
-            showPreview.projects
-              ? "absolute top-0 right-0 w-64 opacity-100 transition-all delay-200 ml-24"
-              : "absolute top-0 right-0 w-64 opacity-0 -translate-y-8 transition-all ml-24"
-          }
-        >
-          <p className="text-lg text-right leading-8 italic">
-            Explore my portfolio of web development projects, showcasing
-            innovative solutions, clean code, and a commitment to user-centric
-            {"\u00A0"}
-            design.
-          </p>
-        </div>
-        <div
-          className={
-            showPreview.resume
-              ? "absolute top-0 right-0 w-64 opacity-100 transition-all delay-200 ml-24"
-              : "absolute top-0 right-0 w-64 opacity-0 -translate-y-8 transition-all ml-24"
-          }
-        >
-          <p className="text-lg text-right leading-8 italic">
-            Review my professional journey and qualifications through my
-            comprehensive resume, highlighting my skills, experiences, and
-            achievements in web development.
-          </p>
-        </div>
-      </div>
+      <PagePreviews
+        outlet={<Outlet />}
+        showPreview={showPreview}
+        location={location}
+      />
     </Fragment>
   );
 };
