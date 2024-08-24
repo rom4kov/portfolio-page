@@ -1,15 +1,16 @@
-import React, { MouseEventHandler } from "react";
+import { MouseEventHandler } from "react";
 import { Link } from "react-router-dom";
+import { Page } from "../../routes/navigation/navigation.component";
 
 
 type PageLinksProps = {
   unblockPreview: MouseEventHandler;
-  handlePreview: (arg0: string) => void;
+  handlePreview: (arg0: Page) => void;
   handleLinkClicked: MouseEventHandler;
   location: string;
 }
 
-const PageLinks: React.FC<PageLinksProps> = ({ unblockPreview, handlePreview, handleLinkClicked, location }) => {
+const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location }: PageLinksProps) => {
   return (
     <div className="flex flex-col items-start" onMouseLeave={unblockPreview}>
       <div

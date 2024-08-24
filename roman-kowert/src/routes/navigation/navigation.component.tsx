@@ -7,17 +7,14 @@ import SocialMediaLinks from "../../components/social-media/social-media.compone
 
 export type previewProps = string;
 
-type previewState = {
-  about: boolean;
-  projects: boolean;
-  resume: boolean;
-};
+export type Page = "about" | "projects" | "resume";
+type previewState = Record<Page, boolean>;
 
-interface NavigationProps {
+type NavigationProps = {
   location: string;
 }
 
-const Navigation: React.FC<NavigationProps> = ({ location }) => {
+const Navigation= ({ location }: NavigationProps) => {
   const [showPreview, setShowPreview] = useState<previewState>({
     about: false,
     projects: false,
@@ -37,7 +34,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
     );
   };
 
-  const handlePreview = (hoveredPage: string) => {
+  const handlePreview = (hoveredPage: Page) => {
     if (!linkClicked) {
       setShowPreview((prev): previewState => {
         return Object.keys(prev).reduce((acc, page) => {
