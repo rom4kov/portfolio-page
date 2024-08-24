@@ -4,6 +4,7 @@ import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
 import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
+import Resume from "./routes/resume/resume.component";
 import axios from "axios";
 import "./App.css";
 
@@ -48,6 +49,10 @@ function App() {
           <Route
             path="projects"
             element={<Projects location={location.pathname} />}
+          />
+          <Route
+            path="resume"
+            element={<Resume location={location.pathname} />}
           />
         </Route>
       </Routes>

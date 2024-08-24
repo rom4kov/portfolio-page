@@ -21,7 +21,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
     resume: false,
   });
   const [linkClicked, setLinkClicked] = useState(false);
-  const [titlePosition, setTitlePosition] = useState("")
+  const [titlePosition, setTitlePosition] = useState("");
 
   const handleLinkClicked = () => {
     setLinkClicked(true);
@@ -43,29 +43,28 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
           return acc;
         }, {} as previewState);
       });
-    } else {
-      setTimeout(() => {
-        setLinkClicked(false);
-      }, 500);
     }
+  };
+
+  const unblockPreview = () => {
+    setLinkClicked(false);
+    console.log(linkClicked);
   };
 
   useEffect(() => {
     if (location === "/") {
-      setTitlePosition("")
+      setTitlePosition("");
     } else {
       setTimeout(() => {
-        setTitlePosition(location === "/" ? "" : "fixed top-20")
+        setTitlePosition(location === "/" ? "" : "fixed top-20");
       }, 500);
     }
-  }, [location])
-
-  console.log(titlePosition);
+  }, [location]);
 
   return (
     <Fragment>
       <div className="w-fit h-fit flex items-center">
-        <div className={`flex flex-col t-20 items-start ${titlePosition}`}>
+        <div className={`flex flex-col items-start ${titlePosition}`}>
           <div className="hover:text-tokyoblue-500 transition-all">
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
@@ -75,43 +74,50 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
             </Link>
           </div>
           <div
-            className={`py-1 text-lg font-bold ${
-              location === "/about" ? "text-tokyoblue-500 pl-4" : ""
-            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
-            onMouseEnter={() => {
-              handlePreview("about");
-            }}
-            onMouseLeave={() => {
-              handlePreview("about");
-            }}
+            className="flex flex-col items-start"
+            onMouseLeave={unblockPreview}
           >
-            <Link to="/about" onClick={handleLinkClicked}>
-              About
-            </Link>
-          </div>
-          <div
-            className={`py-1 text-lg font-bold ${
-              location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
-            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
-            onMouseEnter={() => handlePreview("projects")}
-            onMouseLeave={() => {
-              handlePreview("projects");
-            }}
-          >
-            <Link to="/projects" onClick={handleLinkClicked}>
-              Projects
-            </Link>
-          </div>
-          <div
-            className={`py-1 text-lg font-bold ${
-              location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
-            } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
-            onMouseEnter={() => handlePreview("resume")}
-            onMouseLeave={() => {
-              handlePreview("resume");
-            }}
-          >
-            Resume
+            <div
+              className={`py-1 text-lg font-bold ${
+                location === "/about" ? "text-tokyoblue-500 pl-4" : ""
+              } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+              onMouseEnter={() => {
+                handlePreview("about");
+              }}
+              onMouseLeave={() => {
+                handlePreview("about");
+              }}
+            >
+              <Link to="/about" onClick={handleLinkClicked}>
+                About
+              </Link>
+            </div>
+            <div
+              className={`py-1 text-lg font-bold ${
+                location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
+              } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+              onMouseEnter={() => handlePreview("projects")}
+              onMouseLeave={() => {
+                handlePreview("projects");
+              }}
+            >
+              <Link to="/projects" onClick={handleLinkClicked}>
+                Projects
+              </Link>
+            </div>
+            <div
+              className={`py-1 text-lg font-bold ${
+                location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
+              } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+              onMouseEnter={() => handlePreview("resume")}
+              onMouseLeave={() => {
+                handlePreview("resume");
+              }}
+            >
+              <Link to="/resume" onClick={handleLinkClicked}>
+                Resume
+              </Link>
+            </div>
           </div>
         </div>
       </div>
@@ -129,8 +135,8 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
         <div
           className={
             showPreview.about
-              ? "top-24 right-96 w-64 opacity-100 transition-all delay-200 ml-24"
-              : "top-24 right-96 w-64 opacity-0 -translate-y-8 transition-all ml-24"
+              ? "top-24 right-96 w-64 opacity-100 transition-all delay-200"
+              : "top-24 right-96 w-64 opacity-0 -translate-y-8 transition-all"
           }
         >
           <p className="text-lg text-right leading-8 italic select-none z-0">
@@ -149,6 +155,7 @@ const Navigation: React.FC<NavigationProps> = ({ location }) => {
           <p className="text-lg text-right leading-8 italic">
             Explore my portfolio of web development projects, showcasing
             innovative solutions, clean code, and a commitment to user-centric
+            {"\u00A0"}
             design.
           </p>
         </div>
