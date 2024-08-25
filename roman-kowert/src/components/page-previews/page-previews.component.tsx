@@ -1,6 +1,8 @@
 import { useState, useEffect, ReactNode } from "react";
 import { previewState } from "../../routes/navigation/navigation.component";
 
+import projectsPreview from "../../assets/images/projects_preview_mono.png";
+
 type PagePreviewProps = {
   outlet: ReactNode;
   showPreview: previewState;
@@ -12,8 +14,8 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (location === "/") setPreviewPosition("absolute top-0 right-0");
-      else setPreviewPosition("fixed top-[5.5rem] right-[28rem]");
+      if (location === "/") setPreviewPosition("absolute -top-[1.5rem] right-0");
+      else setPreviewPosition("fixed top-[3.5rem] right-[28rem]");
     }, 500);
   }, [location]);
 
@@ -45,16 +47,11 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
       <div
         className={
           showPreview.projects
-            ? `${previewPostion} w-64 opacity-100 transition-all delay-200 ml-24`
-            : `${previewPostion} w-64 opacity-0 -translate-y-8 transition-all ml-24`
+            ? `${previewPostion} w-96 opacity-100 transition-all delay-200 ml-24`
+            : `${previewPostion} w-96 opacity-0 -translate-y-8 transition-all ml-24`
         }
       >
-        <p className="text-lg text-right leading-8 italic">
-          Explore my portfolio of web development projects, showcasing
-          innovative solutions, clean code, and a commitment to user-centric
-          {"\u00A0"}
-          design.
-        </p>
+        <img src={projectsPreview} alt="" className="w-[35rem] h-[22rem]" />
       </div>
       <div
         className={

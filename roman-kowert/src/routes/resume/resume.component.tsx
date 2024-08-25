@@ -114,7 +114,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
         <div className="flex gap-6">
           <span className="w-1/4 text-sm h-16 rounded-lg">
-            03/2023 - 10/2023
+            01/2022 - 05/2022
           </span>
           <div className="w-3/4">
             <h3 className="font-bold -mt-1 mb-1">
