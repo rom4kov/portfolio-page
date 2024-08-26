@@ -3,6 +3,7 @@ import { previewState } from "../../routes/navigation/navigation.component";
 
 import projectsPreview from "../../assets/images/projects_preview_mono.png";
 import asciiAvatar from "../../assets/images/ascii-art_edit3.png";
+import resumePreview from "../../assets/images/resume_preview3.png";
 
 type PagePreviewProps = {
   outlet: ReactNode;
@@ -58,11 +59,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} w-64 opacity-0 -translate-y-8 transition-all ml-24`
         }
       >
-        <p className="text-lg text-right leading-8 italic">
-          Review my professional journey and qualifications through my
-          comprehensive resume, highlighting my skills, experiences, and
-          achievements in web development.
-        </p>
+        <img src={resumePreview} alt="" className="w-[13rem] h-[18rem] mt-2" />
       </div>
     </div>
   );
