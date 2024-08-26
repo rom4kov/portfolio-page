@@ -54,9 +54,15 @@ const Navigation = ({ location }: NavigationProps) => {
   useEffect(() => {
     if (location === "/") {
       setTitlePosition("");
-    } else {
+    } else if (location === "/about") {
+      setTitlePosition("top-40");
       setTimeout(() => {
-        setTitlePosition(location === "/" ? "" : "fixed top-20");
+        setTitlePosition("fixed top-40");
+      }, 500);
+    } else {
+      setTitlePosition("top-20");
+      setTimeout(() => {
+        setTitlePosition("fixed top-20");
       }, 500);
     }
   }, [location]);
@@ -64,7 +70,7 @@ const Navigation = ({ location }: NavigationProps) => {
   return (
     <Fragment>
       <div className="w-fit h-fit flex items-center">
-        <div className={`flex flex-col items-start ${titlePosition}`}>
+        <div className={`flex flex-col items-start ${titlePosition} transition-all`}>
           <div className="hover:text-tokyoblue-500 transition-all">
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>

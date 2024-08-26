@@ -2,6 +2,7 @@ import { useState, useEffect, ReactNode } from "react";
 import { previewState } from "../../routes/navigation/navigation.component";
 
 import projectsPreview from "../../assets/images/projects_preview_mono.png";
+import asciiAvatar from "../../assets/images/ascii-art_edit3.png";
 
 type PagePreviewProps = {
   outlet: ReactNode;
@@ -14,8 +15,9 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (location === "/") setPreviewPosition("absolute -top-[1.5rem] right-0");
-      else setPreviewPosition("fixed top-[3.5rem] right-[28rem]");
+      if (location === "/") setPreviewPosition("absolute right-0");
+      else if (location === "/about") setPreviewPosition("fixed top-[10rem] right-[28rem]");
+      else setPreviewPosition("fixed top-[5.5rem] right-[28rem]");
     }, 500);
   }, [location]);
 
@@ -34,24 +36,20 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
       <div
         className={
           showPreview.about
-            ? `${previewPostion} w-64 opacity-100 transition-all delay-200`
-            : `${previewPostion} w-64 opacity-0 -translate-y-8 transition-all`
+            ? `${previewPostion} opacity-100 transition-all delay-200`
+            : `${previewPostion} opacity-0 -translate-y-8 transition-all`
         }
       >
-        <p className="text-lg text-right leading-8 italic select-none z-0">
-          Learn more about my journey into web development, my core
-          philosophies, and the principles guiding my approach to building the
-          web.
-        </p>
+        <img src={asciiAvatar} alt="" className="w-[19rem] h-[19rem]" />
       </div>
       <div
         className={
           showPreview.projects
-            ? `${previewPostion} w-96 opacity-100 transition-all delay-200 ml-24`
-            : `${previewPostion} w-96 opacity-0 -translate-y-8 transition-all ml-24`
+            ? `${previewPostion} opacity-100 transition-all delay-200 ml-24`
+            : `${previewPostion} opacity-0 -translate-y-8 transition-all ml-24`
         }
       >
-        <img src={projectsPreview} alt="" className="w-[35rem] h-[22rem]" />
+        <img src={projectsPreview} alt="" className="w-[24rem] h-[18rem] mt-2" />
       </div>
       <div
         className={

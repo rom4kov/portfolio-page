@@ -20,6 +20,8 @@ function App() {
   useEffect(() => {
     if (location.pathname === "/") {
       setContentPosition("mt-72 h-[30vh]");
+    } else if (location.pathname === "/about") {
+      setContentPosition("mt-32 h-[75vh]");
     } else {
       setContentPosition("mt-12 h-[80vh]");
     }
