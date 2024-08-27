@@ -21,7 +21,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
     <div
       className={`${height} transition-all relative flex flex-col gap-8 z-10 mb-36`}
     >
-      <h2 className="text-start text-2xl font-bold">
+      <h2 className="text-start text-2xl font-bold glow:text-glow">
         Recent Work as Freelancer
       </h2>
       <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">

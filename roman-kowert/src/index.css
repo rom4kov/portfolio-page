@@ -46,6 +46,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  --glow-color: #7aa2f7;
 }
 
 ::-webkit-scrollbar {
@@ -121,4 +122,21 @@ button:focus-visible {
   button {
     background-color: #f9f9f9;
   }
+}
+
+.glow-overlay {
+  --glow-size: 70rem;
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  user-select: none;
+  opacity: 0.2;
+  mask: radial-gradient(
+    var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
+    var(--glow-color) 1%,
+    transparent 70%
+  );
+  transition: 400ms mask ease;
+  background-color: var(--glow-color);
+  background-origin: content-box;
 }

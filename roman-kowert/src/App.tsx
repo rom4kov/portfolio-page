@@ -11,8 +11,8 @@ import "./App.css";
 function App() {
   const [contentPosition, setContentPosition] = useState("mt-72");
 
-  const [count, setCount] = useState(0);
-  const [array, setArray] = useState([]);
+  // const [count, setCount] = useState(0);
+  // const [array, setArray] = useState([]);
 
   const location = useLocation();
   console.log(location.pathname);
@@ -30,17 +30,39 @@ function App() {
   const fetchAPI = async () => {
     const response = await axios.get("http://localhost:5000/api/users");
     console.log(response.data.users);
-    setArray(response.data.users);
+    // setArray(response.data.users);
   };
 
   useEffect(() => {
     fetchAPI();
   }, []);
 
+
+  useEffect(() => {
+    const capture = document.querySelector("#root");
+
+    if (capture) {
+      const overlay = capture.querySelector(".glow-overlay");
+
+      (capture as HTMLDivElement).addEventListener("mousemove", (event) => {
+        const mouseEvent = event as MouseEvent;
+        const x = mouseEvent.pageX;
+        const y = mouseEvent.pageY;
+
+        if (overlay) {
+          (overlay as HTMLElement).style.setProperty("--glow-x", `${x}px`);
+          (overlay as HTMLElement).style.setProperty("--glow-y", `${y}px`);
+          (overlay as HTMLElement).style.setProperty("--glow-opacity", "1");
+        }
+      })
+    }
+  }, [])
+
   return (
-    <div
+    <div id="app-root"
       className={`flex justify-between ${contentPosition} transition-all duration-500`}
     >
+      <div className="relative z-20 glow-overlay"></div>
       <Routes>
         <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />

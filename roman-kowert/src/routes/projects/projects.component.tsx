@@ -28,10 +28,10 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
       className={`${height} transition-all relative flex flex-col items-center gap-8 z-10 mb-36`}
     >
       <div
-        className={`w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer`}
+        className={`w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer`}
       >
         <div className="flex gap-6">
-          <img className="w-32 h-16 rounded-lg" src={image} alt="" />{" "}
+          <img className="w-32 h-16 rounded" src={image} alt="" />{" "}
           <div className="grow">
             <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Piano Teacher
@@ -45,9 +45,9 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
           </div>
         </div>
       </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
         <div className="flex gap-6">
-          <img className="w-32 h-16 rounded-lg" src={image2} alt="" />{" "}
+          <img className="w-32 h-16 rounded" src={image2} alt="" />{" "}
           <div className="grow">
             <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Psychotherapist
@@ -62,9 +62,9 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
           </div>
         </div>
       </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
         <div className="flex gap-6">
-          <img className="w-32 h-16 rounded-lg" src={image3} alt="" />{" "}
+          <img className="w-32 h-16 rounded" src={image3} alt="" />{" "}
           <div className="grow">
             <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               Website for a Psychotherapist
@@ -79,9 +79,9 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
           </div>
         </div>
       </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
         <div className="flex gap-6">
-          <img className="w-32 h-16 rounded-lg" src={image4} alt="" />{" "}
+          <img className="w-32 h-16 rounded" src={image4} alt="" />{" "}
           <div className="grow">
             <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
               E-Commerce Clothing Website
@@ -95,9 +95,9 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
           </div>
         </div>
       </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
         <div className="flex gap-6">
-          <img className="w-32 h-16 rounded-lg" src={image5} alt="" />{" "}
+          <img className="w-32 h-16 rounded" src={image5} alt="" />{" "}
           <div className="grow">
             <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">Campground Review Website</h3>
             <p className="text-md">
