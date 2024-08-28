@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-import image from "../../assets/images/klavierunterricht.png";
-import image2 from "../../assets/images/brentrup.png";
-import image3 from "../../assets/images/bielefeld.png";
-import image4 from "../../assets/images/ykms.png";
-import image5 from "../../assets/images/wyldcamp.png";
+import image from "../../assets/images/klavierunterricht_compr.png";
+import image2 from "../../assets/images/brentrup_compr.png";
+import image3 from "../../assets/images/bielefeld_compr.png";
+import image4 from "../../assets/images/ykms_compr.png";
+import image5 from "../../assets/images/wyldcamp_compr.png";
 
 interface ProjectsProps {
   location: string;

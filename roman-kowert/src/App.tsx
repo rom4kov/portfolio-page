@@ -10,7 +10,7 @@ import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [contentPosition, setContentPosition] = useState("translate-y-64");
+  const [contentPosition, setContentPosition] = useState("top-64");
 
   // const [count, setCount] = useState(0);
   // const [array, setArray] = useState([]);
@@ -19,11 +19,11 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("translate-y-64");
+      setContentPosition("top-64");
     } else if (location.pathname === "/about") {
-      setContentPosition(`translate-y-20`);
+      setContentPosition(`top-20`);
     } else {
-      setContentPosition("translate-y-12");
+      setContentPosition("top-12");
     }
   }, [location]);
 

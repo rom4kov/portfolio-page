@@ -117,19 +117,3 @@ button:focus-visible {
     background-color: #f9f9f9;
   }
 }
-
-.glow-overlay {
-  --glow-size: 55rem;
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  user-select: none;
-  opacity: 0.1;
-  mask: radial-gradient(
-    var(--glow-size) var(--glow-size) at var(--glow-x) var(--glow-y),
-    var(--glow-color) 1%,
-    transparent 70%
-  );
-  transition: 400ms mask ease;
-  background-color: var(--glow-color);
-}
