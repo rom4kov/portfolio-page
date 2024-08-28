@@ -18,7 +18,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
     setTimeout(() => {
       if (location === "/") setPreviewPosition("absolute right-0");
       else if (location === "/about") setPreviewPosition("fixed top-[10rem] right-[28rem]");
-      else setPreviewPosition("fixed top-[5.5rem] right-[28rem]");
+      else setPreviewPosition("fixed top-[5.5rem] right-[21rem]");
     }, 500);
   }, [location]);
 

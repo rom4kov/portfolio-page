@@ -18,7 +18,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div className="flex">
+    <div className="flex" id="route-container">
       <div
         className={`${height} transition-all w-[40rem] text-lg text-right leading-10`}
       >

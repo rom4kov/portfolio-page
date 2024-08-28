@@ -18,8 +18,8 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div
-      className={`${height} transition-all relative flex flex-col gap-8 z-10 mb-36`}
+    <div id="route-container"
+      className={`${height} transition-all relative flex flex-col gap-8 z-10 mb-36 ml-auto`}
     >
       <h2 className="text-start text-2xl font-bold glow:text-glow">
         Recent Work as Freelancer

@@ -14,7 +14,7 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
   return (
     <div className="flex flex-col items-start" onMouseLeave={unblockPreview}>
       <div
-        className={`py-1 text-lg font-bold ${
+        className={`py-1 text-lg font-bold relative top-0 z-50 ${
           location === "/about" ? "text-tokyoblue-500 pl-4" : ""
         } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => {
@@ -29,7 +29,7 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
         </Link>
       </div>
       <div
-        className={`py-1 text-lg font-bold ${
+        className={`py-1 text-lg font-bold relative top-0 z-50 ${
           location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
         } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => handlePreview("projects")}
@@ -42,7 +42,7 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
         </Link>
       </div>
       <div
-        className={`py-1 text-lg font-bold ${
+        className={`py-1 text-lg font-bold relative top-0 z-50 ${
           location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
         } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => handlePreview("resume")}

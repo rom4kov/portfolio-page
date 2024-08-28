@@ -7,100 +7,100 @@ export default {
   content: ["./index.html", "./src/**/**/*.{js,ts,jsx,tsx}"],
   theme: {
     colors: {
-      transparent: 'transparent',
-      current: 'currentColor',
-      white: '#ffffff',
-      'tokyo-1': {
-        500: '#1f2335',
+      transparent: "transparent",
+      current: "currentColor",
+      white: "#ffffff",
+      "tokyo-1": {
+        500: "#1f2335",
       },
-      'tokyo-2': {
-        500: '#24283b',
+      "tokyo-2": {
+        500: "#24283b",
       },
-      'tokyo-3': {
-        500: '#292e42',
+      "tokyo-3": {
+        500: "#292e42",
       },
-      'tokyo-4': {
-        500: '#3b4261',
+      "tokyo-4": {
+        500: "#3b4261",
       },
-      'tokyo-5': {
-        500: '#414868',
+      "tokyo-5": {
+        500: "#414868",
       },
-      'tokyo-6': {
-        500: '#545c7e',
+      "tokyo-6": {
+        500: "#545c7e",
       },
-      'tokyo-7': {
-        500: '#565f89',
+      "tokyo-7": {
+        500: "#565f89",
       },
-      'tokyo-8': {
-        500: '#737aa2',
+      "tokyo-8": {
+        500: "#737aa2",
       },
-      'tokyo-9': {
-        500: '#a9b1d6',
+      "tokyo-9": {
+        500: "#a9b1d6",
       },
-      'tokyo-10': {
-        500: '#c0caf5',
+      "tokyo-10": {
+        500: "#c0caf5",
       },
-      'tokyo-11': {
-        500: '#394b70',
+      "tokyo-11": {
+        500: "#394b70",
       },
-      'tokyo-12': {
-        500: '#3d59a1',
+      "tokyo-12": {
+        500: "#3d59a1",
       },
-      'tokyo-13': {
-        500: '#7aa2f7',
+      "tokyo-13": {
+        500: "#7aa2f7",
       },
-      'tokyoblue': {
-        500: '#7dcfff',
+      tokyoblue: {
+        500: "#7dcfff",
       },
-      'tokyo-15': {
-        500: '#b4f9f8',
+      "tokyo-15": {
+        500: "#b4f9f8",
       },
-      'tokyo-16': {
-        500: '#bb9af7',
+      "tokyo-16": {
+        500: "#bb9af7",
       },
-      'tokyo-17': {
-        500: '#9d7cd8',
+      "tokyo-17": {
+        500: "#9d7cd8",
       },
-      'tokyo-18': {
-        500: '#ff9e64',
+      "tokyo-18": {
+        500: "#ff9e64",
       },
-      'tokyo-19': {
-        500: '#ffc777',
+      "tokyo-19": {
+        500: "#ffc777",
       },
-      'tokyo-20': {
-        500: '#c3e88d',
+      "tokyo-20": {
+        500: "#c3e88d",
       },
-      'tokyo-21': {
-        500: '#4fd6be',
+      "tokyo-21": {
+        500: "#4fd6be",
       },
-      'tokyo-22': {
-        500: '#41a6b5',
+      "tokyo-22": {
+        500: "#41a6b5",
       },
-      'tokyo-23': {
-        500: '#ff757f',
+      "tokyo-23": {
+        500: "#ff757f",
       },
-      'tokyo-24': {
-        500: '#c53b53',
+      "tokyo-24": {
+        500: "#c53b53",
       },
-      'tokyo-25': {
-        500: '#ff007c',
+      "tokyo-25": {
+        500: "#ff007c",
       },
     },
     extend: {},
   },
   plugins: [
     typography,
-    plugin(function({ addVariant }) {
-      addVariant("glow", ".glow-capture .glow-overlay &")
+    plugin(function ({ addVariant }) {
+      addVariant("glow", ".glow-capture .glow-overlay &");
     }),
     {
       theme: {
         extend: {
           colors: {
-            glow: "color-mix(in srgb, var(--glow-color) calc(<alpha-value> * 100%), transparent)"
-          }
-        }
-      }
-    }
+            glow: "color-mix(in srgb, var(--glow-color) calc(<alpha-value> * 100%), transparent)",
+          },
+        },
+      },
+    },
   ],
 };

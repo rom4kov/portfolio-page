@@ -5,11 +5,13 @@ import Home from "./routes/home/home.component";
 import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
 import Resume from "./routes/resume/resume.component";
+import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 import axios from "axios";
 import "./App.css";
 
 function App() {
-  const [contentPosition, setContentPosition] = useState("mt-72");
+  const [contentPosition, setContentPosition] = useState("top-72");
+  const [fullPageHeight, setFullPageHeight] = useState("60vh");
 
   // const [count, setCount] = useState(0);
   // const [array, setArray] = useState([]);
@@ -19,11 +21,18 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("mt-72 h-[30vh]");
+      setFullPageHeight("60vh");
+      setContentPosition("top-72");
     } else if (location.pathname === "/about") {
-      setContentPosition("mt-32 h-[75vh]");
+      setTimeout(() => {
+        setFullPageHeight(`${document.documentElement.scrollHeight}px`);
+      }, 500);
+      setContentPosition(`top-32`);
     } else {
-      setContentPosition("mt-12 h-[80vh]");
+      setTimeout(() => {
+        setFullPageHeight(`${document.documentElement.scrollHeight}px`);
+      }, 500);
+      setContentPosition("top-12");
     }
   }, [location]);
 
@@ -37,32 +46,44 @@ function App() {
     fetchAPI();
   }, []);
 
+  // useEffect(() => {
+  //   const capture = document.querySelector(".glow-capture");
+  //
+  //   if (capture) {
+  //     // capture.style.height = document.documentElement.scrollHeight.toString() + "px";
+  //     const overlay = capture.querySelector(".glow-overlay");
+  //
+  //     (capture as HTMLBodyElement).addEventListener("mousemove", (event) => {
+  //       const mouseEvent = event as MouseEvent;
+  //       const x = mouseEvent.pageX;
+  //       const y = mouseEvent.pageY;
+  //
+  //       if (overlay) {
+  //         (overlay as HTMLElement).style.setProperty("--glow-x", `${x}px`);
+  //         (overlay as HTMLElement).style.setProperty("--glow-y", `${y}px`);
+  //         (overlay as HTMLElement).style.setProperty("--glow-opacity", "1");
+  //         (overlay as HTMLElement).style.setProperty("height", fullPageHeight);
+  //       }
+  //     });
+  //   }
+  // }, [location, fullPageHeight]);
 
-  useEffect(() => {
-    const capture = document.querySelector("#root");
-
-    if (capture) {
-      const overlay = capture.querySelector(".glow-overlay");
-
-      (capture as HTMLDivElement).addEventListener("mousemove", (event) => {
-        const mouseEvent = event as MouseEvent;
-        const x = mouseEvent.pageX;
-        const y = mouseEvent.pageY;
-
-        if (overlay) {
-          (overlay as HTMLElement).style.setProperty("--glow-x", `${x}px`);
-          (overlay as HTMLElement).style.setProperty("--glow-y", `${y}px`);
-          (overlay as HTMLElement).style.setProperty("--glow-opacity", "1");
-        }
-      })
-    }
-  }, [])
+  // const handleMouseMove = (event: MouseEvent) => {
+  //   const x = event.pageX;
+  //   const y = event.pageY;
+  //   const overlay = (event.target as HTMLElement).children[0];
+  //   (overlay as HTMLElement).style.setProperty("--glow-x", `${x}px`);
+  //   (overlay as HTMLElement).style.setProperty("--glow-y", `${y}px`);
+  //   (overlay as HTMLElement).style.setProperty("--glow-opacity", "1");
+  // };
 
   return (
-    <div id="app-root"
-      className={`flex justify-between ${contentPosition} transition-all duration-500`}
+    <div
+      id="app-root"
+      style={{ height: fullPageHeight }}
+      className={`flex justify-between ${contentPosition} transition-all duration-500 relative`}
     >
-      <div className="relative z-20 glow-overlay"></div>
+      <GlowCursor />
       <Routes>
         <Route path="/" element={<Navigation location={location.pathname} />}>
           <Route index element={<Home />} />
