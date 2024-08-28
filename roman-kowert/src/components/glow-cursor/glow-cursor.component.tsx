@@ -19,8 +19,8 @@ const GlowCursor = () => {
     <div
       style={{
         position: "fixed",
-        top: mousePosition.y - 550, // Adjust for center alignment
-        left: mousePosition.x - 550, // Adjust for center alignment
+        top: mousePosition.y - 650, // Adjust for center alignment
+        left: mousePosition.x - 850, // Adjust for center alignment
         width: "70rem", // Width of the glow effect
         height: "70rem", // Height of the glow effect
         pointerEvents: "none", // Ensure it doesn't block interactions

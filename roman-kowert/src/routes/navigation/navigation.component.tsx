@@ -22,7 +22,7 @@ const Navigation = ({ location }: NavigationProps) => {
     resume: false,
   });
   const [linkClicked, setLinkClicked] = useState(false);
-  const [titlePosition, setTitlePosition] = useState("");
+  // const [titlePosition, setTitlePosition] = useState("");
 
   const handleLinkClicked = () => {
     setLinkClicked(true);
@@ -51,26 +51,26 @@ const Navigation = ({ location }: NavigationProps) => {
     setLinkClicked(false);
   };
 
-  useEffect(() => {
-    if (location === "/") {
-      setTitlePosition("top-72");
-    } else if (location === "/about") {
-      setTitlePosition("top-28");
-      setTimeout(() => {
-        setTitlePosition("top-28");
-      }, 500);
-    } else {
-      setTitlePosition("top-20");
-      setTimeout(() => {
-        setTitlePosition("top-20");
-      }, 500);
-    }
-  }, [location]);
+  // useEffect(() => {
+  //   if (location === "/") {
+  //     setTitlePosition("translate-y-40");
+  //   } else if (location === "/about") {
+  //     setTitlePosition("translate-y-28");
+  //     setTimeout(() => {
+  //       setTitlePosition("top-28");
+  //     }, 500);
+  //   } else {
+  //     setTitlePosition("top-20");
+  //     setTimeout(() => {
+  //       setTitlePosition("top-20");
+  //     }, 500);
+  //   }
+  // }, [location]);
 
   return (
     <Fragment>
       <div className="overflow-y-auto w-fit h-fit flex items-center">
-        <div className={`fixed flex flex-col items-start ${titlePosition} transition-all duration-500`}>
+        <div className={`fixed flex flex-col items-start top-8`}>
           <div className="hover:text-tokyoblue-500 transition-all duration-300">
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
