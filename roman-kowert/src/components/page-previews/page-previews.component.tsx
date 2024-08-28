@@ -2,7 +2,7 @@ import { useState, useEffect, ReactNode } from "react";
 import { previewState } from "../../routes/navigation/navigation.component";
 
 import projectsPreview from "../../assets/images/projects_preview_mono.png";
-import asciiAvatar from "../../assets/images/ascii-art_edit3.png";
+import asciiAvatar from "../../assets/images/ascii-art_edit4.png";
 import resumePreview from "../../assets/images/resume_preview3.png";
 
 type PagePreviewProps = {
