@@ -16,8 +16,8 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
 
   useEffect(() => {
     setTimeout(() => {
-      if (location === "/") setPreviewPosition("absolute right-0");
-      else if (location === "/about") setPreviewPosition("fixed top-[10rem] right-[28rem]");
+      if (location === "/") setPreviewPosition("absolute top-1 right-0");
+      else if (location === "/about") setPreviewPosition("fixed top-[7.5rem] right-[21rem]");
       else setPreviewPosition("fixed top-[5.5rem] right-[21rem]");
     }, 500);
   }, [location]);

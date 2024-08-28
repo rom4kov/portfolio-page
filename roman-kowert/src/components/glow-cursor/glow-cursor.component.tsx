@@ -27,7 +27,7 @@ const GlowCursor = () => {
         // mask: `radial-gradient(55rem 55rem at ${mousePosition.x - 450}px ${mousePosition.y - 450}px, var(--glow-color) 1%, transparent 70%)`,
         background: "radial-gradient(circle, var(--glow-color) 20%, rgba(255, 255, 255, 0.05) 40%, rgba(255, 255, 255, 0) 60%",
         // transition: "200ms top, 200ms left",
-        opacity: 0.4,
+        opacity: 0.6,
         borderRadius: "50%", // Make it circular
         zIndex: 9999, // Ensure it stays on top
       }}

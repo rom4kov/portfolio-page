@@ -40,7 +40,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #ffffffA5;
+  color: #ffffffD5;
   background-color: #1f2335;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -79,10 +79,6 @@ a {
   text-decoration: inherit;
 }
 
-body {
-  width: 100vw;
-}
-
 h1 {
   font-size: 3.2em;
   line-height: 1.1;
@@ -99,9 +95,11 @@ button {
   cursor: pointer;
   transition: border-color 0.25s;
 }
+
 button:hover {
   border-color: #646cff;
 }
+
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
