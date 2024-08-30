@@ -5,6 +5,8 @@ import Home from "./routes/home/home.component";
 import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
 import Resume from "./routes/resume/resume.component";
+import Admin from "./routes/admin/admin.component";
+
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 import axios from "axios";
 import "./App.css";
@@ -59,6 +61,7 @@ function App() {
             element={<Resume location={location.pathname} />}
           />
         </Route>
+        <Route path="admin" element={<Admin location={location.pathname} />} />
       </Routes>
     </div>
   );
