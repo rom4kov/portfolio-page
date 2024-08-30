@@ -21,6 +21,7 @@ const Navigation = ({ location }: NavigationProps) => {
     projects: false,
     resume: false,
   });
+
   const [linkClicked, setLinkClicked] = useState(false);
   const [titlePosition, setTitlePosition] = useState("");
 
