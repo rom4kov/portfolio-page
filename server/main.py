@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from flask_login import LoginManager
@@ -7,6 +7,7 @@ from sqlalchemy.orm import DeclarativeBase
 
 import os
 from dotenv import load_dotenv
+import json
 
 
 app = Flask(__name__)
@@ -50,6 +51,15 @@ def users():
             ]
         }
     )
+
+
+@app.route("/api/register", methods=['POST'])
+def register():
+    data = request.get_json()['body']
+
+    print(data['email'])
+
+    return jsonify({"msg": "request send"})
 
 
 if __name__ == "__main__":
