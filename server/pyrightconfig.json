@@ -2,7 +2,7 @@
     "executionEnvironments": [
         {"root": "."}
     ],
-    "venvPath": ".",
+    "venvPath": "./",
     "venv": ".venv",  // replace "myenv" with your actual virtual environment folder
     "pythonVersion": "3.12",
     "pythonPlatform": "Linux"
