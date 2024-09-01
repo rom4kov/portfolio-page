@@ -11,3 +11,10 @@ class User(db.Model, UserMixin): # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
+
+
+
+class Project(db.Model): # type: ignore[name-defined]
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
