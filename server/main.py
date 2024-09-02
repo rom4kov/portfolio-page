@@ -8,6 +8,7 @@ from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
+import json
 from dotenv import load_dotenv
 
 
@@ -41,18 +42,27 @@ with app.app_context():
 def home():
     return jsonify({"text": ["Roman Kowert"]})
 
+#
+# @app.route("/api/users", methods=["GET"])
+# def users():
+#     return jsonify(
+#         {
+#             "users": [
+#                 "roman",
+#                 "rosa",
+#                 "karl",
+#             ]
+#         }
+#     )
+
 
 @app.route("/api/users", methods=["GET"])
-def users():
-    return jsonify(
-        {
-            "users": [
-                "roman",
-                "rosa",
-                "karl",
-            ]
-        }
-    )
+def get_users():
+    all_users = db.session.execute(db.select(User).order_by(User.id)).scalars()
+    all_users_dict = [user.to_dict() for user in all_users]
+    print(all_users_dict)
+
+    return jsonify(users=all_users_dict)
 
 
 @app.route("/api/register", methods=["POST"])
@@ -74,10 +84,7 @@ def register():
             db.select(User).where(User.email == data["email"])
         ).scalar()
         login_user(user)
-
-    print(data["email"])
-
-    return jsonify({"msg": "request send" })
+    return jsonify(user_email=current_user.email)
 
 
 if __name__ == "__main__":

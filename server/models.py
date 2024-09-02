@@ -7,20 +7,22 @@ from extensions import db
 from typing import List, Dict, Any, Optional
 
 
-class User(db.Model, UserMixin): # type: ignore[name-defined]
+class User(db.Model, UserMixin):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     email: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     password: Mapped[str] = mapped_column(String(255), nullable=False)
 
+    def to_dict(self):
+        return {"id": self.id, "email": self.email}
 
-class Project(db.Model): # type: ignore[name-defined]
+
+class Project(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
 
 
-class Occupation(db.Model): # type: ignore[name-defined]
+class Occupation(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
-
