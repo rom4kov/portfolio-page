@@ -43,6 +43,7 @@ export const UserProvider = ({ children }: UserProviderChildren) => {
     getUsers();
   }, []);
 
+
   return (
     <UserContext.Provider value={value}>
       {!loading && children}

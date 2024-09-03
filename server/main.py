@@ -2,7 +2,7 @@ from flask import Flask, jsonify, request
 from flask_cors import CORS
 
 from extensions import db
-from flask_login import LoginManager, current_user, login_user
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user
 from sqlalchemy.orm import DeclarativeBase
 from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
@@ -87,6 +87,13 @@ def register():
     return jsonify(user_email=current_user.email)
 
 
+
+@login_manager.user_loader
+def load_user(user_id):
+    return db.get_or_404(User, user_id)
+
+
+
 @app.route("/api/login", methods=["POST"])
 def login():
     data = request.get_json()["body"]
@@ -97,6 +104,12 @@ def login():
             return jsonify(user_email=user.email)
     return jsonify(user_email="no user found")
 
+
+@login_required
+@app.route("/api/logout", methods=["GET", "POST"])
+def logout():
+    logout_user()
+    return jsonify("user was logged out")
 
 
 if __name__ == "__main__":

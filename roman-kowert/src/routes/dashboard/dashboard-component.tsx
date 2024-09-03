@@ -1,9 +1,17 @@
-import React from 'react'
+import axios from "axios";
 
 const Dashboard = () => {
-  return (
-    <div>Dashboard</div>
-  )
-}
+  const handleLogout = async () => {
+    const response = await axios.post("http://localhost:5000/api/logout")
+    console.log(response.data);
+  }
 
-export default Dashboard
+  return (
+    <div>
+      <h1>Dashboard</h1>
+      <button onClick={handleLogout}>Logout</button>
+    </div>
+  );
+};
+
+export default Dashboard;
