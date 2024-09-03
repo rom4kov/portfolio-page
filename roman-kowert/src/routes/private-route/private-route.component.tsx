@@ -1,13 +1,14 @@
-import { useState, useEffect, Children } from "react";
+import { useEffect, useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
 import { Navigate } from "react-router-dom";
 
 type PrivateRouteProps = {
-  children: typeof Children
+  children: JSX.Element
 }
 
 const PrivateRoute = ({ children }: PrivateRouteProps ) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const { currentUser } = useContext(UserContext);
+  console.log(currentUser);
 
   useEffect(() => {
     // const unsubscribe = onAuthStateChangedListener((user) => {
@@ -22,7 +23,7 @@ const PrivateRoute = ({ children }: PrivateRouteProps ) => {
   //   return <Spinner loading={loading} />
   // }
 
-  return user ? children : <Navigate to="/" />;
+  return currentUser ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;

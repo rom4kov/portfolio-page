@@ -6,6 +6,7 @@ import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
 import Resume from "./routes/resume/resume.component";
 import Admin from "./routes/admin/admin.component";
+import PrivateRoute from "./routes/private-route/private-route.component";
 import Dashboard from "./routes/dashboard/dashboard-component";
 
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
@@ -63,7 +64,14 @@ function App() {
           />
         </Route>
         <Route path="admin" element={<Admin />} />
-        <Route path="admin/dashboard" element={<Dashboard />} />
+        <Route
+          path="admin/dashboard"
+          element={
+            <PrivateRoute>
+              <Dashboard />
+            </PrivateRoute>
+          }
+        />
       </Routes>
     </div>
   );
