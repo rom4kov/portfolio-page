@@ -39,7 +39,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={asciiAvatar} alt="" className="w-[19rem] h-[19rem]" />
+        <img src={asciiAvatar} alt="" className="w-[17.5rem] h-[17.5rem]" />
       </div>
       <div
         className={
@@ -48,7 +48,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={projectsPreview} alt="" className="w-[24rem] h-[18rem] mt-2" />
+        <img src={projectsPreview} alt="" className="w-[22rem] h-[17rem] mt-2" />
       </div>
       <div
         className={
@@ -57,7 +57,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={resumePreview} alt="" className="w-[13rem] h-[18rem] mt-2" />
+        <img src={resumePreview} alt="" className="w-[12rem] h-[17rem] mt-2" />
       </div>
     </div>
   );

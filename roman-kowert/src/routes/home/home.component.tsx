@@ -3,7 +3,7 @@ import React from "react";
 const Home = () => {
   return (
     <div id="route-container" className="h-full flex items-center">
-      <div className="w-[22rem] text-2xl text-right leading-[2.35rem]">
+      <div className="w-[22rem] text-2xl text-right leading-[2.175rem]">
         Hello. I'm Roman, a Fullstack Web Developer versed in{" "}
         <span className="text-tokyoblue-500">React</span>,{" "}
         <span className="text-tokyoblue-500">Node.js</span> and{" "}

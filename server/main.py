@@ -87,5 +87,17 @@ def register():
     return jsonify(user_email=current_user.email)
 
 
+@app.route("/api/login", methods=["POST"])
+def login():
+    data = request.get_json()["body"]
+    user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
+    if user:
+        if check_password_hash(user.password, data["password"]):
+            login_user(user)
+            return jsonify(user_email=user.email)
+    return jsonify(user_email="no user found")
+
+
+
 if __name__ == "__main__":
     app.run(debug=True)
