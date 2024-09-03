@@ -6,6 +6,7 @@ import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
 import Resume from "./routes/resume/resume.component";
 import Admin from "./routes/admin/admin.component";
+import Dashboard from "./routes/dashboard/dashboard-component";
 
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 import axios from "axios";
@@ -61,7 +62,8 @@ function App() {
             element={<Resume location={location.pathname} />}
           />
         </Route>
-        <Route path="admin" element={<Admin location={location.pathname} />} />
+        <Route path="admin" element={<Admin />} />
+        <Route path="admin/dashboard" element={<Dashboard />} />
       </Routes>
     </div>
   );

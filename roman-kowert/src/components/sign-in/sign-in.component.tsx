@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, FormEvent, FormEventHandler } from "react";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
 type UserData = {
@@ -15,6 +16,9 @@ type SignInProps = {
 };
 
 const SignIn = ({ loginData, setLoginData, setCurrentUser }: SignInProps) => {
+
+  const navigate = useNavigate();
+
   const handleSignIn: FormEventHandler = async (
     event: FormEvent<HTMLFormElement>,
   ) => {
@@ -31,7 +35,9 @@ const SignIn = ({ loginData, setLoginData, setCurrentUser }: SignInProps) => {
       },
     });
     setCurrentUser(response.data);
+    navigate("/admin/dashboard");
   };
+
   return (
     <div>
       <h1 className="text-center mb-5">Login</h1>
