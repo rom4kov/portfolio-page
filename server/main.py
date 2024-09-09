@@ -1,19 +1,18 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
 
 from extensions import db
-from flask_login import LoginManager, current_user, login_required, login_user, logout_user
+from flask_login import LoginManager, current_user, login_required, login_user, logout_user, user_logged_out
 from sqlalchemy.orm import DeclarativeBase
 from models import User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
-import json
 from dotenv import load_dotenv
 
 
 app = Flask(__name__)
-cors = CORS(app, origins="*")
+cors = CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
 
 
 load_dotenv()
@@ -28,11 +27,12 @@ class Base(DeclarativeBase):
     pass
 
 
-login_manager = LoginManager()
 
 db.init_app(app)
 
+login_manager = LoginManager()
 login_manager.init_app(app)
+
 
 with app.app_context():
     db.create_all()
@@ -42,27 +42,23 @@ with app.app_context():
 def home():
     return jsonify({"text": ["Roman Kowert"]})
 
-#
-# @app.route("/api/users", methods=["GET"])
-# def users():
-#     return jsonify(
-#         {
-#             "users": [
-#                 "roman",
-#                 "rosa",
-#                 "karl",
-#             ]
-#         }
-#     )
+
+@login_manager.user_loader
+def load_user(user_id):
+    print(user_id)
+    return db.get_or_404(User, user_id)
 
 
 @app.route("/api/users", methods=["GET"])
 def get_users():
-    all_users = db.session.execute(db.select(User).order_by(User.id)).scalars()
-    all_users_dict = [user.to_dict() for user in all_users]
-    print(all_users_dict)
+    count = db.session.query(User).count()
+    return jsonify(users=count, logged_in=current_user.is_authenticated)
 
-    return jsonify(users=all_users_dict)
+
+@app.route("/api/auth_state", methods=["GET"])
+def get_auth_state():
+    print("user_auth_state in auth_state route:", current_user.is_authenticated)
+    return jsonify(auth_state=current_user.is_authenticated)
 
 
 @app.route("/api/register", methods=["POST"])
@@ -87,29 +83,41 @@ def register():
     return jsonify(user_email=current_user.email)
 
 
+@app.before_request
+def handle_preflight():
+    if request.method == "OPTIONS":
+        print("in OPTIONS handler: ", request.method)
+        response = make_response("", 200)
+        response.headers['X-Content-Type-Options'] = '*'
+        return response
 
-@login_manager.user_loader
-def load_user(user_id):
-    return db.get_or_404(User, user_id)
 
-
-
-@app.route("/api/login", methods=["POST"])
+@app.route("/api/login", methods=["OPTIONS", "POST"])
 def login():
-    data = request.get_json()["body"]
-    user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
-    if user:
-        if check_password_hash(user.password, data["password"]):
-            login_user(user)
-            return jsonify(user_email=user.email)
-    return jsonify(user_email="no user found")
+    # if request.method == "OPTIONS":
+    #     response = make_response("", 200)
+    #     return response
+    if request.method == "POST":
+        print("in POST handler: ", request.method)
+        data = request.get_json()
+        print("data:", data)
+        user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
+        print("user:", user)
+        if user:
+            if check_password_hash(user.password, data["password"]):
+                login_user(user, remember=True)
+                print("user_auth_state:", current_user.is_authenticated)
+                return jsonify(email=user.email, authenticated=current_user.is_authenticated)
+        return jsonify(user_email="no user found")
+    return "", 200
 
 
+@app.route("/api/logout", methods=["POST"])
 @login_required
-@app.route("/api/logout", methods=["GET", "POST"])
 def logout():
     logout_user()
-    return jsonify("user was logged out")
+    print("user_auth_state on logout:", current_user.is_authenticated)
+    return jsonify(is_authenticated=current_user.is_authenticated)
 
 
 if __name__ == "__main__":

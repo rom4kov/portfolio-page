@@ -11,10 +11,7 @@ type UserData = {
   user_email: string;
 };
 
-type Users = {
-  users: Array<UserData>;
-  length: number | undefined;
-};
+type Users = number | null;
 
 const Admin = () => {
   const [loginData, setLoginData] = useState<FormData>({
@@ -24,7 +21,6 @@ const Admin = () => {
   const [currentUser, setCurrentUser] = useState<UserData>({ user_email: "" });
   const [users, setUsers] = useState<Users>();
   const [loading, setLoading] = useState<boolean>(true);
-  console.log(loading);
 
   useEffect(() => {
     setLoading(true);
@@ -36,7 +32,8 @@ const Admin = () => {
     getUsers();
   }, []);
 
-  console.log(users?.length);
+  console.log(users);
+  console.log(currentUser);
 
   return (
     <div className="flex flex-col items-center justify-center w-full h-96">
@@ -45,7 +42,7 @@ const Admin = () => {
       </div>
       {!loading && (
         <div>
-          {users?.length ? (
+          {users && users > 0 ? (
             <SignIn
               loginData={loginData}
               setLoginData={setLoginData}

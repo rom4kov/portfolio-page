@@ -1,4 +1,6 @@
 import { Dispatch, SetStateAction, FormEvent, FormEventHandler } from "react";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
@@ -15,8 +17,8 @@ type SignInProps = {
   setCurrentUser: Dispatch<SetStateAction<UserData>>;
 };
 
-const SignIn = ({ loginData, setLoginData, setCurrentUser }: SignInProps) => {
-
+const SignIn = ({ loginData, setLoginData }: SignInProps) => {
+  const { setCurrentUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const handleSignIn: FormEventHandler = async (
@@ -24,18 +26,22 @@ const SignIn = ({ loginData, setLoginData, setCurrentUser }: SignInProps) => {
   ) => {
     event.preventDefault();
 
-    const response = await axios.post("http://localhost:5000/api/login", {
-      method: "POST",
+    const data = {
+      email: loginData.email,
+      password: loginData.password,
+    };
+
+    const response = await axios.post("http://localhost:5000/api/login", data, {
       headers: {
         "Content-Type": "application/json",
       },
-      body: {
-        email: loginData.email,
-        password: loginData.password,
-      },
+      withCredentials: true,
     });
+    console.log(response.data);
     setCurrentUser(response.data);
-    navigate("/admin/dashboard");
+    setTimeout(() => {
+      navigate("/admin/dashboard");
+    }, 1000);
   };
 
   return (

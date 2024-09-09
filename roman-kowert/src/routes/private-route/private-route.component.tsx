@@ -1,30 +1,28 @@
-import { useEffect, useContext } from "react";
+import { useState, useEffect, useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
+import axios from "axios";
+
 import { Navigate } from "react-router-dom";
 
 type PrivateRouteProps = {
-  children: JSX.Element
-}
+  children: JSX.Element;
+};
 
-const PrivateRoute = ({ children }: PrivateRouteProps ) => {
+const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { currentUser } = useContext(UserContext);
-  console.log(currentUser);
 
-  useEffect(() => {
-    // const unsubscribe = onAuthStateChangedListener((user) => {
-    //   setUser(user);
-    //   setLoading(false);
-    // });
+  // useEffect(() => {
+  //   const getUsers = async () => {
+  //     const response = await axios.get("http://localhost:5000/api/auth_state");
+  //     console.log(response.data);
+  //     setAuthState(response.data);
+  //   };
+  //   setTimeout(() => {
+  //     getUsers();
+  //   }, 1000);
+  // }, [])
 
-    // return () => unsubscribe();
-  }, []);
-
-  // if (loading) {
-  //   return <Spinner loading={loading} />
-  // }
-
-  return currentUser ? children : <Navigate to="/" />;
+  return currentUser?.authenticated ? children : <Navigate to="/" />;
 };
 
 export default PrivateRoute;
-
