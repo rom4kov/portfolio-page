@@ -1,14 +1,9 @@
 import {
   useState,
-  useEffect,
   createContext,
   Dispatch,
   SetStateAction,
 } from "react";
-
-import { useLocation } from "react-router-dom";
-
-import axios from "axios";
 
 type UserData = {
   email: string | null;
@@ -16,13 +11,11 @@ type UserData = {
 };
 
 type UserContext = {
-  loading: boolean;
   currentUser: UserData | null;
   setCurrentUser: Dispatch<SetStateAction<UserData | null>>;
 };
 
 export const UserContext = createContext<UserContext>({
-  loading: true,
   currentUser: null,
   setCurrentUser: () => null,
 } as UserContext);
@@ -33,26 +26,11 @@ type UserProviderChildren = {
 
 export const UserProvider = ({ children }: UserProviderChildren) => {
   const [currentUser, setCurrentUser] = useState<UserData | null>({ email: "", authenticated: false });
-  const [loading, setLoading] = useState<boolean>(true);
-  const value = { loading, currentUser, setCurrentUser };
-
-  const location = useLocation();
-
-  useEffect(() => {
-      setLoading(true);
-      // const getUsers = async () => {
-      //   const response = await axios.get("http://localhost:5000/api/users");
-      //   console.log(response.data);
-      //   setCurrentUser(response.data);
-        setLoading(false);
-      // };
-      // getUsers();
-  }, []);
-
+  const value = { currentUser, setCurrentUser };
 
   return (
     <UserContext.Provider value={value}>
-      {!loading && children}
+      {children}
     </UserContext.Provider>
   );
 };

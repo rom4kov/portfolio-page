@@ -7,17 +7,15 @@ import Projects from "./routes/projects/projects.component";
 import Resume from "./routes/resume/resume.component";
 import Admin from "./routes/admin/admin.component";
 import PrivateRoute from "./routes/private-route/private-route.component";
-import Dashboard from "./routes/dashboard/dashboard-component";
+import Dashboard from "./routes/dashboard/dashboard.component";
+import DashboardHome from "./routes/dashboard/dashboard-home.component";
 
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
-import axios from "axios";
+
 import "./App.css";
 
 function App() {
   const [contentPosition, setContentPosition] = useState("top-64");
-
-  // const [count, setCount] = useState(0);
-  // const [array, setArray] = useState([]);
 
   const location = useLocation();
 
@@ -30,16 +28,6 @@ function App() {
       setContentPosition("top-12");
     }
   }, [location]);
-
-  const fetchAPI = async () => {
-    const response = await axios.get("http://localhost:5000/api/users");
-    console.log(response.data.users);
-    // setArray(response.data.users);
-  };
-
-  useEffect(() => {
-    fetchAPI();
-  }, []);
 
   return (
     <div
@@ -71,7 +59,9 @@ function App() {
               <Dashboard />
             </PrivateRoute>
           }
-        />
+        >
+            <Route index element={<DashboardHome />} />
+        </Route>
       </Routes>
     </div>
   );

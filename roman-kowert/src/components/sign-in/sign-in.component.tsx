@@ -37,11 +37,8 @@ const SignIn = ({ loginData, setLoginData }: SignInProps) => {
       },
       withCredentials: true,
     });
-    console.log(response.data);
     setCurrentUser(response.data);
-    setTimeout(() => {
-      navigate("/admin/dashboard");
-    }, 1000);
+    navigate("/admin/dashboard");
   };
 
   return (

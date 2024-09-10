@@ -1,6 +1,9 @@
 import { useContext } from "react";
+import { Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import axios from "axios";
+
+import DashboardNav from "../../components/dashboard-nav/dashboard-nav.component";
 
 const Dashboard = () => {
   const { setCurrentUser } = useContext(UserContext);
@@ -12,17 +15,26 @@ const Dashboard = () => {
         withCredentials: true,
       },
     );
-    console.log(response.data);
     if (response.data.is_authenticated === false) {
-      console.log("false");
       setCurrentUser({ email: null, authenticated: false });
     }
   };
 
   return (
-    <div>
-      <h1>Dashboard</h1>
-      <button onClick={handleLogout}>Logout</button>
+    <div className="w-full">
+      <div className="flex justify-between w-full mb-12">
+        <h1>Dashboard</h1>
+        <button className="h-12" onClick={handleLogout}>
+          Logout
+        </button>
+      </div>
+      <div className="flex justify-between">
+        <DashboardNav />
+        <div className="w-[50vw] h-[70vh] border rounded-lg">
+          Edit contents
+          <Outlet />
+        </div>
+      </div>
     </div>
   );
 };
