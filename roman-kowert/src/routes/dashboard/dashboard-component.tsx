@@ -5,9 +5,13 @@ import axios from "axios";
 const Dashboard = () => {
   const { setCurrentUser } = useContext(UserContext);
   const handleLogout = async () => {
-    const response = await axios.post("http://localhost:5000/api/logout", {
-      withCredentials: true,
-    });
+    const response = await axios.post(
+      "http://localhost:5000/api/logout",
+      {},
+      {
+        withCredentials: true,
+      },
+    );
     console.log(response.data);
     if (response.data.is_authenticated === false) {
       console.log("false");

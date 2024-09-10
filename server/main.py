@@ -116,6 +116,7 @@ def login():
 @login_required
 def logout():
     logout_user()
+    print(user_logged_out.__dict__)
     print("user_auth_state on logout:", current_user.is_authenticated)
     return jsonify(is_authenticated=current_user.is_authenticated)
 
