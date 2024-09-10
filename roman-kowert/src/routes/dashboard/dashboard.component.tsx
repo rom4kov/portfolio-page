@@ -30,8 +30,7 @@ const Dashboard = () => {
       </div>
       <div className="flex justify-between">
         <DashboardNav />
-        <div className="w-[50vw] h-[70vh] border rounded-lg">
-          Edit contents
+        <div className="w-[40vw] h-[70vh] border rounded-lg">
           <Outlet />
         </div>
       </div>
