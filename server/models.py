@@ -1,6 +1,6 @@
 from __future__ import annotations
 from flask_login import UserMixin
-from sqlalchemy import Integer, String, Table, Column
+from sqlalchemy import Integer, String, Table, Column, null
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql.elements import SQLCoreOperations
 from extensions import db
@@ -14,6 +14,12 @@ class User(db.Model, UserMixin):  # type: ignore[name-defined]
 
     def to_dict(self):
         return {"id": self.id, "email": self.email}
+
+
+class TextContent(db.Model):  # type: ignore[name-defined]
+    id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    body: Mapped[str] = mapped_column(String(1020), nullable=False)
+    page: Mapped[str] = mapped_column(String(255), nullable=False)
 
 
 class Project(db.Model):  # type: ignore[name-defined]

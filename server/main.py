@@ -57,7 +57,6 @@ def get_users():
 
 @app.route("/api/auth_state", methods=["GET"])
 def get_auth_state():
-    print("user_auth_state in auth_state route:", current_user.is_authenticated)
     return jsonify(auth_state=current_user.is_authenticated)
 
 
@@ -86,7 +85,6 @@ def register():
 @app.before_request
 def handle_preflight():
     if request.method == "OPTIONS":
-        print("in OPTIONS handler: ", request.method)
         response = make_response("", 200)
         response.headers['X-Content-Type-Options'] = '*'
         return response
@@ -94,19 +92,12 @@ def handle_preflight():
 
 @app.route("/api/login", methods=["OPTIONS", "POST"])
 def login():
-    # if request.method == "OPTIONS":
-    #     response = make_response("", 200)
-    #     return response
     if request.method == "POST":
-        print("in POST handler: ", request.method)
         data = request.get_json()
-        print("data:", data)
         user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
-        print("user:", user)
         if user:
             if check_password_hash(user.password, data["password"]):
                 login_user(user, remember=True)
-                print("user_auth_state:", current_user.is_authenticated)
                 return jsonify(email=user.email, authenticated=current_user.is_authenticated)
         return jsonify(user_email="no user found")
     return "", 200
@@ -116,9 +107,12 @@ def login():
 @login_required
 def logout():
     logout_user()
-    print(user_logged_out.__dict__)
-    print("user_auth_state on logout:", current_user.is_authenticated)
     return jsonify(is_authenticated=current_user.is_authenticated)
+
+
+@app.route("/api/create-text", methods=["POST"])
+def create_text():
+    return ""
 
 
 if __name__ == "__main__":
