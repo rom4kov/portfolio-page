@@ -1,10 +1,17 @@
 from flask import Flask, jsonify, request, make_response
 from flask_cors import CORS
+from sqlalchemy import except_
 
 from extensions import db
-from flask_login import LoginManager, current_user, login_required, login_user, logout_user, user_logged_out
+from flask_login import (
+    LoginManager,
+    current_user,
+    login_required,
+    login_user,
+    logout_user,
+)
 from sqlalchemy.orm import DeclarativeBase
-from models import User
+from models import TextContent, User
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
@@ -25,7 +32,6 @@ app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
 
 class Base(DeclarativeBase):
     pass
-
 
 
 db.init_app(app)
@@ -86,7 +92,7 @@ def register():
 def handle_preflight():
     if request.method == "OPTIONS":
         response = make_response("", 200)
-        response.headers['X-Content-Type-Options'] = '*'
+        response.headers["X-Content-Type-Options"] = "*"
         return response
 
 
@@ -94,11 +100,15 @@ def handle_preflight():
 def login():
     if request.method == "POST":
         data = request.get_json()
-        user = db.session.execute(db.select(User).where(User.email == data["email"])).scalar()
+        user = db.session.execute(
+            db.select(User).where(User.email == data["email"])
+        ).scalar()
         if user:
             if check_password_hash(user.password, data["password"]):
                 login_user(user, remember=True)
-                return jsonify(email=user.email, authenticated=current_user.is_authenticated)
+                return jsonify(
+                    email=user.email, authenticated=current_user.is_authenticated
+                )
         return jsonify(user_email="no user found")
     return "", 200
 
@@ -112,7 +122,18 @@ def logout():
 
 @app.route("/api/create-text", methods=["POST"])
 def create_text():
-    return ""
+    data = request.get_json()
+    print(data)
+    new_text = TextContent(
+        body=data["body"],  # type: ignore
+        page=data["page"],  # type: ignore
+    )
+    try:
+        db.session.add(new_text)
+        db.session.commit()
+    except Exception as e:
+        raise e
+    return jsonify(success=True)
 
 
 if __name__ == "__main__":
