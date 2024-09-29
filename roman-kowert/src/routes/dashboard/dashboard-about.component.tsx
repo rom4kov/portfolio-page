@@ -1,18 +1,17 @@
 import { useState, FormEventHandler } from "react";
-import axios from "axios";
+import axios, { AxiosResponse } from "axios";
 
 const DashboardAbout = () => {
   const [textContent, setTextContent] = useState<string>("");
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
-
     const data = {
       body: textContent,
       page: "about"
     }
 
-    const response = await axios.post(
+    const response = await axios.post<AxiosResponse>(
       "http://localhost:5000/api/create-text",
       data,
     );
