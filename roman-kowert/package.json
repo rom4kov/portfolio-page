@@ -7,14 +7,18 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "postinstall": "node ./postinstall.js"
   },
   "dependencies": {
     "@tailwindcss/typography": "^0.5.14",
+    "@tinymce/tinymce-react": "^5.1.1",
     "axios": "^1.7.4",
+    "fs-extra": "^11.2.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
-    "react-router-dom": "^6.26.1"
+    "react-router-dom": "^6.26.1",
+    "tinymce": "^7.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
