@@ -1,9 +1,4 @@
-import {
-  useState,
-  createContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react";
 
 type UserData = {
   email: string | null;
@@ -13,11 +8,13 @@ type UserData = {
 type UserContext = {
   currentUser: UserData | null;
   setCurrentUser: Dispatch<SetStateAction<UserData | null>>;
+  loading: boolean;
 };
 
 export const UserContext = createContext<UserContext>({
   currentUser: null,
   setCurrentUser: () => null,
+  loading: true,
 } as UserContext);
 
 type UserProviderChildren = {
@@ -25,12 +22,21 @@ type UserProviderChildren = {
 };
 
 export const UserProvider = ({ children }: UserProviderChildren) => {
-  const [currentUser, setCurrentUser] = useState<UserData | null>({ email: "", authenticated: false });
-  const value = { currentUser, setCurrentUser };
+  const [loading, setLoading] = useState<boolean>(true);
+  const [currentUser, setCurrentUser] = useState<UserData | null>(null);
 
-  return (
-    <UserContext.Provider value={value}>
-      {children}
-    </UserContext.Provider>
-  );
+  useEffect(() => {
+    setLoading(true);
+    const loggedInUser = localStorage.getItem("user");
+    if (loggedInUser) {
+      const foundUser = JSON.parse(loggedInUser);
+      setCurrentUser(foundUser);
+    }
+    setLoading(false);
+  }, []);
+
+
+  const value = { currentUser, setCurrentUser, loading };
+
+  return <UserContext.Provider value={value}>{!loading && children}</UserContext.Provider>;
 };

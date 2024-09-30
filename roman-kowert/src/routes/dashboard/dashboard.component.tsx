@@ -7,6 +7,7 @@ import DashboardNav from "../../components/dashboard-nav/dashboard-nav.component
 
 const Dashboard = () => {
   const { setCurrentUser } = useContext(UserContext);
+
   const handleLogout = async () => {
     const response = await axios.post(
       "http://localhost:5000/api/logout",
@@ -17,6 +18,7 @@ const Dashboard = () => {
     );
     if (response.data.is_authenticated === false) {
       setCurrentUser({ email: null, authenticated: false });
+      localStorage.clear();
     }
   };
 

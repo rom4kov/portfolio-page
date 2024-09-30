@@ -10,8 +10,8 @@ const DashboardAbout = () => {
     evt.preventDefault();
     const data = {
       body: textContent,
-      page: "about"
-    }
+      page: "about",
+    };
 
     const response = await axios.post<AxiosResponse>(
       "http://localhost:5000/api/create-text",
@@ -26,12 +26,10 @@ const DashboardAbout = () => {
       <h3>Change About Text</h3>
       <form
         action=""
-        className="flex flex-col w-[45rem] h-[100%] gap-3"
+        className="flex flex-col w-[95%] h-[100%] gap-3"
         onSubmit={handleSubmit}
       >
-        <TextEditor
-          setTextContent={setTextContent}
-        />
+        <TextEditor setTextContent={setTextContent} />
         <button type="submit">Update</button>
       </form>
     </div>

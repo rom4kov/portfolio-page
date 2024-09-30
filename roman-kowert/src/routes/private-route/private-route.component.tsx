@@ -8,7 +8,12 @@ type PrivateRouteProps = {
 };
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
-  const { currentUser } = useContext(UserContext);
+  const { currentUser, loading } = useContext(UserContext);
+  console.log(currentUser);
+
+  if (loading) {
+    return <div>Loading...</div>
+  }
 
   return currentUser?.authenticated ? children : <Navigate to="/" />;
 };
