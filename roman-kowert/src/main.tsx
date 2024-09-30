@@ -3,6 +3,7 @@ import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { UserProvider } from "./contexts/user.context.tsx";
+import { TextProvider } from "./contexts/text.context.tsx";
 
 import "./index.css";
 
@@ -10,7 +11,9 @@ createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <BrowserRouter>
       <UserProvider>
-        <App />
+        <TextProvider>
+          <App />
+        </TextProvider>
       </UserProvider>
     </BrowserRouter>
   </StrictMode>,
