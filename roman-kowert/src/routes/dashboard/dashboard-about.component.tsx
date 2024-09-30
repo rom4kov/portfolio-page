@@ -4,6 +4,7 @@ import TextEditor from "../../editor/editor.component";
 
 const DashboardAbout = () => {
   const [textContent, setTextContent] = useState<string>("");
+  console.log(textContent);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -29,7 +30,7 @@ const DashboardAbout = () => {
         onSubmit={handleSubmit}
       >
         <TextEditor
-          // onChange={(evt) => setTextContent(evt.target.value)}
+          setTextContent={setTextContent}
         />
         <button type="submit">Update</button>
       </form>
