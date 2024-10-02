@@ -1,18 +1,18 @@
 import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
-type TextElement = {
+export type TextElement = {
   id: number,
   body: string,
   page: string
 }
 
-type TextContext = {
+export type TextContextType = {
   texts: TextElement[]
   setTexts: Dispatch<SetStateAction<TextElement[] | []>>;
 }
 
-export const TextContext = createContext<TextContext>({
+export const TextContext = createContext<TextContextType>({
   texts: [],
   setTexts: () => [],
 })

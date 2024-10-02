@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Link, Outlet } from "react-router-dom";
+import { useContext } from "react";
+import { UserContext } from "../../contexts/user.context";
 
 import PageLinks from "../../components/page-links/page-links.component";
 import SocialMediaLinks from "../../components/social-media/social-media.component";
@@ -24,6 +26,8 @@ const Navigation = ({ location }: NavigationProps) => {
 
   const [linkClicked, setLinkClicked] = useState(false);
   const [titlePosition, setTitlePosition] = useState("");
+
+  const { currentUser } = useContext(UserContext);
 
   const handleLinkClicked = () => {
     setLinkClicked(true);
@@ -70,8 +74,15 @@ const Navigation = ({ location }: NavigationProps) => {
 
   return (
     <Fragment>
+      {currentUser?.authenticated && (
+        <div className="fixed top-5 right-5 font-extrabold">
+          <Link to="/admin/dashboard">Dashboard</Link>
+        </div>
+      )}
       <div className="overflow-y-auto w-fit h-fit flex items-center">
-        <div className={`fixed flex flex-col items-start ${titlePosition} transition-all duration-500`}>
+        <div
+          className={`fixed flex flex-col items-start ${titlePosition} transition-all duration-500`}
+        >
           <div className="hover:text-tokyoblue-500 transition-all duration-300">
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>

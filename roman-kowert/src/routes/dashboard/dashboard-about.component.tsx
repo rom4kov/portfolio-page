@@ -1,25 +1,46 @@
 import { useState, useContext, FormEventHandler, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
-import { TextContext } from "../../contexts/text.context";
+import { TextElement, TextContext, TextContextType } from "../../contexts/text.context";
 import TextEditor from "../../editor/editor.component";
+
+type Result = AxiosResponse & {
+  data: {
+    success: boolean,
+  }
+}
 
 const DashboardAbout = () => {
   const [textContent, setTextContent] = useState<string>("");
-  const { texts, setTexts } = useContext(TextContext);
+  const { texts, setTexts } = useContext<TextContextType>(TextContext);
+  const value = texts.find((obj) => {
+    return obj.page === "about";
+  }) as TextElement;
+  console.log(value);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
+
     const data = {
       body: textContent,
       page: "about",
     };
 
     const response = await axios.post<AxiosResponse>(
-      "http://localhost:5000/api/create-text",
+      "http://localhost:5000/api/update-text",
       data,
-    );
-    console.log(response);
-  };
+    ) as Result;
+
+    if (response.data.success == true) {
+      setTexts((prev) => {
+        return prev.map((text) => {
+          if (text.page === "about") {
+            text.body = textContent;
+          }
+          return text;
+        })
+      })
+    };
+  }
 
   return (
     <div className="w-full flex flex-col items-center gap-3">
@@ -30,7 +51,7 @@ const DashboardAbout = () => {
         className="flex flex-col w-[95%] h-[100%] gap-3"
         onSubmit={handleSubmit}
       >
-        <TextEditor setTextContent={setTextContent} initialValue={texts[0].body} />
+        <TextEditor setTextContent={setTextContent} initialValue={value.body} />
         <button type="submit">Update</button>
       </form>
     </div>

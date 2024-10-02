@@ -21,13 +21,18 @@ const DashboardNav = () => {
         className={`py-1 text-sm font-bold relative top-0 z-50 hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer
           ${pathname === "/admin/dashboard/projects" ? "text-tokyoblue-500 pl-4" : ""}`}
       >
-        <Link to="/projects">PROJECTS</Link>
+        <Link to="/admin/dashboard/projects">PROJECTS</Link>
       </div>
       <div
         className={`py-1 text-sm font-bold relative top-0 z-50 hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer
           ${pathname === "/admin/dashboard/resume" ? "text-tokyoblue-500 pl-4" : ""}`}
       >
-        <Link to="/resume">RESUME</Link>
+        <Link to="/admin/dashboard/resume">RESUME</Link>
+      </div>
+      <div
+        className={"mt-5 py-1 text-sm font-bold relative top-0 z-50 hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"}
+      >
+        <Link to="/">GO BACK TO WEBSITE</Link>
       </div>
     </div>
   );

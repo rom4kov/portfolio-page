@@ -136,6 +136,20 @@ def create_text():
     return jsonify(success=True)
 
 
+@app.route("/api/update-text", methods=["POST"])
+def update_text():
+    data = request.get_json()
+    try:
+        text_to_update = db.session.execute(
+            db.select(TextContent).where(TextContent.page == "about")
+        ).scalar_one()
+        text_to_update.body = data["body"]
+        db.session.commit()
+    except Exception as e:
+        raise e
+    return jsonify(success=True)
+
+
 @app.route("/api/get-texts", methods=["GET"])
 def get_texts():
     text_data = db.session.execute(db.select(TextContent)).scalars()
