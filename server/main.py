@@ -136,5 +136,12 @@ def create_text():
     return jsonify(success=True)
 
 
+@app.route("/api/get-texts", methods=["GET"])
+def get_texts():
+    text_data = db.session.execute(db.select(TextContent)).scalars()
+    texts = [text.to_dict() for text in text_data]
+    return jsonify(texts=texts)
+
+
 if __name__ == "__main__":
     app.run(debug=True)

@@ -1,10 +1,11 @@
-import { useState, FormEventHandler } from "react";
+import { useState, useContext, FormEventHandler, useEffect } from "react";
 import axios, { AxiosResponse } from "axios";
+import { TextContext } from "../../contexts/text.context";
 import TextEditor from "../../editor/editor.component";
 
 const DashboardAbout = () => {
   const [textContent, setTextContent] = useState<string>("");
-  console.log(textContent);
+  const { texts, setTexts } = useContext(TextContext);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -29,7 +30,7 @@ const DashboardAbout = () => {
         className="flex flex-col w-[95%] h-[100%] gap-3"
         onSubmit={handleSubmit}
       >
-        <TextEditor setTextContent={setTextContent} />
+        <TextEditor setTextContent={setTextContent} initialValue={texts[0].body} />
         <button type="submit">Update</button>
       </form>
     </div>

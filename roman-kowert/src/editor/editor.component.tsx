@@ -4,11 +4,12 @@ import { Editor as TinyMCEEditor } from "tinymce";
 
 type TextContentProps = {
   setTextContent: Dispatch<SetStateAction<string>>;
+  initialValue: string;
 };
 
-const TextEditor = ({ setTextContent }: TextContentProps) => {
+const TextEditor = ({ setTextContent, initialValue }: TextContentProps) => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
-  const [value, setValue] = useState<string>();
+  const [value, setValue] = useState<string>(initialValue);
   // const log = () => {
   //   if (editorRef.current) {
   //     console.log(editorRef.current.getContent());

@@ -21,6 +21,9 @@ class TextContent(db.Model):  # type: ignore[name-defined]
     body: Mapped[str] = mapped_column(String(1020), nullable=False)
     page: Mapped[str] = mapped_column(String(255), nullable=False)
 
+    def to_dict(self):
+        return {"id": self.id, "body": self.body, "page": self.page}
+
 
 class Project(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
