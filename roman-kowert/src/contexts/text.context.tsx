@@ -23,11 +23,11 @@ type TextProviderChildren = {
 
 export const TextProvider = ({ children }: TextProviderChildren ) => {
   const [texts, setTexts] = useState<TextElement[] | []>([]);
-  console.log(texts);
 
   useEffect(() => {
     const getTexts = async () => {
       const response = await axios.get("http://localhost:5000/api/get-texts")
+      console.log(response);
       setTexts(response.data.texts);
     }
     getTexts();
@@ -37,6 +37,4 @@ export const TextProvider = ({ children }: TextProviderChildren ) => {
 
   return <TextContext.Provider value={value}>{children}</TextContext.Provider>
 }
-
-
 

@@ -1,4 +1,4 @@
-import { useState, useContext, FormEventHandler, useEffect } from "react";
+import { useState, useContext, FormEventHandler } from "react";
 import axios, { AxiosResponse } from "axios";
 import { TextElement, TextContext, TextContextType } from "../../contexts/text.context";
 import TextEditor from "../../editor/editor.component";
@@ -32,13 +32,22 @@ const DashboardAbout = () => {
 
     if (response.data.success == true) {
       setTexts((prev) => {
-        return prev.map((text) => {
-          if (text.page === "about") {
-            text.body = textContent;
-          }
-          return text;
-        })
-      })
+        return texts.some(text => text.page === "about") ?
+          (prev.map((text) => {
+            if (text.page === "about") {
+              text.body = textContent;
+            }
+            return text;
+          })) :
+          ([
+            ...prev,
+            {
+              id: prev.length + 1,
+              body: textContent,
+              page: "about"
+            },
+          ]);
+      });
     };
   }
 

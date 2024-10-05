@@ -1,6 +1,6 @@
-from flask import Flask, jsonify, request, make_response
+from flask import Flask, jsonify, request, make_response, redirect, url_for
 from flask_cors import CORS
-from sqlalchemy import except_
+from sqlalchemy.exc import NoResultFound
 
 from extensions import db
 from flask_login import (
@@ -141,12 +141,13 @@ def update_text():
     data = request.get_json()
     try:
         text_to_update = db.session.execute(
-            db.select(TextContent).where(TextContent.page == "about")
+            db.select(TextContent).where(TextContent.page == data["page"])
         ).scalar_one()
         text_to_update.body = data["body"]
         db.session.commit()
-    except Exception as e:
-        raise e
+    except NoResultFound as e:
+        print(e._message())
+        return redirect(url_for("create_text"), code=307)
     return jsonify(success=True)
 
 
