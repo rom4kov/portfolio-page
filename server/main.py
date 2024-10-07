@@ -123,7 +123,6 @@ def logout():
 @app.route("/api/create-text", methods=["POST"])
 def create_text():
     data = request.get_json()
-    print(data)
     new_text = TextContent(
         body=data["body"],  # type: ignore
         page=data["page"],  # type: ignore
@@ -156,6 +155,16 @@ def get_texts():
     text_data = db.session.execute(db.select(TextContent)).scalars()
     texts = [text.to_dict() for text in text_data]
     return jsonify(texts=texts)
+
+
+@app.route("/api/create-project", methods=["POST"])
+def create_project():
+    data = request.get_json()
+    new_project = Project()
+    try:
+        pass
+    except Exception as e:
+        raise e
 
 
 if __name__ == "__main__":
