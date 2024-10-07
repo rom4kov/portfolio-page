@@ -30,6 +30,9 @@ class Project(db.Model):  # type: ignore[name-defined]
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
 
+    def to_dict(self):
+        return {"id": self.id, "title": self.title, "description": self.description}
+
 
 class Occupation(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)

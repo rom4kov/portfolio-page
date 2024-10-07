@@ -11,7 +11,7 @@ from flask_login import (
     logout_user,
 )
 from sqlalchemy.orm import DeclarativeBase
-from models import TextContent, User
+from models import User, TextContent, Project
 from werkzeug.security import generate_password_hash, check_password_hash
 
 import os
@@ -160,11 +160,23 @@ def get_texts():
 @app.route("/api/create-project", methods=["POST"])
 def create_project():
     data = request.get_json()
-    new_project = Project()
+    new_project = Project(
+        title=data["title"],  # type: ignore
+        description=data["description"],  # type: ignore
+    )
     try:
-        pass
+        db.session.add(new_project)
+        db.session.commit()
     except Exception as e:
         raise e
+    return jsonify(success=True)
+
+
+@app.route("/api/get-project", methods=["GET"])
+def get_project():
+    project_data = db.session.execute(db.select(Project)).scalars()
+    projects = [project.to_dict() for project in project_data]
+    return jsonify(projects=projects)
 
 
 if __name__ == "__main__":
