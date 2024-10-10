@@ -172,8 +172,8 @@ def create_project():
     return jsonify(success=True)
 
 
-@app.route("/api/get-project", methods=["GET"])
-def get_project():
+@app.route("/api/get-projects", methods=["GET"])
+def get_projects():
     project_data = db.session.execute(db.select(Project)).scalars()
     projects = [project.to_dict() for project in project_data]
     return jsonify(projects=projects)
