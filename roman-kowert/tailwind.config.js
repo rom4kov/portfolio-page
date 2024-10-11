@@ -6,7 +6,6 @@ export default {
     colors: {
       transparent: "transparent",
       current: "currentColor",
-      white: "#ffffff",
       "tokyo-1": {
         500: "#1f2335",
       },

@@ -172,6 +172,21 @@ def create_project():
     return jsonify(success=True)
 
 
+@app.route("/api/update-project", methods=["POST"])
+def update_project():
+    data = request.get_json()
+    try:
+        project = db.session.execute(
+            db.select(Project).where(Project.id == data["id"])
+        ).scalar_one()
+        project.body = data["body"]
+        db.session.commit()
+    except NoResultFound as e:
+        print(e._message())
+        return redirect(url_for("create_project"), code=307)
+    return jsonify(success=True)
+
+
 @app.route("/api/get-projects", methods=["GET"])
 def get_projects():
     project_data = db.session.execute(db.select(Project)).scalars()

@@ -10,6 +10,8 @@ import PrivateRoute from "./routes/private-route/private-route.component";
 import Dashboard from "./routes/dashboard/dashboard.component";
 import DashboardHome from "./routes/dashboard/dashboard-home.component";
 import DashboardAbout from "./routes/dashboard/dashboard-about.component";
+import DashboardProjects from "./routes/dashboard/dashboard-projects";
+import DashboardResume from "./routes/dashboard/dashboard-resume";
 
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 
@@ -63,6 +65,8 @@ function App() {
         >
             <Route index element={<DashboardHome />} />
             <Route path="about" element={<DashboardAbout />} />
+            <Route path="projects" element={<DashboardProjects />} />
+            <Route path="resume" element={<DashboardResume />} />
         </Route>
       </Routes>
     </div>
