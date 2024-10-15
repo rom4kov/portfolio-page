@@ -1,16 +1,11 @@
 import { useState, useContext, FormEventHandler } from "react";
 import axios, { AxiosResponse } from "axios";
 import {
-  TextElement,
-  TextContext,
-  TextContextType,
-} from "../../contexts/text.context";
+  Project,
+  ProjectsContext,
+  ProjectsContextType,
+} from "../../contexts/projects.context";
 import TextEditor from "../../editor/editor.component";
-
-type Projects = {
-  title: string,
-  description: string
-}
 
 type Result = AxiosResponse & {
   data: {
@@ -19,53 +14,52 @@ type Result = AxiosResponse & {
 };
 
 const DashboardProjects = () => {
-  const [textContent, setTextContent] = useState<Projects>({
+  const [description, setDescription] = useState<string>("");
+  const [textContent, setTextContent] = useState<Project>({
+    project_id: 0,
     title: "",
     description: ""
   });
-  const { texts, setTexts } = useContext<TextContextType>(TextContext);
-  const value = texts.find((obj) => {
-    return obj.page === "projects";
-  }) as TextElement;
-  console.log(value?.body);
+  const { projects, setProjects } = useContext<ProjectsContextType>(ProjectsContext);
+  console.log(projects);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 
     const data = {
+      project_id: projects.length + 1,
       title: textContent.title,
-      body: textContent.description,
+      description: description,
     };
 
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/update-projects",
       data,
     )) as Result;
+    console.log(response.data);
 
     if (response.data.success == true) {
-      setTexts((prev) => {
-        return texts.some((text) => text.page === "projects")
-          ? prev.map((text) => {
-              if (text.page === "projects") {
-                text.body = textContent;
-              }
-              return text;
-            })
-          : [
-              ...prev,
-              {
-                id: prev.length + 1,
-                page: "projects",
-                body: textContent,
-              },
-            ];
+      setProjects((prev) => {
+        return [
+          ...prev,
+          {
+            project_id: prev.length + 1,
+            title: textContent.title,
+            description: description,
+          },
+        ];
       });
     }
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-3">
+    <div className="w-full flex flex-col items-center gap-3 overflow-scroll">
       <h2 className="text-2xl mt-3">Edit Projects Content</h2>
+      {projects.map(project => {
+        return (
+          <div>{project.title}</div>
+        )
+      })}
       <form
         action=""
         className="flex flex-col w-[95%] h-[100%] gap-3"
@@ -76,10 +70,16 @@ const DashboardProjects = () => {
           id="title"
           className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
           placeholder="Title"
+          onChange={(evt) => setTextContent((prev) => {
+            return {
+              ...prev,
+              title: evt.target.value
+            }
+          })}
         />
         <TextEditor
-          setTextContent={setTextContent}
-          initialValue={value?.body ? value?.body : "Type..."}
+          setTextContent={setDescription}
+          initialValue={"Type..."}
         />
         <button type="submit" className="h-8 leading-3">
           Update

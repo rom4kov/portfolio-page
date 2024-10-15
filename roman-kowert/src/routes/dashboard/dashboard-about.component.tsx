@@ -60,7 +60,7 @@ const DashboardAbout = () => {
         className="flex flex-col w-[95%] h-[100%] gap-3"
         onSubmit={handleSubmit}
       >
-        <TextEditor setTextContent={setTextContent} initialValue={value.body} />
+        <TextEditor setTextContent={setTextContent} initialValue={value?.body ? value.body : "Type..." } />
         <button type="submit">Update</button>
       </form>
     </div>

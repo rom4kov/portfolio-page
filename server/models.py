@@ -1,4 +1,5 @@
 from __future__ import annotations
+from enum import unique
 from flask_login import UserMixin
 from sqlalchemy import Integer, String, Table, Column, null
 from sqlalchemy.orm import Mapped, mapped_column
@@ -27,11 +28,12 @@ class TextContent(db.Model):  # type: ignore[name-defined]
 
 class Project(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
+    project_id: Mapped[int] = mapped_column(Integer, nullable=False, unique=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
 
     def to_dict(self):
-        return {"id": self.id, "title": self.title, "description": self.description}
+        return {"project_id": self.project_id, "title": self.title, "description": self.description}
 
 
 class Occupation(db.Model):  # type: ignore[name-defined]

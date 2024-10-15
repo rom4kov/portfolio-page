@@ -2,18 +2,18 @@ import { useState, useEffect, createContext, Dispatch, SetStateAction } from "re
 import axios from "axios";
 
 export type Project = {
-  id: number,
-  body: string,
-  page: string
+  project_id: number,
+  title: string,
+  description: string
 }
 
 export type ProjectsContextType = {
-  texts: Project[]
+  projects: Project[] | []
   setProjects: Dispatch<SetStateAction<Project[] | []>>;
 }
 
 export const ProjectsContext = createContext<ProjectsContextType>({
-  texts: [],
+  projects: [],
   setProjects: () => [],
 })
 
@@ -22,7 +22,7 @@ type ProjectsProviderChildren = {
 }
 
 export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
-  const [texts, setProjects] = useState<Project[] | []>([]);
+  const [projects, setProjects] = useState<Project[] | []>([]);
 
   useEffect(() => {
     const getProjects = async () => {
@@ -33,7 +33,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
     getProjects();
   }, [])
 
-  const value = { texts, setProjects };
+  const value = { projects, setProjects };
 
   return <ProjectsContext.Provider value={value}>{children}</ProjectsContext.Provider>
 }
