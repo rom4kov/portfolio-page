@@ -5,7 +5,7 @@ import {
   ProjectsContext,
   ProjectsContextType,
 } from "../../contexts/projects.context";
-import TextEditor from "../../editor/editor.component";
+import DashboardForm from "./dashboard-form.component";
 
 type Result = AxiosResponse & {
   data: {
@@ -14,13 +14,15 @@ type Result = AxiosResponse & {
 };
 
 const DashboardProjects = () => {
+  const [showEditForm, setShowEditForm] = useState<boolean>(false);
   const [description, setDescription] = useState<string>("");
   const [textContent, setTextContent] = useState<Project>({
     project_id: 0,
     title: "",
-    description: ""
+    description: "",
   });
-  const { projects, setProjects } = useContext<ProjectsContextType>(ProjectsContext);
+  const { projects, setProjects } =
+    useContext<ProjectsContextType>(ProjectsContext);
   console.log(projects);
 
   const handleSubmit: FormEventHandler = async (evt) => {
@@ -52,39 +54,56 @@ const DashboardProjects = () => {
     }
   };
 
+  const handleEditForm = (project: Project) => {
+    setShowEditForm(true);
+    setTextContent(project);
+  };
+
   return (
-    <div className="w-full flex flex-col items-center gap-3 overflow-scroll">
+    <div className="w-full px-5 flex flex-col items-start gap-3">
       <h2 className="text-2xl mt-3">Edit Projects Content</h2>
-      {projects.map(project => {
-        return (
-          <div>{project.title}</div>
-        )
-      })}
-      <form
-        action=""
-        className="flex flex-col w-[95%] h-[100%] gap-3"
-        onSubmit={handleSubmit}
-      >
-        <input
-          type="text"
-          id="title"
-          className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
-          placeholder="Title"
-          onChange={(evt) => setTextContent((prev) => {
-            return {
-              ...prev,
-              title: evt.target.value
-            }
+      {!showEditForm ? (
+        <div className="mt-3 flex flex-col items-start gap-5">
+          {projects.map((project) => {
+            return (
+              <div className="flex gap-3 items-start">
+                <div className="text-start">
+                  <div className="font-bold">{project.title}</div>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: project.description,
+                    }}
+                  />
+                </div>
+                <button
+                  className="h-6 mt-auto p-1 leading-[0.9rem] text-sm"
+                  onClick={() => {
+                    handleEditForm(project);
+                  }}
+                >
+                  Edit
+                </button>
+                <button className="h-6 mt-auto p-1 leading-[0.9rem] text-sm">
+                  Delete
+                </button>
+              </div>
+            );
           })}
+          <div>
+            <button className="h-8 mt-auto p-2 leading-[0.9rem] text-sm">
+              Add new project
+            </button>
+          </div>
+        </div>
+      ) : (
+        <DashboardForm
+          handleSubmit={handleSubmit}
+          setShowEditForm={setShowEditForm}
+          textContent={textContent}
+          setTextContent={setTextContent}
+          setDescription={setDescription}
         />
-        <TextEditor
-          setTextContent={setDescription}
-          initialValue={"Type..."}
-        />
-        <button type="submit" className="h-8 leading-3">
-          Update
-        </button>
-      </form>
+      )}
     </div>
   );
 };

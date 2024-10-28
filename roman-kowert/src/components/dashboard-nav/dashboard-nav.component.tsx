@@ -32,7 +32,7 @@ const DashboardNav = () => {
       <div
         className={"mt-5 py-1 text-sm font-bold relative top-0 z-50 hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer"}
       >
-        <Link to="/">GO BACK TO WEBSITE</Link>
+        <Link to="/">BACK TO WEBSITE</Link>
       </div>
     </div>
   );
