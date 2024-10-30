@@ -10,12 +10,11 @@ const Home = () => {
   const value = texts.find((obj) => {
     return obj.page === "home";
   }) as TextElement;
-  console.log(value);
 
   return (
     <div id="route-container" className="h-full flex items-center">
       <div
-        className="mt-2 w-[22rem] text-2xl text-right leading-[2.25rem]"
+        className="mt-2 w-[22rem] text-2xl text-right leading-[2.15rem]"
         dangerouslySetInnerHTML={{ __html: value?.body }}
       />
     </div>

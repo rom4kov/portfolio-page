@@ -176,9 +176,10 @@ def create_project():
 @app.route("/api/update-projects", methods=["POST"])
 def update_project():
     data = request.get_json()
+    print(data["project_id"])
     try:
         project = db.session.execute(
-            db.select(Project).where(Project.project_id == data["project_id"])
+            db.select(Project).where(Project.id == data["project_id"])
         ).scalar_one()
         project.title = data["title"]
         project.description = data["description"]

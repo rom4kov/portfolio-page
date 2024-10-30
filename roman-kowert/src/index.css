@@ -71,6 +71,28 @@
   background: #737aa2;
 }
 
+#projects-edit-content::-webkit-scrollbar {
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+#projects-edit-content::-webkit-scrollbar-track {
+  background: hsl(177, 26%, 83%);
+  border-radius: 100vw;
+  margin-block: 0.1rem;
+  background: #1f3337;
+}
+
+#projects-edit-content::-webkit-scrollbar-thumb {
+  width: 0.4rem;
+  height: 0.5rem;
+  background: #737aa2;
+}
+
+#projects-edit-content::-webkit-scrollbar-thumb:hover {
+  background: #9ba2cc;
+}
+
 html {
   overflow-y: scroll;
 }

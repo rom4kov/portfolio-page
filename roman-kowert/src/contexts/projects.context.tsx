@@ -2,6 +2,7 @@ import { useState, useEffect, createContext, Dispatch, SetStateAction } from "re
 import axios from "axios";
 
 export type Project = {
+  id: number,
   project_id: number,
   title: string,
   description: string

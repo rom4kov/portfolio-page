@@ -8,7 +8,7 @@ import DashboardNav from "../../components/dashboard-nav/dashboard-nav.component
 const Dashboard = () => {
   const { setCurrentUser } = useContext(UserContext);
 
-  const handleLogout = async () => {
+  const handleLogout: () => Promise<void> = async () => {
     const response = await axios.post(
       "http://localhost:5000/api/logout",
       {},
@@ -23,18 +23,13 @@ const Dashboard = () => {
   };
 
   return (
-    <div className="w-full">
-      <div className="flex justify-between w-full mb-12">
-        <h1>Dashboard</h1>
-        <button className="h-12" onClick={handleLogout}>
-          Logout
-        </button>
+    <div className="w-full flex">
+      <div className="w-full h-[80vh] flex flex-col justify-between mb-12">
+        <h1 className="text-start mb-5">Dashboard</h1>
+        <DashboardNav handleLogout={handleLogout} />
       </div>
-      <div className="flex justify-between">
-        <DashboardNav />
-        <div className="w-[40vw] h-[70vh] border rounded-lg">
-          <Outlet />
-        </div>
+      <div className="w-full h-[80vh] border rounded-lg">
+        <Outlet />
       </div>
     </div>
   );
