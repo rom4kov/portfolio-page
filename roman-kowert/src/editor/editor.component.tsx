@@ -27,7 +27,7 @@ const TextEditor = ({ setTextContent, initialValue }: TextContentProps) => {
           setTextContent(editor.getContent());
         }}
         init={{
-          height: 600,
+          height: 500,
           menubar: false,
           plugins: [
             "advlist",

@@ -25,10 +25,10 @@ const initialState = {
 const DashboardProjects = () => {
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
   const [textContent, setTextContent] = useState<Project>(initialState);
+  const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
   const { projects, setProjects } =
     useContext<ProjectsContextType>(ProjectsContext);
-  console.log(projects);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -38,34 +38,48 @@ const DashboardProjects = () => {
       ? "http://localhost:5000/api/update-project"
       : "http://localhost:5000/api/create-project";
 
-    const data = {
-      id: textContent.id,
-      title: textContent.title,
-      description: description,
-    };
+    const formData = new FormData();
+    formData.append("id", String(textContent.id));
+    formData.append("title", textContent.title);
+    formData.append("description", description);
 
-    const response = (await axios.post<AxiosResponse>(url, data)) as Result;
-    console.log(response.data);
+    if (file) {
+      formData.append("img_file", file);
+    }
 
-    if (response.data.success == true) {
-      setProjects((prev) => {
-        if (isUpdating) {
-          return prev.map((project) =>
-            project.id === textContent.id
-              ? { ...project, title: data.title, description: data.description }
-              : project,
-          );
-        } else {
-          return [
-            ...prev,
-            {
-              id: 0,
-              title: textContent.title,
-              description: description,
-            },
-          ];
-        }
-      });
+    console.log(file);
+    console.log(formData);
+
+    try {
+      const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
+      console.log(response.data);
+
+      if (response.data.success == true) {
+        setProjects((prev) => {
+          if (isUpdating) {
+            return prev.map((project) =>
+              project.id === textContent.id
+                ? {
+                  ...project,
+                  title: textContent.title,
+                  description,
+                }
+                : project,
+            );
+          } else {
+            return [
+              ...prev,
+              {
+                id: 0,
+                title: textContent.title,
+                description,
+              },
+            ];
+          }
+        });
+      }
+    } catch (error) {
+      console.error("Error uploading project:", error);
     }
   };
 
@@ -75,7 +89,7 @@ const DashboardProjects = () => {
   };
 
   return (
-    <div className="w-full px-5 flex flex-col items-center gap-3">
+    <div className="w-full h-full px-5 flex flex-col items-center gap-3">
       <h2 className="text-2xl mt-3 text-center">Edit Projects Content</h2>
       {!showEditForm ? (
         <div className="w-full h-full">
@@ -105,6 +119,7 @@ const DashboardProjects = () => {
           setShowEditForm={setShowEditForm}
           textContent={textContent}
           setTextContent={setTextContent}
+          setFile={setFile}
           setDescription={setDescription}
         />
       )}

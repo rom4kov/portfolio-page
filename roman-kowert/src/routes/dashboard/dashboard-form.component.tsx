@@ -1,21 +1,28 @@
-import { Dispatch, SetStateAction, FormEventHandler } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  FormEventHandler,
+  ChangeEvent,
+} from "react";
 import TextEditor from "../../editor/editor.component";
 
 import { Project } from "../../contexts/projects.context";
 
 type DashboardFormProps = {
-  handleSubmit: FormEventHandler,
-  setShowEditForm: Dispatch<SetStateAction<boolean>>,
-  textContent: Project,
-  setTextContent: Dispatch<SetStateAction<Project>>,
-  setDescription: Dispatch<SetStateAction<string>>,
-}
+  handleSubmit: FormEventHandler;
+  setShowEditForm: Dispatch<SetStateAction<boolean>>;
+  textContent: Project;
+  setTextContent: Dispatch<SetStateAction<Project>>;
+  setFile: Dispatch<SetStateAction<File | null>>;
+  setDescription: Dispatch<SetStateAction<string>>;
+};
 
 const DashboardForm = ({
   handleSubmit,
   setShowEditForm,
   textContent,
   setTextContent,
+  setFile,
   setDescription,
 }: DashboardFormProps) => {
   return (
@@ -23,6 +30,7 @@ const DashboardForm = ({
       action=""
       className="flex flex-col w-full h-full gap-3"
       onSubmit={handleSubmit}
+      encType="mulipart/form-data"
     >
       <input
         type="text"
@@ -37,6 +45,13 @@ const DashboardForm = ({
             };
           })
         }
+      />
+      <input
+        type="file"
+        className="my-2"
+        onChange={(event: ChangeEvent<HTMLInputElement>) => {
+          setFile(event.target.files && event.target.files[0]);
+        }}
       />
       <TextEditor
         setTextContent={setDescription}

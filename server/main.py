@@ -1,6 +1,7 @@
 from flask import Flask, jsonify, request, make_response, redirect, url_for
 from flask_cors import CORS
 from sqlalchemy.exc import NoResultFound
+from sqlalchemy.orm.base import instance_str
 
 from extensions import db
 from flask_login import (
@@ -13,14 +14,17 @@ from flask_login import (
 from sqlalchemy.orm import DeclarativeBase
 from models import User, TextContent, Project
 from werkzeug.security import generate_password_hash, check_password_hash
+from werkzeug.utils import secure_filename
 
 import os
 from dotenv import load_dotenv
 
+UPLOAD_FOLDER = "../roman-kowert/src/assets/images/"
+ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+
 
 app = Flask(__name__)
 cors = CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
-
 
 load_dotenv()
 
@@ -28,6 +32,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.environ.get(
     "DB_URI", "sqlite:///portfolio.db"
 )
 app.config["SECRET_KEY"] = os.environ.get("SECRET_KEY")
+app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 
 
 class Base(DeclarativeBase):
@@ -159,22 +164,45 @@ def get_texts():
 
 @app.route("/api/create-project", methods=["POST"])
 def create_project():
-    data = request.get_json()
+    title = request.form.get("title")
+    description = request.form.get("description")
+    file = request.files.get("img_file")
+    if file and isinstance(file.filename, str) and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        file.save(file_path)
     new_project = Project(
-        title=data["title"],  # type: ignore
-        description=data["description"],  # type: ignore
+        title=title,  # type: ignore
+        description=description,  # type: ignore
     )
     try:
         db.session.add(new_project)
         db.session.commit()
+        return jsonify(success=True)
     except Exception as e:
-        raise e
-    return jsonify(success=True)
+        db.session.rollback()
+        return jsonify(success=False, error=str(e)), 500
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/api/update-project", methods=["POST"])
 def update_project():
     data = request.get_json()
+    if "file" not in request.files:
+        return redirect(request.url)
+    file = request.files['file']
+    print(request.files)
+    print(request.files['file'])
+    print(data["file"])
+    if file.filename == "":
+        return redirect(request.url)
+    if file and isinstance(file.filename, str) and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     try:
         project = db.session.execute(
             db.select(Project).where(Project.id == data["id"])
