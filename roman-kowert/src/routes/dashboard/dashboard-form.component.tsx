@@ -21,7 +21,7 @@ const DashboardForm = ({
   return (
     <form
       action=""
-      className="flex flex-col w-[95%] h-[100%] gap-3"
+      className="flex flex-col w-full h-full gap-3"
       onSubmit={handleSubmit}
     >
       <input
@@ -44,7 +44,7 @@ const DashboardForm = ({
       />
       <div className="flex justify-start gap-3">
         <button type="submit" className="h-8 leading-3">
-          Update
+          {textContent.id === 0 ? "Add project" : "Update"}
         </button>
         <button
           onClick={() => setShowEditForm(false)}

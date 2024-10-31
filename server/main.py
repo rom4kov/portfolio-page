@@ -161,7 +161,6 @@ def get_texts():
 def create_project():
     data = request.get_json()
     new_project = Project(
-        project_id=data["project_id"],  # type: ignore
         title=data["title"],  # type: ignore
         description=data["description"],  # type: ignore
     )
@@ -173,13 +172,12 @@ def create_project():
     return jsonify(success=True)
 
 
-@app.route("/api/update-projects", methods=["POST"])
+@app.route("/api/update-project", methods=["POST"])
 def update_project():
     data = request.get_json()
-    print(data["project_id"])
     try:
         project = db.session.execute(
-            db.select(Project).where(Project.id == data["project_id"])
+            db.select(Project).where(Project.id == data["id"])
         ).scalar_one()
         project.title = data["title"]
         project.description = data["description"]
@@ -187,7 +185,7 @@ def update_project():
     except NoResultFound as e:
         print(e._message())
         return redirect(url_for("create_project"), code=307)
-    return jsonify(success=True)
+    return jsonify(success=True, title=project.title, description=project.description)
 
 
 @app.route("/api/get-projects", methods=["GET"])

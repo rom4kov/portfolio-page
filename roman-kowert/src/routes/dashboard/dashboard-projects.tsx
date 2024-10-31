@@ -1,11 +1,14 @@
 import { useState, useContext, FormEventHandler } from "react";
+
 import axios, { AxiosResponse } from "axios";
 import {
   Project,
   ProjectsContext,
   ProjectsContextType,
 } from "../../contexts/projects.context";
+
 import DashboardForm from "./dashboard-form.component";
+import ProjectPreview from "../../components/dashboard-nav/project.component";
 
 type Result = AxiosResponse & {
   data: {
@@ -13,15 +16,16 @@ type Result = AxiosResponse & {
   };
 };
 
+const initialState = {
+  id: 0,
+  title: "",
+  description: "",
+};
+
 const DashboardProjects = () => {
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
+  const [textContent, setTextContent] = useState<Project>(initialState);
   const [description, setDescription] = useState<string>("");
-  const [textContent, setTextContent] = useState<Project>({
-    id: 0,
-    project_id: 0,
-    title: "",
-    description: "",
-  });
   const { projects, setProjects } =
     useContext<ProjectsContextType>(ProjectsContext);
   console.log(projects);
@@ -29,29 +33,38 @@ const DashboardProjects = () => {
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 
+    const isUpdating = textContent.id !== 0;
+    const url = isUpdating
+      ? "http://localhost:5000/api/update-project"
+      : "http://localhost:5000/api/create-project";
+
     const data = {
-      project_id: projects.length + 1,
+      id: textContent.id,
       title: textContent.title,
       description: description,
     };
 
-    const response = (await axios.post<AxiosResponse>(
-      "http://localhost:5000/api/update-projects",
-      data,
-    )) as Result;
+    const response = (await axios.post<AxiosResponse>(url, data)) as Result;
     console.log(response.data);
 
     if (response.data.success == true) {
       setProjects((prev) => {
-        return [
-          ...prev,
-          {
-            id: 0,
-            project_id: prev.length + 1,
-            title: textContent.title,
-            description: description,
-          },
-        ];
+        if (isUpdating) {
+          return prev.map((project) =>
+            project.id === textContent.id
+              ? { ...project, title: data.title, description: data.description }
+              : project,
+          );
+        } else {
+          return [
+            ...prev,
+            {
+              id: 0,
+              title: textContent.title,
+              description: description,
+            },
+          ];
+        }
       });
     }
   };
@@ -62,44 +75,29 @@ const DashboardProjects = () => {
   };
 
   return (
-    <div className="w-full px-5 flex flex-col items-start gap-3">
-      <h2 className="text-2xl mt-3">Edit Projects Content</h2>
+    <div className="w-full px-5 flex flex-col items-center gap-3">
+      <h2 className="text-2xl mt-3 text-center">Edit Projects Content</h2>
       {!showEditForm ? (
-        <div
-          className="w-full h-[58vh] mt-3 flex flex-col items-start gap-5 overflow-auto"
-          id="projects-edit-content"
-        >
-          {projects.map((project) => {
-            return (
-              <div className="flex gap-3 items-start">
-                <div className="text-start">
-                  <div>{project.id}</div>
-                  <div className="font-bold">{project.title}</div>
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: project.description,
-                    }}
-                  />
-                </div>
-                <button
-                  className="h-6 mt-auto p-1 leading-[0.9rem] text-sm"
-                  onClick={() => {
-                    handleEditForm(project);
-                  }}
-                >
-                  Edit
-                </button>
-                <button className="h-6 mt-auto p-1 leading-[0.9rem] text-sm">
-                  Delete
-                </button>
-              </div>
-            );
-          })}
-          <div>
-            <button className="h-8 mt-auto p-2 leading-[0.9rem] text-sm">
-              Add new project
-            </button>
+        <div className="w-full h-full">
+          <div
+            className="w-full h-[63vh] mt-3 flex flex-col items-start gap-5 overflow-auto"
+            id="projects-edit-content"
+          >
+            {projects.map((project) => {
+              return (
+                <ProjectPreview
+                  project={project}
+                  handleEditForm={handleEditForm}
+                />
+              );
+            })}
           </div>
+          <button
+            className="h-8 mt-8 p-2 leading-[0.9rem] text-sm"
+            onClick={() => handleEditForm(initialState)}
+          >
+            Add new project
+          </button>
         </div>
       ) : (
         <DashboardForm

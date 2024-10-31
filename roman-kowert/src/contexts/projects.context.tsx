@@ -3,7 +3,6 @@ import axios from "axios";
 
 export type Project = {
   id: number,
-  project_id: number,
   title: string,
   description: string
 }
@@ -28,7 +27,6 @@ export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
   useEffect(() => {
     const getProjects = async () => {
       const response = await axios.get("http://localhost:5000/api/get-projects")
-      console.log(response);
       setProjects(response.data.projects);
     }
     getProjects();
