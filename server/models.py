@@ -29,10 +29,16 @@ class TextContent(db.Model):  # type: ignore[name-defined]
 class Project(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    img_file_path: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
 
     def to_dict(self):
-        return {"id": self.id, "title": self.title, "description": self.description}
+        return {
+            "id": self.id,
+            "title": self.title,
+            "img_file_path": self.img_file_path,
+            "description": self.description,
+        }
 
 
 class Occupation(db.Model):  # type: ignore[name-defined]

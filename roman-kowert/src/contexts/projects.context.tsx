@@ -4,6 +4,7 @@ import axios from "axios";
 export type Project = {
   id: number,
   title: string,
+  img_file_path: string,
   description: string
 }
 
@@ -23,6 +24,7 @@ type ProjectsProviderChildren = {
 
 export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
   const [projects, setProjects] = useState<Project[] | []>([]);
+  console.log(projects);
 
   useEffect(() => {
     const getProjects = async () => {

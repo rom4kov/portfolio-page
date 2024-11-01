@@ -19,6 +19,7 @@ type Result = AxiosResponse & {
 const initialState = {
   id: 0,
   title: "",
+  img_file_path: "",
   description: "",
 };
 
@@ -47,9 +48,6 @@ const DashboardProjects = () => {
       formData.append("img_file", file);
     }
 
-    console.log(file);
-    console.log(formData);
-
     try {
       const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
       console.log(response.data);
@@ -62,6 +60,7 @@ const DashboardProjects = () => {
                 ? {
                   ...project,
                   title: textContent.title,
+                  img_file_path: response.data.file_path,
                   description,
                 }
                 : project,
@@ -71,6 +70,7 @@ const DashboardProjects = () => {
               ...prev,
               {
                 id: 0,
+                img_file_path: response.data.file_path,
                 title: textContent.title,
                 description,
               },
@@ -100,6 +100,7 @@ const DashboardProjects = () => {
             {projects.map((project) => {
               return (
                 <ProjectPreview
+                  key={project.id}
                   project={project}
                   handleEditForm={handleEditForm}
                 />

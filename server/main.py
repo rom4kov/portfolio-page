@@ -167,18 +167,20 @@ def create_project():
     title = request.form.get("title")
     description = request.form.get("description")
     file = request.files.get("img_file")
+    file_path = ""
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
-        file.save(file_path)
+        print(filename)
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     new_project = Project(
         title=title,  # type: ignore
+        img_file_path=filename,  # type: ignore
         description=description,  # type: ignore
     )
     try:
         db.session.add(new_project)
         db.session.commit()
-        return jsonify(success=True)
+        return jsonify(success=True, file_path=file_path)
     except Exception as e:
         db.session.rollback()
         return jsonify(success=False, error=str(e)), 500
@@ -195,9 +197,6 @@ def update_project():
     if "file" not in request.files:
         return redirect(request.url)
     file = request.files['file']
-    print(request.files)
-    print(request.files['file'])
-    print(data["file"])
     if file.filename == "":
         return redirect(request.url)
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
