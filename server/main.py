@@ -191,6 +191,13 @@ def allowed_file(filename):
            filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
+@app.route("/api/get-projects", methods=["GET"])
+def get_projects():
+    project_data = db.session.execute(db.select(Project)).scalars()
+    projects = [project.to_dict() for project in project_data]
+    return jsonify(projects=projects)
+
+
 @app.route("/api/update-project", methods=["POST"])
 def update_project():
     data = request.get_json()
@@ -215,11 +222,16 @@ def update_project():
     return jsonify(success=True, title=project.title, description=project.description)
 
 
-@app.route("/api/get-projects", methods=["GET"])
-def get_projects():
-    project_data = db.session.execute(db.select(Project)).scalars()
-    projects = [project.to_dict() for project in project_data]
-    return jsonify(projects=projects)
+@app.route("/api/delete-project", methods=["POST"])
+def delete_project():
+    project_id = request.get_json()['id']
+    try:
+        project_to_delete = db.session.execute(db.select(Project).where(Project.id == project_id)).scalar()
+        db.session.delete(project_to_delete)
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        return jsonify(success=True, message=e)
 
 
 if __name__ == "__main__":
