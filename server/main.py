@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response, redirect, url_for
+from flask import Flask, json, jsonify, request, make_response, redirect, url_for
 from flask_cors import CORS
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm.base import instance_str
@@ -165,6 +165,13 @@ def get_texts():
 @app.route("/api/create-project", methods=["POST"])
 def create_project():
     title = request.form.get("title")
+
+    keywords_string = request.form.get('keywords', '')  # Get the string from the form data
+    keywords = keywords_string.split(',') if keywords_string else []  # Split into a list
+    keywords = [kw.strip() for kw in keywords]
+
+    print(request.form.get("keywords"))
+    print(keywords)
     description = request.form.get("description")
     file = request.files.get("img_file")
     file_path = ""
@@ -174,6 +181,7 @@ def create_project():
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     new_project = Project(
         title=title,  # type: ignore
+        keywords=keywords,  # type: ignore
         img_file_path=filename,  # type: ignore
         description=description,  # type: ignore
     )
@@ -194,12 +202,14 @@ def allowed_file(filename):
 def get_projects():
     project_data = db.session.execute(db.select(Project)).scalars()
     projects = [project.to_dict() for project in project_data]
+    print(projects)
     return jsonify(projects=projects)
 
 
 @app.route("/api/update-project", methods=["POST"])
 def update_project():
     data = request.get_json()
+    keywords = json.loads(data["keywords"]) if "keyword" in data else []
     if "file" not in request.files:
         return redirect(request.url)
     file = request.files["file"]
@@ -213,6 +223,7 @@ def update_project():
             db.select(Project).where(Project.id == data["id"])
         ).scalar_one()
         project.title = data["title"]
+        project.keywords = keywords
         project.description = data["description"]
         db.session.commit()
     except NoResultFound as e:

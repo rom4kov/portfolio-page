@@ -47,6 +47,20 @@ const DashboardForm = ({
         }
       />
       <input
+        type="text"
+        id="keywords"
+        className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+        value={textContent.keywords}
+        onChange={(evt) =>
+          setTextContent((prev) => {
+            return {
+              ...prev,
+              keywords: evt.target.value.split(/, */),
+            };
+          })
+        }
+      />
+      <input
         type="file"
         className="my-2"
         onChange={(event: ChangeEvent<HTMLInputElement>) => {

@@ -4,6 +4,7 @@ import axios from "axios";
 export type Project = {
   id: number,
   title: string,
+  keywords: string[],
   img_file_path: string,
   description: string
 }

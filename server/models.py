@@ -1,7 +1,7 @@
 from __future__ import annotations
 from enum import unique
 from flask_login import UserMixin
-from sqlalchemy import Integer, String, Table, Column, null
+from sqlalchemy import JSON, Integer, String, ARRAY
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy.sql.elements import SQLCoreOperations
 from extensions import db
@@ -29,6 +29,7 @@ class TextContent(db.Model):  # type: ignore[name-defined]
 class Project(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
+    keywords: Mapped[list[str]] = mapped_column(JSON, nullable=True, unique=False)
     img_file_path: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
 
@@ -36,6 +37,7 @@ class Project(db.Model):  # type: ignore[name-defined]
         return {
             "id": self.id,
             "title": self.title,
+            "keywords": self.keywords,
             "img_file_path": self.img_file_path,
             "description": self.description,
         }

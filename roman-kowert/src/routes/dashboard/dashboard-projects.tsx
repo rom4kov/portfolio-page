@@ -18,9 +18,10 @@ type Result = AxiosResponse & {
 
 const initialState = {
   id: 0,
-  title: "",
-  img_file_path: "",
-  description: "",
+  title: "title",
+  keywords: [],
+  img_file_path: "image file path",
+  description: "description",
 };
 
 const DashboardProjects = () => {
@@ -39,9 +40,12 @@ const DashboardProjects = () => {
       ? "http://localhost:5000/api/update-project"
       : "http://localhost:5000/api/create-project";
 
+    const keywords = textContent.keywords.join(",");
+
     const formData = new FormData();
     formData.append("id", String(textContent.id));
     formData.append("title", textContent.title);
+    formData.append("keywords", keywords);
     formData.append("description", description);
 
     if (file) {
@@ -60,6 +64,7 @@ const DashboardProjects = () => {
                 ? {
                   ...project,
                   title: textContent.title,
+                  keywords: textContent.keywords,
                   img_file_path: response.data.file_path,
                   description,
                 }
@@ -70,8 +75,9 @@ const DashboardProjects = () => {
               ...prev,
               {
                 id: 0,
-                img_file_path: response.data.file_path,
                 title: textContent.title,
+                img_file_path: response.data.file_path,
+                keywords: textContent.keywords,
                 description,
               },
             ];
