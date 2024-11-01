@@ -103,6 +103,7 @@ const DashboardProjects = () => {
                   key={project.id}
                   project={project}
                   handleEditForm={handleEditForm}
+                  setProjects={setProjects}
                 />
               );
             })}

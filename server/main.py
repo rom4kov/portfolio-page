@@ -20,7 +20,7 @@ import os
 from dotenv import load_dotenv
 
 UPLOAD_FOLDER = "../roman-kowert/src/assets/images/"
-ALLOWED_EXTENSIONS = {'txt', 'pdf', 'png', 'jpg', 'jpeg', 'gif'}
+ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
 
 app = Flask(__name__)
@@ -187,8 +187,7 @@ def create_project():
 
 
 def allowed_file(filename):
-    return '.' in filename and \
-           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
+    return "." in filename and filename.rsplit(".", 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 @app.route("/api/get-projects", methods=["GET"])
@@ -203,7 +202,7 @@ def update_project():
     data = request.get_json()
     if "file" not in request.files:
         return redirect(request.url)
-    file = request.files['file']
+    file = request.files["file"]
     if file.filename == "":
         return redirect(request.url)
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
@@ -224,9 +223,12 @@ def update_project():
 
 @app.route("/api/delete-project", methods=["POST"])
 def delete_project():
-    project_id = request.get_json()['id']
+    project_id = request.get_json()["id"]
+    print(project_id)
     try:
-        project_to_delete = db.session.execute(db.select(Project).where(Project.id == project_id)).scalar()
+        project_to_delete = db.session.execute(
+            db.select(Project).where(Project.id == project_id)
+        ).scalar()
         db.session.delete(project_to_delete)
         db.session.commit()
         return jsonify(success=True)
