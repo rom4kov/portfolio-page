@@ -86,6 +86,7 @@ const DashboardProjects = () => {
             ];
           }
         });
+        setShowEditForm(false);
       }
     } catch (error) {
       console.error("Error uploading project:", error);

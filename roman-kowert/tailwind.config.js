@@ -68,6 +68,7 @@ export default {
         500: "#c3e88d",
       },
       "tokyo-21": {
+        300: "#b5f5e9",
         500: "#4fd6be",
       },
       "tokyo-22": {

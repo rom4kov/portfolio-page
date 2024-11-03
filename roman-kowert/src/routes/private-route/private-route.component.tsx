@@ -9,7 +9,6 @@ type PrivateRouteProps = {
 
 const PrivateRoute = ({ children }: PrivateRouteProps) => {
   const { currentUser, loading } = useContext(UserContext);
-  console.log(currentUser);
 
   if (loading) {
     return <div>Loading...</div>

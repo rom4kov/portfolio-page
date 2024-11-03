@@ -13,6 +13,7 @@ import DashboardAbout from "./routes/dashboard/dashboard-about.component";
 import DashboardProjects from "./routes/dashboard/dashboard-projects";
 import DashboardResume from "./routes/dashboard/dashboard-resume";
 
+import FlashMessage from "./components/flash-message/flash.component";
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 
 import "./App.css";
@@ -33,42 +34,45 @@ function App() {
   }, [location]);
 
   return (
-    <div
-      id="app-root"
-      className={`flex justify-between ${contentPosition} transition-all duration-500 relative`}
-    >
-      <GlowCursor />
-      <Routes>
-        <Route path="/" element={<Navigation location={location.pathname} />}>
-          <Route index element={<Home />} />
+    <div>
+      <div
+        id="app-root"
+        className={`flex justify-between ${contentPosition} transition-all duration-500 relative`}
+      >
+        <GlowCursor />
+        <Routes>
+          <Route path="/" element={<Navigation location={location.pathname} />}>
+            <Route index element={<Home />} />
+            <Route
+              path="about"
+              element={<About location={location.pathname} />}
+            />
+            <Route
+              path="projects"
+              element={<Projects location={location.pathname} />}
+            />
+            <Route
+              path="resume"
+              element={<Resume location={location.pathname} />}
+            />
+          </Route>
+          <Route path="admin" element={<Admin />} />
           <Route
-            path="about"
-            element={<About location={location.pathname} />}
-          />
-          <Route
-            path="projects"
-            element={<Projects location={location.pathname} />}
-          />
-          <Route
-            path="resume"
-            element={<Resume location={location.pathname} />}
-          />
-        </Route>
-        <Route path="admin" element={<Admin />} />
-        <Route
-          path="admin/dashboard"
-          element={
-            <PrivateRoute>
-              <Dashboard />
-            </PrivateRoute>
-          }
-        >
+            path="admin/dashboard"
+            element={
+              <PrivateRoute>
+                <Dashboard />
+              </PrivateRoute>
+            }
+          >
             <Route index element={<DashboardHome />} />
             <Route path="about" element={<DashboardAbout />} />
             <Route path="projects" element={<DashboardProjects />} />
             <Route path="resume" element={<DashboardResume />} />
-        </Route>
-      </Routes>
+          </Route>
+        </Routes>
+      </div>
+      <FlashMessage />
     </div>
   );
 }
