@@ -32,6 +32,9 @@ const DashboardProjects = () => {
   const { projects, setProjects } =
     useContext<ProjectsContextType>(ProjectsContext);
 
+  console.log(file);
+  console.log(file?.name);
+
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 
@@ -54,7 +57,6 @@ const DashboardProjects = () => {
 
     try {
       const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
-      console.log(response.data);
 
       if (response.data.success == true) {
         setProjects((prev) => {
@@ -63,9 +65,10 @@ const DashboardProjects = () => {
               project.id === textContent.id
                 ? {
                   ...project,
+                  id: textContent.id,
                   title: textContent.title,
                   keywords: textContent.keywords,
-                  img_file_path: response.data.file_path,
+                  img_file_path: file?.name ? file.name : project.img_file_path,
                   description,
                 }
                 : project,
@@ -92,6 +95,7 @@ const DashboardProjects = () => {
   const handleEditForm = (project: Project) => {
     setShowEditForm(true);
     setTextContent(project);
+    setDescription(project.description)
   };
 
   return (

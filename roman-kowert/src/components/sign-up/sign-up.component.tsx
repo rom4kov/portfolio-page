@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction, FormEvent, FormEventHandler } from "react";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 type UserData = {
   user_email: string;
@@ -14,31 +15,30 @@ type SignUpProps = {
   setCurrentUser: Dispatch<SetStateAction<UserData>>;
 };
 
-const SignUp = ({
-  setLoginData,
-  loginData,
-  setCurrentUser,
-}: SignUpProps) => {
+const SignUp = ({ setLoginData, loginData, setCurrentUser }: SignUpProps) => {
+  const navigate = useNavigate();
+
   const handleSignUp: FormEventHandler = async (
     event: FormEvent<HTMLFormElement>,
   ) => {
     event.preventDefault();
 
-    const response = await axios.post(
-      "http://localhost:5000/api/register",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: {
-          email: loginData.email,
-          password: loginData.password,
-        },
+    const response = await axios.post("http://localhost:5000/api/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
       },
-    );
+      body: {
+        email: loginData.email,
+        password: loginData.password,
+      },
+    });
     setCurrentUser(response.data);
+    const userData = JSON.stringify(response.data);
+    localStorage.setItem("user", userData);
+    navigate("/admin/dashboard");
   };
+
   return (
     <div>
       <h1 className="text-center mb-5">Register</h1>

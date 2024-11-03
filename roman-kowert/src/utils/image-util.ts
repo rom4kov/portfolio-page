@@ -1,4 +1,4 @@
-function getImageURL(name: string) {
+function getImageURL(name: string | undefined) {
   return new URL(`../assets/images/${name}`, import.meta.url).href;
 }
 

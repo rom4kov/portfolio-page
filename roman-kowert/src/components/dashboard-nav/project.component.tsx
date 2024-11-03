@@ -38,6 +38,8 @@ const ProjectPreview = ({
     }
   };
 
+  console.log(project.img_file_path);
+
   return (
     <div className="w-[97.5%] items-start hover:bg-tokyo-4-500 p-3 rounded-lg">
       <div className="mt-0 flex gap-2">
@@ -57,8 +59,8 @@ const ProjectPreview = ({
       </div>
       <div className="mt-2 flex gap-3">
         <img
-          src={getImageURL(project.img_file_path)}
-          alt=""
+          src={project.img_file_path && getImageURL(project.img_file_path)}
+          alt="thumbnail of web site project landing page"
           className="mt-1 w-[25%] h-full"
         />
         <div
@@ -68,10 +70,13 @@ const ProjectPreview = ({
           }}
         />
       </div>
-      <div className="mt-3 ms-32 mb-3 ps-3 flex gap-2 flex-wrap">
-        {project.keywords.map((keyword) => {
+      <div className="mt-3 ms-32 mb-1 ps-3 flex gap-2 flex-wrap">
+        {project.keywords.map((keyword, idx) => {
           return (
-            <span className="py-0 px-2 bg-tokyo-8-500 text-[#1f2335] rounded-xl text-xs">
+            <span
+              key={idx}
+              className="py-1 px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-xs font-bold"
+            >
               {keyword}
             </span>
           );

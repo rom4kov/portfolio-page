@@ -89,8 +89,11 @@ def register():
         user = db.session.execute(
             db.select(User).where(User.email == data["email"])
         ).scalar()
-        login_user(user)
-    return jsonify(user_email=current_user.email)
+        login_user(user, remember=True)
+        if user:
+            print(user)
+            return jsonify(email=user.email, authenticated=current_user.is_authenticated)
+    return "", 200
 
 
 @app.before_request
@@ -119,7 +122,6 @@ def login():
 
 
 @app.route("/api/logout", methods=["POST"])
-@login_required
 def logout():
     logout_user()
     return jsonify(is_authenticated=current_user.is_authenticated)
@@ -166,18 +168,15 @@ def get_texts():
 def create_project():
     title = request.form.get("title")
 
-    keywords_string = request.form.get('keywords', '')  # Get the string from the form data
-    keywords = keywords_string.split(',') if keywords_string else []  # Split into a list
+    keywords_string = request.form.get('keywords', '')
+    keywords = keywords_string.split(',') if keywords_string else []
     keywords = [kw.strip() for kw in keywords]
 
-    print(request.form.get("keywords"))
-    print(keywords)
     description = request.form.get("description")
     file = request.files.get("img_file")
     file_path = ""
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        print(filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     new_project = Project(
         title=title,  # type: ignore
@@ -202,29 +201,34 @@ def allowed_file(filename):
 def get_projects():
     project_data = db.session.execute(db.select(Project)).scalars()
     projects = [project.to_dict() for project in project_data]
-    print(projects)
     return jsonify(projects=projects)
 
 
 @app.route("/api/update-project", methods=["POST"])
 def update_project():
-    data = request.get_json()
-    keywords = json.loads(data["keywords"]) if "keyword" in data else []
-    if "file" not in request.files:
-        return redirect(request.url)
-    file = request.files["file"]
-    if file.filename == "":
-        return redirect(request.url)
-    if file and isinstance(file.filename, str) and allowed_file(file.filename):
+    id = request.form.get("id")
+    title = request.form.get("title")
+
+    keywords_string = request.form.get('keywords', '')
+    keywords = keywords_string.split(',') if keywords_string else []
+    keywords = [kw.strip() for kw in keywords]
+
+    description = request.form.get("description")
+    file = request.files.get("img_file")
+    print(file)
+    filename = ""
+    if file is not None and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
     try:
         project = db.session.execute(
-            db.select(Project).where(Project.id == data["id"])
+            db.select(Project).where(Project.id == id)
         ).scalar_one()
-        project.title = data["title"]
+        project.title = title
+        if file is not None and isinstance(filename, str):
+            project.img_file_path = filename
         project.keywords = keywords
-        project.description = data["description"]
+        project.description = description
         db.session.commit()
     except NoResultFound as e:
         print(e._message())
@@ -235,7 +239,6 @@ def update_project():
 @app.route("/api/delete-project", methods=["POST"])
 def delete_project():
     project_id = request.get_json()["id"]
-    print(project_id)
     try:
         project_to_delete = db.session.execute(
             db.select(Project).where(Project.id == project_id)

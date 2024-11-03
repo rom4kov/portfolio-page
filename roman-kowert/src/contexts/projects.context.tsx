@@ -5,7 +5,7 @@ export type Project = {
   id: number,
   title: string,
   keywords: string[],
-  img_file_path: string,
+  img_file_path: string | undefined,
   description: string
 }
 
@@ -25,7 +25,6 @@ type ProjectsProviderChildren = {
 
 export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
   const [projects, setProjects] = useState<Project[] | []>([]);
-  console.log(projects);
 
   useEffect(() => {
     const getProjects = async () => {
