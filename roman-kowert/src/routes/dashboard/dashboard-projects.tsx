@@ -7,6 +7,8 @@ import {
   ProjectsContextType,
 } from "../../contexts/projects.context";
 
+import { FlashContext } from "../../contexts/flash.context";
+
 import DashboardForm from "./dashboard-form.component";
 import ProjectPreview from "../../components/dashboard-nav/project.component";
 
@@ -31,6 +33,7 @@ const DashboardProjects = () => {
   const [description, setDescription] = useState<string>("");
   const { projects, setProjects } =
     useContext<ProjectsContextType>(ProjectsContext);
+  const { setFlash, setShowAlert } = useContext(FlashContext);
 
   console.log(file);
   console.log(file?.name);
@@ -56,7 +59,10 @@ const DashboardProjects = () => {
     }
 
     try {
-      const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
+      const response = (await axios.post<AxiosResponse>(
+        url,
+        formData,
+      )) as Result;
 
       if (response.data.success == true) {
         setProjects((prev) => {
@@ -64,13 +70,15 @@ const DashboardProjects = () => {
             return prev.map((project) =>
               project.id === textContent.id
                 ? {
-                  ...project,
-                  id: textContent.id,
-                  title: textContent.title,
-                  keywords: textContent.keywords,
-                  img_file_path: file?.name ? file.name : project.img_file_path,
-                  description,
-                }
+                    ...project,
+                    id: textContent.id,
+                    title: textContent.title,
+                    keywords: textContent.keywords,
+                    img_file_path: file?.name
+                      ? file.name
+                      : project.img_file_path,
+                    description,
+                  }
                 : project,
             );
           } else {
@@ -87,6 +95,8 @@ const DashboardProjects = () => {
           }
         });
         setShowEditForm(false);
+        setFlash("Project successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
+        setShowAlert(true);
       }
     } catch (error) {
       console.error("Error uploading project:", error);
@@ -96,7 +106,7 @@ const DashboardProjects = () => {
   const handleEditForm = (project: Project) => {
     setShowEditForm(true);
     setTextContent(project);
-    setDescription(project.description)
+    setDescription(project.description);
   };
 
   return (
