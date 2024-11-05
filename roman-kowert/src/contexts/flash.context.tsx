@@ -19,7 +19,7 @@ export type FlashContextType = {
 
 export const FlashContext = createContext<FlashContextType>({
   flashMessage: { message: "", bgColor: "", textColor: "" },
-  setFlash: () => {},
+  setFlash: () => { },
   showAlert: false,
   setShowAlert: () => false,
 });

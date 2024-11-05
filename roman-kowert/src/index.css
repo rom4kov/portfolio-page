@@ -140,6 +140,10 @@ button:focus-visible {
   }
 }
 
+.tox.tox-tinymce {
+  height: unset !important;
+  flex-grow: 1 !important;
+}
 /* iframe { */
 /*   z-index: -1; */
 /*   position: relative; */

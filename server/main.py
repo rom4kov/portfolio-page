@@ -173,11 +173,13 @@ def create_project():
     keywords = [kw.strip() for kw in keywords]
 
     description = request.form.get("description")
+
     file = request.files.get("img_file")
     file_path = ""
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
     new_project = Project(
         title=title,  # type: ignore
         keywords=keywords,  # type: ignore
@@ -214,12 +216,13 @@ def update_project():
     keywords = [kw.strip() for kw in keywords]
 
     description = request.form.get("description")
+
     file = request.files.get("img_file")
-    print(file)
     filename = ""
     if file is not None and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
     try:
         project = db.session.execute(
             db.select(Project).where(Project.id == id)

@@ -38,8 +38,6 @@ const ProjectPreview = ({
     }
   };
 
-  console.log(project.img_file_path);
-
   return (
     <div className="w-[97.5%] items-start hover:bg-tokyo-4-300 p-3 rounded-lg">
       <div className="mt-0 flex gap-2">
