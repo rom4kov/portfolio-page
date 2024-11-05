@@ -98,16 +98,7 @@ const DashboardForm = ({
           </div>
         </form>
       ) : (
-        <div className="h-full flex flex-col">
-          <h2 className="mb-3">Long Description</h2>
-          <DashboardLongForm />
-          <button
-            onClick={() => setLongForm(false)}
-            className="my-5 mx-auto py-2 w-48 h-8 leading-3"
-          >
-              Back to Short Form
-          </button>
-        </div>
+        <DashboardLongForm setLongForm={setLongForm} />
       )}
     </div>
   );

@@ -144,6 +144,10 @@ button:focus-visible {
   height: unset !important;
   flex-grow: 1 !important;
 }
+
+.tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__help-text, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__path, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__right-container {
+    flex: 1 !important;
+}
 /* iframe { */
 /*   z-index: -1; */
 /*   position: relative; */
