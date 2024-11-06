@@ -43,11 +43,19 @@ class Project(db.Model):  # type: ignore[name-defined]
             "keywords": self.keywords,
             "img_file_path": self.img_file_path,
             "description": self.description,
-            "features": [feature.to_dict() for feature in self.features[::-1]],
+            "features": sorted(
+                (feature.to_dict() for feature in self.features), key=lambda f: f["id"]
+            ),
         }
 
 
 class Feature(db.Model):  # type: ignore
+    def __init__(self, title, img_file_path, description, project_id) -> None:
+        self.title = title
+        self.img_file_path = img_file_path
+        self.description = description
+        self.project_id = project_id
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     img_file_path: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)

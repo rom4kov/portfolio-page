@@ -213,6 +213,8 @@ def get_projects():
         db.select(Project).options(joinedload(Project.features))
     ).unique().scalars()
     projects = [project.to_dict() for project in project_data]
+    for project in projects:
+        print(project['features'])
     return jsonify(projects=projects)
 
 
@@ -284,7 +286,7 @@ def create_feature():
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
     new_feature = Feature(
-        title=title,  # type: ignore
+        title=title,
         description=description,
         img_file_path=filename,
         project_id=project_id,

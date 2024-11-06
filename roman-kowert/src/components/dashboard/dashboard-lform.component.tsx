@@ -137,13 +137,15 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         <div className="w-full h-[77.5%] overflow-y-scroll">
           {project?.features.map((feature: Feature) => {
             return (
-              <div className="mt-3 mb-8 text-start">
+              <div key={feature.id} className="mt-3 mb-8 text-start">
                 <h3 className="mb-2 font-bold">{feature.title}</h3>
-                <img
-                  className="mb-3"
-                  src={getImageURL(feature.img_file_path)}
-                  alt=""
-                />
+                {feature.img_file_path && (
+                  <img
+                    className="mb-3"
+                    src={getImageURL(feature.img_file_path)}
+                    alt=""
+                  />
+                )}
                 <div
                   dangerouslySetInnerHTML={{ __html: feature.description }}
                 />
