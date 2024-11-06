@@ -1,7 +1,7 @@
 from flask import Flask, json, jsonify, request, make_response, redirect, url_for
 from flask_cors import CORS
 from sqlalchemy.exc import NoResultFound
-from sqlalchemy.orm.base import instance_str
+from sqlalchemy.orm import joinedload
 
 from extensions import db
 from flask_login import (
@@ -12,7 +12,7 @@ from flask_login import (
     logout_user,
 )
 from sqlalchemy.orm import DeclarativeBase
-from models import User, TextContent, Project
+from models import User, TextContent, Project, Feature
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
@@ -24,7 +24,11 @@ ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
 
 app = Flask(__name__)
-cors = CORS(app, origins=["http://localhost:5173"], supports_credentials=True)
+cors = CORS(
+    app,
+    resources={r"/api/*": {"origins": "http://localhost:5173"}},
+    supports_credentials=True,
+)
 
 load_dotenv()
 
@@ -92,7 +96,9 @@ def register():
         login_user(user, remember=True)
         if user:
             print(user)
-            return jsonify(email=user.email, authenticated=current_user.is_authenticated)
+            return jsonify(
+                email=user.email, authenticated=current_user.is_authenticated
+            )
     return "", 200
 
 
@@ -168,17 +174,18 @@ def get_texts():
 def create_project():
     title = request.form.get("title")
 
-    keywords_string = request.form.get('keywords', '')
-    keywords = keywords_string.split(',') if keywords_string else []
+    keywords_string = request.form.get("keywords", "")
+    keywords = keywords_string.split(",") if keywords_string else []
     keywords = [kw.strip() for kw in keywords]
 
     description = request.form.get("description")
 
     file = request.files.get("img_file")
-    file_path = ""
+    file_path = None
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
-        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+        file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
+        file.save(file_path)
 
     new_project = Project(
         title=title,  # type: ignore
@@ -186,6 +193,7 @@ def create_project():
         img_file_path=filename,  # type: ignore
         description=description,  # type: ignore
     )
+
     try:
         db.session.add(new_project)
         db.session.commit()
@@ -201,7 +209,9 @@ def allowed_file(filename):
 
 @app.route("/api/get-projects", methods=["GET"])
 def get_projects():
-    project_data = db.session.execute(db.select(Project)).scalars()
+    project_data = db.session.execute(
+        db.select(Project).options(joinedload(Project.features))
+    ).unique().scalars()
     projects = [project.to_dict() for project in project_data]
     return jsonify(projects=projects)
 
@@ -211,15 +221,19 @@ def update_project():
     id = request.form.get("id")
     title = request.form.get("title")
 
-    keywords_string = request.form.get('keywords', '')
-    keywords = keywords_string.split(',') if keywords_string else []
+    keywords_string = request.form.get("keywords", "")
+    keywords = keywords_string.split(",") if keywords_string else []
     keywords = [kw.strip() for kw in keywords]
 
     description = request.form.get("description")
 
     file = request.files.get("img_file")
     filename = ""
-    if file is not None and isinstance(file.filename, str) and allowed_file(file.filename):
+    if (
+        file is not None
+        and isinstance(file.filename, str)
+        and allowed_file(file.filename)
+    ):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
@@ -251,6 +265,43 @@ def delete_project():
         return jsonify(success=True)
     except Exception as e:
         return jsonify(success=True, message=e)
+
+
+@app.route("/api/create-feature", methods=["POST"])
+def create_feature():
+    project_id = request.form.get("project_id")
+    title = request.form.get("title")
+    description = request.form.get("description")
+
+    file = request.files.get("img_file")
+    filename = ""
+    if (
+        file is not None
+        and isinstance(file.filename, str)
+        and allowed_file(file.filename)
+    ):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
+    new_feature = Feature(
+        title=title,  # type: ignore
+        description=description,
+        img_file_path=filename,
+        project_id=project_id,
+    )
+
+    try:
+        db.session.add(new_feature)
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(success=False, error=str(e)), 500
+
+
+@app.route("/api/get-features", methods=["POST"])
+def get_features():
+    return ""
 
 
 if __name__ == "__main__":

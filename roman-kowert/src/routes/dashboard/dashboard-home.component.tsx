@@ -56,7 +56,7 @@ const DashboardHome = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-3">
+    <div className="w-full h-full flex flex-col items-center gap-3">
       <h2 className="text-2xl mt-3">Edit Home Content</h2>
       <form
         action=""
@@ -67,7 +67,7 @@ const DashboardHome = () => {
           setTextContent={setTextContent}
           initialValue={value?.body ? value?.body : "Type..."}
         />
-        <button type="submit">Update</button>
+        <button type="submit" className="mb-4 leading-3">Update</button>
       </form>
     </div>
   );

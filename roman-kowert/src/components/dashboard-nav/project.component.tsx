@@ -25,6 +25,7 @@ const ProjectPreview = ({
   handleEditForm,
   setProjects,
 }: ProjectProps) => {
+
   const deleteProject: deleteFunc = async (project_id: number) => {
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/delete-project",
@@ -57,7 +58,7 @@ const ProjectPreview = ({
       </div>
       <div className="mt-2 flex gap-3">
         <img
-          src={project.img_file_path && getImageURL(project.img_file_path)}
+          src={project.img_file_path !== undefined ? getImageURL(project.img_file_path) : ""}
           alt="thumbnail of web site project landing page"
           className="mt-1 w-[25%] h-full"
         />

@@ -24,6 +24,7 @@ const initialState = {
   keywords: [],
   img_file_path: "image file path",
   description: "description",
+  features: []
 };
 
 const DashboardProjects = () => {
@@ -34,9 +35,6 @@ const DashboardProjects = () => {
   const { projects, setProjects } =
     useContext<ProjectsContextType>(ProjectsContext);
   const { setFlash, setShowAlert } = useContext(FlashContext);
-
-  console.log(file);
-  console.log(file?.name);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -78,6 +76,7 @@ const DashboardProjects = () => {
                       ? file.name
                       : project.img_file_path,
                     description,
+                    features: []
                   }
                 : project,
             );
@@ -85,15 +84,17 @@ const DashboardProjects = () => {
             return [
               ...prev,
               {
-                id: 0,
+                id: projects.length + 1,
                 title: textContent.title,
-                img_file_path: response.data.file_path,
+                img_file_path: file?.name,
                 keywords: textContent.keywords,
                 description,
+                features: []
               },
             ];
           }
         });
+
         setShowEditForm(false);
         setFlash("Project successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
         setShowAlert(true);

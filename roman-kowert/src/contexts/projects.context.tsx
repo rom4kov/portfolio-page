@@ -1,12 +1,20 @@
 import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
+export type Feature = {
+  id: number,
+  title: string,
+  img_file_path: string,
+  description: string,
+}
+
 export type Project = {
   id: number,
   title: string,
   keywords: string[],
   img_file_path: string | undefined,
-  description: string
+  description: string,
+  features: Feature[]
 }
 
 export type ProjectsContextType = {
@@ -23,7 +31,7 @@ type ProjectsProviderChildren = {
   children: JSX.Element;
 }
 
-export const ProjectsProvider = ({ children }: ProjectsProviderChildren ) => {
+export const ProjectsProvider = ({ children }: ProjectsProviderChildren) => {
   const [projects, setProjects] = useState<Project[] | []>([]);
 
   useEffect(() => {

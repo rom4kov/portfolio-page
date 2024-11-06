@@ -98,7 +98,10 @@ const DashboardForm = ({
           </div>
         </form>
       ) : (
-        <DashboardLongForm setLongForm={setLongForm} />
+        <DashboardLongForm
+          projectId={textContent.id}
+          setLongForm={setLongForm}
+        />
       )}
     </div>
   );

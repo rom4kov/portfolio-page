@@ -10,11 +10,7 @@ type TextContentProps = {
 const TextEditor = ({ setTextContent, initialValue }: TextContentProps) => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [value, setValue] = useState<string>(initialValue);
-  // const log = () => {
-  //   if (editorRef.current) {
-  //     console.log(editorRef.current.getContent());
-  //   }
-  // };
+
   return (
     <>
       <Editor
