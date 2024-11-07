@@ -10,14 +10,13 @@ import {
 import axios, { AxiosResponse } from "axios";
 
 import TextEditor from "../../editor/editor.component";
+import ProjectFeature from "../dashboard-nav/feature.component";
 
 import {
   Project,
   ProjectsContext,
   Feature,
 } from "../../contexts/projects.context";
-
-import { getImageURL } from "../../utils/image-util";
 
 import { FlashContext } from "../../contexts/flash.context";
 
@@ -49,17 +48,19 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
   const { projects, setProjects } = useContext(ProjectsContext);
   const project = projects.find((project) => project.id === projectId);
   console.log(project?.features);
-  console.log(textContent);
+  console.log(description);
 
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
-  const handleSubmit: FormEventHandler = async () => {
+  const handleSubmit: FormEventHandler = async (e) => {
+    e.preventDefault();
+
     console.log(textContent);
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-project"
-      : "http://localhost:5000/api/create-project";
+      ? "http://localhost:5000/api/update-feature"
+      : "http://localhost:5000/api/create-feature";
 
     const formData = new FormData();
 
@@ -82,7 +83,6 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         formData,
       )) as Result;
 
-      console.log(response.data);
       if (response.data.success === true) {
         setProjects((prev: Project[]) => {
           if (isUpdating) {
@@ -126,7 +126,6 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
             ];
           }
         });
-        console.log(projects);
 
         setShowEditForm(false);
         setFlash(
@@ -194,32 +193,15 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         <div className="w-full h-[77.5%] overflow-y-scroll">
           {project?.features.map((feature: Feature) => {
             return (
-              <div key={feature.id} className="mt-3 mb-8 text-start">
-                <div className="flex justify-between">
-                  <h3 className="mb-2 font-bold inline">{feature.title}</h3>
-                  <button
-                    className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
-                    onClick={() => handleEditForm(feature)}
-                  >
-                    Edit
-                  </button>
-                </div>
-                {feature.img_file_path && (
-                  <img
-                    className="mb-3"
-                    src={getImageURL(feature.img_file_path)}
-                    alt=""
-                  />
-                )}
-                <div
-                  dangerouslySetInnerHTML={{ __html: feature.description }}
-                />
-              </div>
+              <ProjectFeature
+                feature={feature}
+                handleEditForm={handleEditForm}
+              />
             );
           })}
           <button
             className="mt-2 py-2 w-36 h-8 leading-3 mx-auto"
-            onClick={() => setShowEditForm(true)}
+            onClick={() => handleEditForm(initialState)}
           >
             Add content
           </button>

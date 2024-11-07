@@ -1,12 +1,12 @@
-import type { Feature } from "../../contexts/projects.context";
+import type { Feature as ProjectFeature } from "../../contexts/projects.context";
 import { getImageURL } from "../../utils/image-util";
 
 type FeatureProps = {
-  feature: Feature;
-  handleEditForm: (feature: Feature) => void;
+  feature: ProjectFeature;
+  handleEditForm: (feature: ProjectFeature) => void;
 }
 
-const Feature = ({ feature, handleEditForm }: FeatureProps) => {
+const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
   return (
     <div key={feature.id} className="mt-3 mb-8 text-start">
       <div className="flex justify-between">
@@ -26,4 +26,4 @@ const Feature = ({ feature, handleEditForm }: FeatureProps) => {
   );
 };
 
-export default Feature;
+export default ProjectFeature;
