@@ -11,9 +11,15 @@ import axios, { AxiosResponse } from "axios";
 
 import TextEditor from "../../editor/editor.component";
 
-import { ProjectsContext, Feature } from "../../contexts/projects.context";
+import {
+  Project,
+  ProjectsContext,
+  Feature,
+} from "../../contexts/projects.context";
 
 import { getImageURL } from "../../utils/image-util";
+
+import { FlashContext } from "../../contexts/flash.context";
 
 type LongFormProps = {
   projectId: number;
@@ -24,6 +30,8 @@ const initialState = {
   id: 0,
   title: "title",
   img_file_path: "image file path",
+  description: "",
+  project_id: 0,
 };
 
 type Result = AxiosResponse & {
@@ -33,7 +41,7 @@ type Result = AxiosResponse & {
 };
 
 const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
-  const [textContent, setTextContent] = useState(initialState);
+  const [textContent, setTextContent] = useState<Feature>(initialState);
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
@@ -41,13 +49,24 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
   const { projects, setProjects } = useContext(ProjectsContext);
   const project = projects.find((project) => project.id === projectId);
   console.log(project?.features);
+  console.log(textContent);
 
-  const handleSubmit: FormEventHandler = async (e) => {
-    e.preventDefault();
+  const { setFlash, setShowAlert } = useContext(FlashContext);
 
-    const url = "http://localhost:5000/api/create-feature";
+  const handleSubmit: FormEventHandler = async () => {
+    console.log(textContent);
+
+    const isUpdating = textContent.id !== 0;
+    const url = isUpdating
+      ? "http://localhost:5000/api/update-project"
+      : "http://localhost:5000/api/create-project";
 
     const formData = new FormData();
+
+    if (isUpdating) {
+      formData.append("id", String(textContent.id));
+      console.log(textContent.id + " will be updated");
+    }
 
     formData.append("project_id", String(projectId));
     formData.append("title", textContent.title);
@@ -63,39 +82,77 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         formData,
       )) as Result;
 
-      console.log(response);
-      // if (response.data.success === true) {
-      //   setProjects((prev) => {
-      //     if (isUpdating) {
-      //       return prev.map((project) =>
-      //         project.id === textContent.id
-      //           ? {
-      //               ...project,
-      //               id: textContent.id,
-      //               title: textContent.title,
-      //               img_file_path: file?.name
-      //                 ? file.name
-      //                 : project.img_file_path,
-      //               description,
-      //             }
-      //           : project,
-      //       );
-      //     } else {
-      //       return [
-      //         ...prev,
-      //         {
-      //           id: 0,
-      //           title: textContent.title,
-      //           img_file_path: response.data.file_path,
-      //           description,
-      //         },
-      //       ];
-      //     }
-      //   });
-      // }
+      console.log(response.data);
+      if (response.data.success === true) {
+        setProjects((prev: Project[]) => {
+          if (isUpdating) {
+            console.log(isUpdating);
+            return prev.map((project) =>
+              project.id === textContent.project_id
+                ? {
+                    ...project,
+                    features: project.features.map((feature) =>
+                      feature.id === textContent.id
+                        ? {
+                            ...feature,
+                            title: textContent.title,
+                            img_file_path: textContent.img_file_path,
+                            description,
+                          }
+                        : feature,
+                    ),
+                  }
+                : project,
+            );
+          } else {
+            return [
+              ...prev.map((project) =>
+                project.id === textContent.project_id
+                  ? {
+                      ...project,
+                      features: [
+                        ...project.features,
+                        {
+                          id: project.features.length + 1,
+                          title: textContent.title,
+                          img_file_path: textContent.img_file_path,
+                          description,
+                          project_id: projectId,
+                        },
+                      ],
+                    }
+                  : project,
+              ),
+            ];
+          }
+        });
+        console.log(projects);
+
+        setShowEditForm(false);
+        setFlash(
+          "Feature successfully updated.",
+          "bg-tokyo-22-500",
+          "text-tokyo-21-300",
+        );
+        setShowAlert(true);
+      }
     } catch (error) {
       console.log(error);
+      setShowEditForm(false);
+      setFlash(
+        "Feature could not be updated.",
+        "bg-tokyo-23-500",
+        "text-tokyo-24-300",
+      );
+      setShowAlert(true);
     }
+  };
+
+  const handleEditForm = (feature: Feature) => {
+    setShowEditForm(true);
+    setTextContent(feature);
+    setDescription(feature.description);
+    console.log(feature);
   };
 
   return (
@@ -138,7 +195,15 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
           {project?.features.map((feature: Feature) => {
             return (
               <div key={feature.id} className="mt-3 mb-8 text-start">
-                <h3 className="mb-2 font-bold">{feature.title}</h3>
+                <div className="flex justify-between">
+                  <h3 className="mb-2 font-bold inline">{feature.title}</h3>
+                  <button
+                    className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
+                    onClick={() => handleEditForm(feature)}
+                  >
+                    Edit
+                  </button>
+                </div>
                 {feature.img_file_path && (
                   <img
                     className="mb-3"
@@ -167,7 +232,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
               onClick={handleSubmit}
               className="my-5 me-3 py-2 w-24 h-8 leading-3"
             >
-              Add
+              {textContent.id === 0 ? "Add" : "Update"}
             </button>
             <button
               onClick={() => setShowEditForm(false)}

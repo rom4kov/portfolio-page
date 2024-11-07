@@ -69,6 +69,7 @@ class Feature(db.Model):  # type: ignore
             "title": self.title,
             "img_file_path": self.img_file_path,
             "description": self.description,
+            "project_id": self.project_id,
         }
 
 

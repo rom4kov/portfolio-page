@@ -18,14 +18,13 @@ type Result = AxiosResponse & {
   };
 };
 
-type deleteFunc = (arg0: number) => Promise<void>;
+type deleteFunc = (project_id: number) => Promise<void>;
 
 const ProjectPreview = ({
   project,
   handleEditForm,
   setProjects,
 }: ProjectProps) => {
-
   const deleteProject: deleteFunc = async (project_id: number) => {
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/delete-project",

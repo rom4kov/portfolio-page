@@ -93,7 +93,7 @@ const DashboardForm = ({
               className="ms-auto py-2 h-8 leading-3"
               onClick={() => setLongForm(true)}
             >
-              Edit Long Description
+              Edit Project Details
             </button>
           </div>
         </form>

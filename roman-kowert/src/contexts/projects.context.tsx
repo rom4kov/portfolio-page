@@ -6,6 +6,7 @@ export type Feature = {
   title: string,
   img_file_path: string,
   description: string,
+  project_id: number,
 }
 
 export type Project = {

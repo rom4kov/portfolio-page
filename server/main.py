@@ -209,12 +209,12 @@ def allowed_file(filename):
 
 @app.route("/api/get-projects", methods=["GET"])
 def get_projects():
-    project_data = db.session.execute(
-        db.select(Project).options(joinedload(Project.features))
-    ).unique().scalars()
+    project_data = (
+        db.session.execute(db.select(Project).options(joinedload(Project.features)))
+        .unique()
+        .scalars()
+    )
     projects = [project.to_dict() for project in project_data]
-    for project in projects:
-        print(project['features'])
     return jsonify(projects=projects)
 
 
@@ -249,10 +249,10 @@ def update_project():
         project.keywords = keywords
         project.description = description
         db.session.commit()
+        return jsonify(success=True, title=project.title, description=project.description)
     except NoResultFound as e:
         print(e._message())
         return redirect(url_for("create_project"), code=307)
-    return jsonify(success=True, title=project.title, description=project.description)
 
 
 @app.route("/api/delete-project", methods=["POST"])
@@ -301,8 +301,39 @@ def create_feature():
         return jsonify(success=False, error=str(e)), 500
 
 
-@app.route("/api/get-features", methods=["POST"])
-def get_features():
+@app.route("/api/update-feature", methods=["POST"])
+def update_feature():
+    id = request.form.get("id")
+    title = request.form.get("title")
+    description = request.form.get("description")
+
+    file = request.files.get("img_file")
+    filename = ""
+    if (
+        file is not None
+        and isinstance(file.filename, str)
+        and allowed_file(file.filename)
+    ):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
+
+    try:
+        feature_to_update = db.session.execute(
+            db.select(Feature).where(Feature.id == id)
+        ).scalar_one()
+        feature_to_update.title = title
+        if file is not None and isinstance(filename, str):
+            feature_to_update.img_file_path = filename
+        feature_to_update.description = description
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        db.session.rollback()
+        return jsonify(succuss=False, error=str(e)), 500
+
+
+@app.route("/api/delete-feature", methods=["POST"])
+def delete_feature():
     return ""
 
 
