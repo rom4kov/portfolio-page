@@ -56,6 +56,8 @@ const DashboardProjects = () => {
       formData.append("img_file", file);
     }
 
+    console.log(file);
+
     try {
       const response = (await axios.post<AxiosResponse>(
         url,
@@ -111,10 +113,10 @@ const DashboardProjects = () => {
   };
 
   return (
-    <div className="w-full h-full px-5 flex flex-col items-center gap-3">
-      <h2 className="text-2xl mt-3 text-center">Edit Projects Content</h2>
+    <div id="projects-edit-container" className="w-full h-full px-5 flex flex-col items-center gap-3">
+      <h2 className="text-2xl mt-3 text-center flex-none">Edit Projects Content</h2>
       {!showEditForm ? (
-        <div className="w-full h-full">
+        <div className="w-full h-full flex-grow">
           <div
             className="w-full h-[63vh] mt-3 flex flex-col items-start gap-5 overflow-auto"
             id="projects-edit-content"

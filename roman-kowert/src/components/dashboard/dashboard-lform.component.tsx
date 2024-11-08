@@ -121,6 +121,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
           }
         });
 
+        setFile(null);
         setShowEditForm(false);
         setFlash(
           "Feature successfully updated.",
@@ -131,6 +132,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
       }
     } catch (error) {
       console.log((error as AxiosError).response?.data);
+      setFile(null);
       setShowEditForm(false);
       setFlash(
         "Feature could not be updated.",
@@ -149,12 +151,12 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
   };
 
   return (
-    <div className="h-full flex flex-col">
-      <h2 className="mb-3">Long Description</h2>
+    <div className="flex flex-col flex-grow h-full" id="long-form-container">
+      <h2 className="mb-3 flex-none">Long Description</h2>
       {showEditForm ? (
         <form
           action=""
-          className="flex flex-col w-full h-full gap-3"
+          className="flex flex-col w-full gap-3 flex-grow"
           encType="mulipart/form-data"
         >
           <input
@@ -193,7 +195,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
           />
         </form>
       ) : (
-        <div className="w-full h-[77.5%] overflow-y-scroll">
+        <div id="features" className="w-full h-auto flex-grow overflow-y-auto">
           {project?.features.map((feature: Feature, idx) => {
             return (
               <ProjectFeature
@@ -211,7 +213,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
           </button>
         </div>
       )}
-      <div className="flex justify-between">
+      <div className="flex justify-between h-auto flex-none">
         {showEditForm && (
           <div>
             <button
@@ -230,7 +232,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         )}
         <button
           onClick={() => setLongForm(false)}
-          className={`mt-6 mb-3 ${showEditForm ? "ms-auto" : "mx-auto"} py-2 w-48 h-8 leading-3`}
+          className={`mt-6 mb-4 flex-none ${showEditForm ? "ms-auto" : "mx-auto"} py-2 w-48 h-8 leading-3`}
         >
           Back to Short Form
         </button>

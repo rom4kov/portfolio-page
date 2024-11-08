@@ -1,6 +1,7 @@
-import { Dispatch, SetStateAction } from "react";
+import { useContext, Dispatch, SetStateAction } from "react";
 
 import { Project } from "../../contexts/projects.context";
+import { FlashContext } from "../../contexts/flash.context";
 
 import axios, { AxiosResponse } from "axios";
 
@@ -25,6 +26,7 @@ const ProjectPreview = ({
   handleEditForm,
   setProjects,
 }: ProjectProps) => {
+  const { setFlash, setShowAlert } = useContext(FlashContext);
 
   const deleteProject: deleteFunc = async (project_id: number) => {
     const response = (await axios.post<AxiosResponse>(
@@ -37,6 +39,13 @@ const ProjectPreview = ({
         return prev.filter((project) => project.id !== project_id);
       });
     }
+
+    setFlash(
+      "Project has been deleted",
+      "bg-tokyo-22-500",
+      "text-tokyo-21-300",
+    );
+    setShowAlert(true);
   };
 
   return (

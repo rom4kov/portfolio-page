@@ -31,7 +31,7 @@ const DashboardForm = ({
   const [longForm, setLongForm] = useState(false);
 
   return (
-    <div className="w-full h-full">
+    <div className="w-full flex-grow overflow-y-auto">
       {!longForm ? (
         <form
           action=""
