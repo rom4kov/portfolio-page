@@ -7,7 +7,9 @@ import {
   ChangeEvent,
 } from "react";
 
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosResponse, AxiosError } from "axios";
+
+import short from "short-uuid";
 
 import TextEditor from "../../editor/editor.component";
 import ProjectFeature from "../dashboard-nav/feature.component";
@@ -47,15 +49,11 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
 
   const { projects, setProjects } = useContext(ProjectsContext);
   const project = projects.find((project) => project.id === projectId);
-  console.log(project?.features);
-  console.log(description);
 
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
   const handleSubmit: FormEventHandler = async (e) => {
     e.preventDefault();
-
-    console.log(textContent);
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
@@ -66,7 +64,6 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
 
     if (isUpdating) {
       formData.append("id", String(textContent.id));
-      console.log(textContent.id + " will be updated");
     }
 
     formData.append("project_id", String(projectId));
@@ -86,9 +83,8 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
       if (response.data.success === true) {
         setProjects((prev: Project[]) => {
           if (isUpdating) {
-            console.log(isUpdating);
             return prev.map((project) =>
-              project.id === textContent.project_id
+              project.id === projectId
                 ? {
                     ...project,
                     features: project.features.map((feature) =>
@@ -96,7 +92,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
                         ? {
                             ...feature,
                             title: textContent.title,
-                            img_file_path: textContent.img_file_path,
+                            img_file_path: file?.name,
                             description,
                           }
                         : feature,
@@ -105,25 +101,23 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
                 : project,
             );
           } else {
-            return [
-              ...prev.map((project) =>
-                project.id === textContent.project_id
-                  ? {
-                      ...project,
-                      features: [
-                        ...project.features,
-                        {
-                          id: project.features.length + 1,
-                          title: textContent.title,
-                          img_file_path: textContent.img_file_path,
-                          description,
-                          project_id: projectId,
-                        },
-                      ],
-                    }
-                  : project,
-              ),
-            ];
+            return prev.map((project) =>
+              project.id === projectId
+                ? {
+                    ...project,
+                    features: [
+                      ...project.features,
+                      {
+                        id: project.features.length + 1,
+                        title: textContent.title,
+                        img_file_path: file?.name,
+                        description,
+                        project_id: projectId,
+                      },
+                    ],
+                  }
+                : project,
+            );
           }
         });
 
@@ -136,7 +130,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         setShowAlert(true);
       }
     } catch (error) {
-      console.log(error);
+      console.log((error as AxiosError).response?.data);
       setShowEditForm(false);
       setFlash(
         "Feature could not be updated.",
@@ -181,7 +175,16 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
             type="file"
             className="flex-none my-2"
             onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setFile(event.target.files && event.target.files[0]);
+              const selectedFile = event.target.files && event.target.files[0];
+              const fnParts = selectedFile && selectedFile.name.split(".");
+              if (selectedFile && fnParts) {
+                const modifiedFile = new File(
+                  [selectedFile],
+                  fnParts[0] + "-" + short.generate() + "." + fnParts[1],
+                  { type: selectedFile.type },
+                );
+                setFile(modifiedFile);
+              }
             }}
           />
           <TextEditor
@@ -191,9 +194,10 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
         </form>
       ) : (
         <div className="w-full h-[77.5%] overflow-y-scroll">
-          {project?.features.map((feature: Feature) => {
+          {project?.features.map((feature: Feature, idx) => {
             return (
               <ProjectFeature
+                key={idx}
                 feature={feature}
                 handleEditForm={handleEditForm}
               />

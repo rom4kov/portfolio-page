@@ -4,7 +4,7 @@ import axios from "axios";
 export type Feature = {
   id: number,
   title: string,
-  img_file_path: string,
+  img_file_path: string | undefined,
   description: string,
   project_id: number,
 }
