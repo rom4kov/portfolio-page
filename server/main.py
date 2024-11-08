@@ -276,6 +276,7 @@ def create_feature():
     description = request.form.get("description")
 
     file = request.files.get("img_file")
+    print(file)
     filename = ""
     if (
         file is not None
@@ -283,6 +284,7 @@ def create_feature():
         and allowed_file(file.filename)
     ):
         filename = secure_filename(file.filename)
+        print(filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
     new_feature = Feature(
@@ -334,7 +336,16 @@ def update_feature():
 
 @app.route("/api/delete-feature", methods=["POST"])
 def delete_feature():
-    return ""
+    feature_id = request.get_json()["id"]
+    try:
+        feature_to_delete = db.session.execute(
+            db.select(Feature).where(Feature.id == feature_id)
+        ).scalar()
+        db.session.delete(feature_to_delete)
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        return jsonify(success=True, message=e)
 
 
 if __name__ == "__main__":

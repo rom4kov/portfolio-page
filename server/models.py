@@ -57,9 +57,9 @@ class Feature(db.Model):  # type: ignore
         self.project_id = project_id
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
-    img_file_path: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
-    description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    img_file_path: Mapped[str] = mapped_column(String(255), nullable=True)
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
     project: Mapped["Project"] = relationship(back_populates="features")
     project_id: Mapped[int] = mapped_column(ForeignKey("project_table.id"))
 

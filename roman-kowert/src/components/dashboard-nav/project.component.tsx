@@ -25,6 +25,7 @@ const ProjectPreview = ({
   handleEditForm,
   setProjects,
 }: ProjectProps) => {
+
   const deleteProject: deleteFunc = async (project_id: number) => {
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/delete-project",
