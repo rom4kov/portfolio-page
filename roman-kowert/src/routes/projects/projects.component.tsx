@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
-import image from "../../assets/images/klavierunterricht_compr.png";
-import image2 from "../../assets/images/brentrup_compr.png";
-import image3 from "../../assets/images/bielefeld_compr.png";
-import image4 from "../../assets/images/ykms_compr.png";
-import image5 from "../../assets/images/wyldcamp_compr.png";
+import {
+  ProjectsContext,
+  ProjectsContextType,
+} from "../../contexts/projects.context";
+
+import ProjectPreview from "../../components/dashboard-nav/project.component";
 
 interface ProjectsProps {
   location: string;
@@ -12,6 +13,7 @@ interface ProjectsProps {
 
 const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const [height, setHeight] = useState("h-0 hidden");
+  const { projects } = useContext<ProjectsContextType>(ProjectsContext);
 
   useEffect(() => {
     if (location === "/projects") {
@@ -24,91 +26,18 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div id="route-container"
+    <div
+      id="route-container"
       className={`${height} transition-all relative flex flex-col items-center gap-8 z-10 mb-36`}
     >
-      <div
-        className={`w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer`}
-      >
-        <div className="flex gap-6">
-          <img className="w-32 h-16 rounded" src={image} alt="" />{" "}
-          <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
-              Website for a Piano Teacher
-            </h3>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              reiciendis odio possimus nihil. Esse dolorem, reprehenderit non
-              perferendis nesciunt dolorum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
-        <div className="flex gap-6">
-          <img className="w-32 h-16 rounded" src={image2} alt="" />{" "}
-          <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
-              Website for a Psychotherapist
-            </h3>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              reiciendis odio possimus nihil. Esse dolorem, reprehenderit non
-              perferendis nesciunt dolorum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
-        <div className="flex gap-6">
-          <img className="w-32 h-16 rounded" src={image3} alt="" />{" "}
-          <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
-              Website for a Psychotherapist
-            </h3>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              reiciendis odio possimus nihil. Esse dolorem, reprehenderit non
-              perferendis nesciunt dolorum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
-        <div className="flex gap-6">
-          <img className="w-32 h-16 rounded" src={image4} alt="" />{" "}
-          <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">
-              E-Commerce Clothing Website
-            </h3>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              reiciendis odio possimus nihil. Esse dolorem, reprehenderit non
-              perferendis nesciunt dolorum.
-            </p>
-          </div>
-        </div>
-      </div>
-      <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded cursor-pointer">
-        <div className="flex gap-6">
-          <img className="w-32 h-16 rounded" src={image5} alt="" />{" "}
-          <div className="grow">
-            <h3 className="font-bold -mt-1 mb-1 text-tokyo-9-500">Campground Review Website</h3>
-            <p className="text-md">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero est
-              labore, hic, ab quisquam quam maxime excepturi nisi maiores
-              reiciendis odio possimus nihil. Esse dolorem, reprehenderit non
-              perferendis nesciunt dolorum.
-            </p>
-          </div>
-        </div>
-      </div>
+      {projects.map((project) => {
+        return (
+          <ProjectPreview
+            key={project.id}
+            project={project}
+          />
+        );
+      })}
     </div>
   );
 };

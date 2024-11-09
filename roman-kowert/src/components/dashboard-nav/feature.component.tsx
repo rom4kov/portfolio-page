@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import type {
   Project,
-  Feature as ProjectFeature,
+  Feature,
 } from "../../contexts/projects.context";
 import axios, { AxiosResponse } from "axios";
 import { getImageURL } from "../../utils/image-util";
@@ -17,8 +17,8 @@ type Result = AxiosResponse & {
 };
 
 type FeatureProps = {
-  feature: ProjectFeature;
-  handleEditForm: (feature: ProjectFeature) => void;
+  feature: Feature;
+  handleEditForm: (feature: Feature) => void;
 };
 
 const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {

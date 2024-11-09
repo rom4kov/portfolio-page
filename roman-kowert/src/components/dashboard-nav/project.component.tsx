@@ -9,8 +9,8 @@ import { getImageURL } from "../../utils/image-util";
 
 type ProjectProps = {
   project: Project;
-  handleEditForm: (project: Project) => void;
-  setProjects: Dispatch<SetStateAction<Project[] | []>>;
+  handleEditForm?: (project: Project) => void;
+  setProjects?: Dispatch<SetStateAction<Project[] | []>>;
 };
 
 type Result = AxiosResponse & {
@@ -34,7 +34,7 @@ const ProjectPreview = ({
       { id: project_id },
     )) as Result;
 
-    if (response.data.success === true) {
+    if (response.data.success === true && setProjects) {
       setProjects((prev: Project[]) => {
         return prev.filter((project) => project.id !== project_id);
       });
@@ -52,24 +52,30 @@ const ProjectPreview = ({
     <div className="w-[97.5%] items-start hover:bg-tokyo-4-300 p-3 rounded-lg">
       <div className="mt-0 flex gap-2">
         <div className="font-bold">{project.title}</div>
-        <button
-          className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
-          onClick={() => handleEditForm(project)}
-        >
-          Edit
-        </button>
+        {handleEditForm && (
+          <div><button
+            className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
+            onClick={() => handleEditForm(project)}
+          >
+            Edit
+          </button>
         <button
           className="me-3 h-6 p-1 leading-[0.9rem] text-xs"
           onClick={() => deleteProject(project.id)}
         >
           Delete
-        </button>
+        </button></div>
+        )}
       </div>
       <div className="mt-2 flex gap-3">
         <img
-          src={project.img_file_path !== undefined ? getImageURL(project.img_file_path) : ""}
+          src={
+            project.img_file_path !== undefined
+              ? getImageURL(project.img_file_path)
+              : ""
+          }
           alt="thumbnail of web site project landing page"
-          className="mt-1 w-[25%] h-full"
+          className="mt-1 w-[25%] h-full opacity-90 rounded"
         />
         <div
           className="w-[75%] text-start"
