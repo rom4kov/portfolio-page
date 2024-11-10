@@ -10,13 +10,12 @@ import TextEditor from "../../editor/editor.component";
 import DashboardLongForm from "../../components/dashboard/dashboard-lform.component";
 
 import { Project } from "../../contexts/projects.context";
-import { Occupation } from "../../contexts/occupations.context";
 
 type DashboardFormProps = {
   handleSubmit: FormEventHandler;
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
-  textContent: Project | Occupation;
-  setTextContent: Dispatch<SetStateAction<Project | Occupation>>;
+  textContent: Project;
+  setTextContent: Dispatch<SetStateAction<Project>>;
   setFile: Dispatch<SetStateAction<File | null>>;
   setDescription: Dispatch<SetStateAction<string>>;
 };

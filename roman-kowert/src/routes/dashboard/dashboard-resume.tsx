@@ -1,11 +1,13 @@
 import { useState, useContext, FormEventHandler } from "react";
 import axios, { AxiosResponse } from "axios";
-import { Project } from "../../contexts/projects.context";
+
 import {
   Occupation,
   OccupationsContext,
-  OccupationsContextType
+  OccupationsContextType,
 } from "../../contexts/occupations.context";
+
+import OccupationPreview from "../../components/occupation-preview/occupation-preview.component";
 
 import OccupationForm from "../../components/dashboard/occupation-form.component";
 
@@ -20,15 +22,16 @@ const initialState: Occupation = {
   occupation_type: "occupation type",
   time_period: "time period",
   title: "occupation title",
-  description: "occupation description"
-}
+  description: "occupation description",
+};
 
 const DashboardResume = () => {
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
   const [textContent, setTextContent] = useState<Occupation>(initialState);
   const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
-  const { occupations, setOccupations } = useContext<OccupationsContextType>(OccupationsContext);
+  const { occupations, setOccupations } =
+    useContext<OccupationsContextType>(OccupationsContext);
   const work: Occupation[] = occupations.filter((obj) => {
     return obj.occupation_type === "work";
   });
@@ -38,8 +41,8 @@ const DashboardResume = () => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-project"
-      : "http://localhost:5000/api/create-project";
+      ? "http://localhost:5000/api/update-occupation"
+      : "http://localhost:5000/api/create-occupation";
 
     const formData = new FormData();
     formData.append("id", String(textContent.id));
@@ -50,10 +53,7 @@ const DashboardResume = () => {
       formData.append("img_file", file);
     }
 
-    const response = await axios.post<AxiosResponse>(
-      url,
-      formData,
-    ) as Result;
+    const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
 
     console.log(response.data);
 
@@ -85,29 +85,33 @@ const DashboardResume = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center gap-3">
+    <div className="w-full h-full flex flex-col items-center gap-3">
       <h2 className="text-2xl mt-3">Edit Resume Content</h2>
       {!showEditForm ? (
-        <div className="w-full h-full flex-grow">
+        <div className="w-full h-full flex flex-col justify-between flex-grow">
           <div
-            className="w-full h-[63vh] mt-3 flex flex-col items-start gap-5 overflow-auto"
+            className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-auto"
             id="projects-edit-content"
           >
             {work.map((work) => {
               return (
-                <div>{work.title}</div>
+                <OccupationPreview
+                  occupation={work}
+                  setOccupation={setOccupations}
+                  handleEditForm={handleEditForm}
+                />
               );
             })}
           </div>
           <button
-            className="h-8 mt-8 p-2 leading-[0.9rem] text-sm"
+            className="h-8 w-max mt-8 mx-auto mb-5 p-2 leading-[0.9rem] text-sm"
             onClick={() => handleEditForm(initialState)}
           >
             Add new occupation
           </button>
         </div>
       ) : (
-        <OccupationForm 
+        <OccupationForm
           handleSubmit={handleSubmit}
           setShowEditForm={setShowEditForm}
           textContent={textContent}
@@ -116,10 +120,8 @@ const DashboardResume = () => {
           setDescription={setDescription}
         />
       )}
-        <button type="submit">Update</button>
     </div>
   );
 };
 
 export default DashboardResume;
-
