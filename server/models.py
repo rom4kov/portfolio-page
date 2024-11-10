@@ -75,5 +75,17 @@ class Feature(db.Model):  # type: ignore
 
 class Occupation(db.Model):  # type: ignore[name-defined]
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
-    title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
-    description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    time_period: Mapped[str] = mapped_column(String(255), nullable=False)
+    title: Mapped[str] = mapped_column(String(255), nullable=False)
+    description: Mapped[str] = mapped_column(String(255), nullable=True)
+    occupation_type: Mapped[str] = mapped_column(String(255), nullable=True)
+
+    def to_dict(self):
+        return {
+            "id": self.id,
+            "time_period": self.time_period,
+            "title": self.title,
+            "description": self.description,
+            "occupation_type": self.occupation_type,
+        }
+

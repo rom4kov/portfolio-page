@@ -56,8 +56,6 @@ const DashboardProjects = () => {
       formData.append("img_file", file);
     }
 
-    console.log(file);
-
     try {
       const response = (await axios.post<AxiosResponse>(
         url,

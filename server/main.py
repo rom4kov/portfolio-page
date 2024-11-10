@@ -1,4 +1,4 @@
-from flask import Flask, json, jsonify, request, make_response, redirect, url_for
+from flask import Flask, jsonify, request, make_response, redirect, url_for
 from flask_cors import CORS
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import joinedload
@@ -12,7 +12,7 @@ from flask_login import (
     logout_user,
 )
 from sqlalchemy.orm import DeclarativeBase
-from models import User, TextContent, Project, Feature
+from models import Occupation, User, TextContent, Project, Feature
 from werkzeug.security import generate_password_hash, check_password_hash
 from werkzeug.utils import secure_filename
 
@@ -346,6 +346,16 @@ def delete_feature():
         return jsonify(success=True)
     except Exception as e:
         return jsonify(success=True, message=e)
+
+
+@app.route("/api/get-occupations", methods=["GET"])
+def get_occupations():
+    try:
+        occupation_data = db.session.execute(db.select(Occupation)).scalars()
+        occupations = [occupation.to_dict() for occupation in occupation_data]
+        return jsonify(occupations=occupations)
+    except Exception as e:
+        raise e
 
 
 if __name__ == "__main__":

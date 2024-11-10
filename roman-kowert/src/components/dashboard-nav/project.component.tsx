@@ -53,18 +53,20 @@ const ProjectPreview = ({
       <div className="mt-0 flex gap-2">
         <div className="font-bold">{project.title}</div>
         {handleEditForm && (
-          <div><button
-            className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
-            onClick={() => handleEditForm(project)}
-          >
-            Edit
-          </button>
-        <button
-          className="me-3 h-6 p-1 leading-[0.9rem] text-xs"
-          onClick={() => deleteProject(project.id)}
-        >
-          Delete
-        </button></div>
+          <div className="ms-auto">
+            <button
+              className="me-1 h-6 p-1 leading-[0.9rem] text-xs"
+              onClick={() => handleEditForm(project)}
+            >
+              Edit
+            </button>
+            <button
+              className="me-3 h-6 p-1 leading-[0.9rem] text-xs"
+              onClick={() => deleteProject(project.id)}
+            >
+              Delete
+            </button>
+          </div>
         )}
       </div>
       <div className="mt-2 flex gap-3">
