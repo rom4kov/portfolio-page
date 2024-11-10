@@ -1,5 +1,4 @@
 import {
-  useState,
   Dispatch,
   SetStateAction,
   FormEventHandler,
@@ -7,32 +6,29 @@ import {
 } from "react";
 
 import TextEditor from "../../editor/editor.component";
-import DashboardLongForm from "../../components/dashboard/dashboard-lform.component";
 
-import { Project } from "../../contexts/projects.context";
+import { Occupation } from "../../contexts/occupations.context";
 
-type DashboardFormProps = {
+type OccupationFormProps = {
   handleSubmit: FormEventHandler;
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
-  textContent: Project;
-  setTextContent: Dispatch<SetStateAction<Project>>;
+  textContent:  Occupation;
+  setTextContent: Dispatch<SetStateAction<Occupation>>;
   setFile: Dispatch<SetStateAction<File | null>>;
   setDescription: Dispatch<SetStateAction<string>>;
 };
 
-const DashboardForm = ({
+const OccupationForm = ({
   handleSubmit,
   setShowEditForm,
   textContent,
   setTextContent,
   setFile,
   setDescription,
-}: DashboardFormProps) => {
-  const [longForm, setLongForm] = useState(false);
+}: OccupationFormProps) => {
 
   return (
     <div className="w-full flex-grow overflow-y-auto">
-      {!longForm ? (
         <form
           action=""
           className="flex flex-col w-full h-full gap-3"
@@ -49,20 +45,6 @@ const DashboardForm = ({
                 return {
                   ...prev,
                   title: evt.target.value,
-                };
-              })
-            }
-          />
-          <input
-            type="text"
-            id="keywords"
-            className="flex-none p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
-            value={textContent.keywords}
-            onChange={(evt) =>
-              setTextContent((prev) => {
-                return {
-                  ...prev,
-                  keywords: evt.target.value.split(/, */),
                 };
               })
             }
@@ -88,23 +70,11 @@ const DashboardForm = ({
             >
               Cancel
             </button>
-            <button
-              type="button"
-              className="ms-auto py-2 h-8 leading-3"
-              onClick={() => setLongForm(true)}
-            >
-              Edit Project Details
-            </button>
           </div>
         </form>
-      ) : (
-        <DashboardLongForm
-          projectId={textContent.id}
-          setLongForm={setLongForm}
-        />
-      )}
     </div>
   );
 };
 
-export default DashboardForm;
+export default OccupationForm;
+

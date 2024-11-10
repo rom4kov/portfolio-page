@@ -9,8 +9,8 @@ import {
 
 import { FlashContext } from "../../contexts/flash.context";
 
-import DashboardForm from "./dashboard-form.component";
-import ProjectPreview from "../../components/dashboard-nav/project.component";
+import DashboardForm from "../../components/dashboard/dashboard-form.component";
+import ProjectPreview from "../../components/dashboard/project.component";
 
 type Result = AxiosResponse & {
   data: {

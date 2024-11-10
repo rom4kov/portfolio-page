@@ -12,6 +12,7 @@ export type Occupation = {
   title: string;
   description: string;
   time_period: string;
+  occupation_type: string;
 };
 
 export type OccupationsContextType = {

@@ -5,7 +5,7 @@ import {
   ProjectsContextType,
 } from "../../contexts/projects.context";
 
-import ProjectPreview from "../../components/dashboard-nav/project.component";
+import ProjectPreview from "../../components/dashboard/project.component";
 
 interface ProjectsProps {
   location: string;

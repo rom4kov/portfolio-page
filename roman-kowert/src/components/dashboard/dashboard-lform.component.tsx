@@ -12,7 +12,7 @@ import axios, { AxiosResponse, AxiosError } from "axios";
 import short from "short-uuid";
 
 import TextEditor from "../../editor/editor.component";
-import ProjectFeature from "../dashboard-nav/feature.component";
+import ProjectFeature from "../dashboard/feature.component";
 
 import {
   Project,
