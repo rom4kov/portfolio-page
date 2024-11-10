@@ -49,20 +49,20 @@ const OccupationPreview = ({
   return (
     <div className="w-[95%] items-start hover:bg-tokyo-4-300 mx-auto p-3 rounded-lg">
       <div className="mt-0 flex gap-3">
-        <span className="text-start text-xs w-36 mt-1.5">{occupation.time_period}</span>
-        <div className="flex flex-col">
+        <span className="text-start text-xs w-[22.5%] mt-1.5">{occupation.time_period}</span>
+        <div className="flex flex-col w-[77.5%]">
           <div className="mt-0 mb-2 flex gap-2">
             <h3 className="text-[1.1rem] font-bold">{occupation.title}</h3>
             {handleEditForm && (
               <div className="ms-auto -mt-0.5">
                 <button
-                  className="me-1.5 h-6 p-1 leading-[0.9rem] text-xs"
+                  className="me-1.5 h-6 px-1 leading-[0.5rem] text-xs"
                   onClick={() => handleEditForm(occupation)}
                 >
                   Edit
                 </button>
                 <button
-                  className="me-1 h-6 p-1 leading-[0.9rem] text-xs"
+                  className="-me-1 h-6 px-1 leading-[0.5rem] text-xs"
                   onClick={() => deleteProject(occupation.id)}
                 >
                   Delete

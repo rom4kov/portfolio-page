@@ -8,8 +8,9 @@ import {
 } from "../../contexts/occupations.context";
 
 import OccupationPreview from "../../components/occupation-preview/occupation-preview.component";
-
 import OccupationForm from "../../components/dashboard/occupation-form.component";
+
+import { FlashContext } from "../../contexts/flash.context";
 
 type Result = AxiosResponse & {
   data: {
@@ -19,7 +20,7 @@ type Result = AxiosResponse & {
 
 const initialState: Occupation = {
   id: 0,
-  occupation_type: "occupation type",
+  occupation_type: "work",
   time_period: "time period",
   title: "occupation title",
   description: "occupation description",
@@ -28,30 +29,28 @@ const initialState: Occupation = {
 const DashboardResume = () => {
   const [showEditForm, setShowEditForm] = useState<boolean>(false);
   const [textContent, setTextContent] = useState<Occupation>(initialState);
-  const [file, setFile] = useState<File | null>(null);
   const [description, setDescription] = useState<string>("");
   const { occupations, setOccupations } =
     useContext<OccupationsContextType>(OccupationsContext);
   const work: Occupation[] = occupations.filter((obj) => {
     return obj.occupation_type === "work";
   });
+  const { setFlash, setShowAlert } = useContext(FlashContext);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 
-    const isUpdating = textContent.id !== 0;
+    const isUpdating = textContent.id === 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-occupation"
-      : "http://localhost:5000/api/create-occupation";
+      ? "http://localhost:5000/api/create-occupation"
+      : "http://localhost:5000/api/update-occupation";
 
     const formData = new FormData();
     formData.append("id", String(textContent.id));
     formData.append("title", textContent.title);
+    formData.append("time_period", textContent.time_period);
     formData.append("description", description);
-
-    if (file) {
-      formData.append("img_file", file);
-    }
+    formData.append("occupation_type", textContent.occupation_type);
 
     const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
 
@@ -76,6 +75,10 @@ const DashboardResume = () => {
     //       ]);
     //   });
     // };
+
+    setShowEditForm(false);
+    setFlash("Occupation successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
+    setShowAlert(true);
   };
 
   const handleEditForm = (occupation: Occupation) => {
@@ -116,7 +119,6 @@ const DashboardResume = () => {
           setShowEditForm={setShowEditForm}
           textContent={textContent}
           setTextContent={setTextContent}
-          setFile={setFile}
           setDescription={setDescription}
         />
       )}

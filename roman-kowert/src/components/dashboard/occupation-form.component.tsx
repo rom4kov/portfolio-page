@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, FormEventHandler } from "react";
+import { useState, Dispatch, SetStateAction, FormEventHandler } from "react";
 
 import TextEditor from "../../editor/editor.component";
 
@@ -9,7 +9,6 @@ type OccupationFormProps = {
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
   textContent: Occupation;
   setTextContent: Dispatch<SetStateAction<Occupation>>;
-  setFile: Dispatch<SetStateAction<File | null>>;
   setDescription: Dispatch<SetStateAction<string>>;
 };
 
@@ -20,6 +19,8 @@ const OccupationForm = ({
   setTextContent,
   setDescription,
 }: OccupationFormProps) => {
+  const [arrowUp, setArrowUp] = useState<boolean>(false);
+
   return (
     <div className="w-full flex-grow overflow-y-auto px-4">
       <form
@@ -31,7 +32,7 @@ const OccupationForm = ({
         <input
           type="text"
           id="title"
-          className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+          className="py-1 px-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
           value={textContent.title}
           onChange={(evt) =>
             setTextContent((prev) => {
@@ -42,19 +43,45 @@ const OccupationForm = ({
             })
           }
         />
-        <input
-          type="text"
-          className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
-          value={textContent.time_period}
-          onChange={(evt) =>
-            setTextContent((prev) => {
-              return {
-                ...prev,
-                time_period: evt.target.value,
-              };
-            })
-          }
-        />
+        <div className="flex gap-3">
+          <input
+            type="text"
+            className="py-1 px-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+            value={textContent.time_period}
+            onChange={(evt) =>
+              setTextContent((prev) => {
+                return {
+                  ...prev,
+                  time_period: evt.target.value,
+                };
+              })
+            }
+          />
+          <div
+            className={`border rounded-lg w-full ${arrowUp ? "after:content-['⌃'] after:translate-y-[0.5rem]" : "after:content-['⌄'] after:translate-y-[0.2rem]"} after:absolute after:text-md after:text-tokyo-14-500 after:w-3 after:h-3 after:leading-4 after:translate-x-[-1.25rem]`}
+          >
+            <select
+              className="py-1 px-2 text-sm align-middle bg-tokyo-1-500 border-none rounded-lg w-full appearance-none"
+              value={textContent.occupation_type}
+              onFocus={() => setArrowUp(true)}
+              onBlur={() => setArrowUp(false)}
+              onChange={(evt) => {
+                console.log(evt.target.value);
+                setTextContent((prev) => {
+                  return {
+                    ...prev,
+                    occupation_type: evt.target.value,
+                  };
+                });
+                setArrowUp(false);
+              }}
+            >
+              <option value="work">Work</option>
+              <option value="course">Course</option>
+              <span>a</span>
+            </select>
+          </div>
+        </div>
         <TextEditor
           setTextContent={setDescription}
           initialValue={textContent.description}
