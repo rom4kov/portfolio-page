@@ -249,7 +249,9 @@ def update_project():
         project.keywords = keywords
         project.description = description
         db.session.commit()
-        return jsonify(success=True, title=project.title, description=project.description)
+        return jsonify(
+            success=True, title=project.title, description=project.description
+        )
     except NoResultFound as e:
         print(e._message())
         return redirect(url_for("create_project"), code=307)
@@ -346,6 +348,22 @@ def delete_feature():
         return jsonify(success=True)
     except Exception as e:
         return jsonify(success=True, message=e)
+
+
+@app.route("/api/create-occupation", methods=["POST"])
+def create_occupation():
+    new_occuptation = Occupation(
+        title=request.form.get("title"),
+        time_period=request.form.get("time_period"),
+        description=request.form.get("description"),
+        occupation_type=request.form.get("occupation_type")
+    )
+    try:
+        db.session.add(new_occuptation)
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        return jsonify(success=True, error=str(e)), 500
 
 
 @app.route("/api/get-occupations", methods=["GET"])

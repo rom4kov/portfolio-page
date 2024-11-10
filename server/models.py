@@ -74,6 +74,12 @@ class Feature(db.Model):  # type: ignore
 
 
 class Occupation(db.Model):  # type: ignore[name-defined]
+    def __init__(self, title, time_period, description, occupation_type) -> None:
+        self.title = title
+        self.time_period = time_period
+        self.description = description
+        self.occupation_type = occupation_type
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     time_period: Mapped[str] = mapped_column(String(255), nullable=False)
     title: Mapped[str] = mapped_column(String(255), nullable=False)
