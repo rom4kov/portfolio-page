@@ -120,7 +120,7 @@ const DashboardResume = () => {
           <div className="w-full h-[65vh] flex flex-col justify-start flex-grow overflow-y-auto">
             <h3 className="font-bold text-tokyo-22-500">WORK</h3>
             <div
-              className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible"
+              className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible occupation-list"
               id="projects-edit-content"
             >
               {work.map((work) => {

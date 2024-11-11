@@ -1,8 +1,5 @@
 import { useContext } from "react";
-import type {
-  Project,
-  Feature,
-} from "../../contexts/projects.context";
+import type { Project, Feature } from "../../contexts/projects.context";
 import axios, { AxiosResponse } from "axios";
 import { getImageURL } from "../../utils/image-util";
 import { ProjectsContext } from "../../contexts/projects.context";
@@ -18,7 +15,7 @@ type Result = AxiosResponse & {
 
 type FeatureProps = {
   feature: Feature;
-  handleEditForm: (feature: Feature) => void;
+  handleEditForm?: (feature: Feature) => void;
 };
 
 const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
@@ -59,12 +56,14 @@ const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
       <div className="mb-1 flex justify-between">
         <h3 className="mb-2 font-bold inline">{feature.title}</h3>
         <div>
-          <button
-            className="ms-auto me-2 h-6 p-1 leading-[0.9rem] text-xs"
-            onClick={() => handleEditForm(feature)}
-          >
-            Edit
-          </button>
+          {handleEditForm && (
+            <button
+              className="ms-auto me-2 h-6 p-1 leading-[0.9rem] text-xs"
+              onClick={() => handleEditForm(feature)}
+            >
+              Edit
+            </button>
+          )}
           <button
             className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
             onClick={() => deleteFeature(feature.id)}

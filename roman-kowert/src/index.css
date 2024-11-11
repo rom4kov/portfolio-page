@@ -46,7 +46,7 @@
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  --glow-color: #7aa2f733;
+  --glow-color: #7aa2f728;
 }
 
 ::-webkit-scrollbar {
@@ -148,7 +148,15 @@ button:focus-visible {
 .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__help-text, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__path, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__right-container {
     flex: 1 !important;
 }
-/* iframe { */
-/*   z-index: -1; */
-/*   position: relative; */
-/* } */
+
+.occupation-list p {
+  font-size: 1.1rem;
+  margin-bottom: 1rem;
+}
+
+.occupation-list ul {
+  list-style: circle;
+  padding-left: 1.25rem;
+  font-size: 1rem;
+  line-height: 1.5rem;
+}

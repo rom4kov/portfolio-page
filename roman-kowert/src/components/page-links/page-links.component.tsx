@@ -16,8 +16,8 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
     <div className="flex flex-col items-start" onMouseLeave={unblockPreview}>
       <div
         className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/about" ? "text-tokyoblue-500 pl-4" : ""
-        } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+          location === "/about" ? "text-tokyo-15-500 pl-4" : ""
+        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => {
           handlePreview("about");
         }}
@@ -31,8 +31,8 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
       </div>
       <div
         className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/projects" ? "text-tokyoblue-500 pl-4" : ""
-        } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+          location === "/projects" ? "text-tokyo-15-500 pl-4" : ""
+        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => handlePreview("projects")}
         onMouseLeave={() => {
           handlePreview("projects");
@@ -44,8 +44,8 @@ const PageLinks = ({ unblockPreview, handlePreview, handleLinkClicked, location 
       </div>
       <div
         className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/resume" ? "text-tokyoblue-500 pl-4" : ""
-        } hover:text-tokyoblue-500 hover:pl-4 transition-all cursor-pointer`}
+          location === "/resume" ? "text-tokyo-15-500 pl-4" : ""
+        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
         onMouseEnter={() => handlePreview("resume")}
         onMouseLeave={() => {
           handlePreview("resume");

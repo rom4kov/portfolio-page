@@ -23,10 +23,10 @@ const GlowCursor = () => {
         <div
           style={{
             position: "fixed",
-            top: mousePosition.y - 550, // Adjust for center alignment
-            left: mousePosition.x - 550, // Adjust for center alignment
-            width: "70rem", // Width of the glow effect
-            height: "70rem", // Height of the glow effect
+            top: mousePosition.y - 750, // Adjust for center alignment
+            left: mousePosition.x - 750, // Adjust for center alignment
+            width: "95rem", // Width of the glow effect
+            height: "95rem", // Height of the glow effect
             pointerEvents: "none", // Ensure it doesn't block interactions
             // mask: `radial-gradient(55rem 55rem at ${mousePosition.x - 450}px ${mousePosition.y - 450}px, var(--glow-color) 1%, transparent 70%)`,
             background:

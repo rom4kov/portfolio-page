@@ -1,5 +1,8 @@
 import React, { useState, useEffect, useContext } from "react";
-import { Occupation, OccupationsContext } from "../../contexts/occupations.context";
+import {
+  Occupation,
+  OccupationsContext,
+} from "../../contexts/occupations.context";
 
 interface ResumeProps {
   location: string;
@@ -26,13 +29,14 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div id="route-container"
+    <div
+      id="route-container"
       className={`${height} transition-all relative flex flex-col gap-8 mb-36 ml-auto`}
     >
       <h2 className="text-start text-2xl font-bold">
         Recent Work as Freelancer
       </h2>
-      {work.map((work) => {
+      {work.reverse().map((work) => {
         return (
           <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
             <div className="flex gap-5">
@@ -40,12 +44,15 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
                 {work.time_period}
               </span>
               <div className="w-3/4">
-                <h3 className="font-bold -mt-1 mb-1">{work.title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: work.description}}></div>
+                <h3 className="text-lg font-bold -mt-1 mb-1">{work.title}</h3>
+                <div
+                  className="occupation-list"
+                  dangerouslySetInnerHTML={{ __html: work.description }}
+                ></div>
               </div>
             </div>
           </div>
-        )
+        );
       })}
       <h2 className="text-start text-2xl font-bold mt-4 -mb-2">
         Courses {"&"} Education
@@ -58,12 +65,14 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
                 {course.time_period}
               </span>
               <div className="w-3/4">
-                <h3 className="font-bold -mt-1 mb-1">{course.title}</h3>
-                <div dangerouslySetInnerHTML={{ __html: course.description}}></div>
+                <h3 className="text-lg font-bold -mt-1 mb-1">{course.title}</h3>
+                <div
+                  dangerouslySetInnerHTML={{ __html: course.description }}
+                ></div>
               </div>
             </div>
           </div>
-        )
+        );
       })}
     </div>
   );

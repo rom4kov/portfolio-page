@@ -1,6 +1,8 @@
 import { useContext, Dispatch, SetStateAction } from "react";
+import { Link } from "react-router-dom";
 
 import { Project } from "../../contexts/projects.context";
+import { Feature } from "../../contexts/projects.context";
 import { FlashContext } from "../../contexts/flash.context";
 
 import axios, { AxiosResponse } from "axios";
@@ -11,6 +13,7 @@ type ProjectProps = {
   project: Project;
   handleEditForm?: (project: Project) => void;
   setProjects?: Dispatch<SetStateAction<Project[] | []>>;
+  setFeatures?: Dispatch<SetStateAction<Feature[] | []>>;
 };
 
 type Result = AxiosResponse & {
@@ -25,6 +28,7 @@ const ProjectPreview = ({
   project,
   handleEditForm,
   setProjects,
+  setFeatures,
 }: ProjectProps) => {
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
@@ -51,7 +55,18 @@ const ProjectPreview = ({
   return (
     <div className="w-[97.5%] items-start hover:bg-tokyo-4-300 p-3 rounded-lg">
       <div className="mt-0 flex gap-2">
-        <div className="font-bold">{project.title}</div>
+        <div className={`${setFeatures && "w-full"} flex justify-between`}>
+          <h3 className="font-bold">{project.title}</h3>
+          {setFeatures && (
+            <Link
+              to={String(project.id)}
+              className="ms-auto me-1 h-6 p-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
+              onClick={() => setFeatures(project.features)}
+            >
+              See Project Details
+            </Link>
+          )}
+        </div>
         {handleEditForm && (
           <div className="ms-auto">
             <button
@@ -77,7 +92,7 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 w-[25%] h-full opacity-90 rounded"
+          className="mt-1 w-[25%] h-full opacity-80 rounded"
         />
         <div
           className="w-[75%] text-start"

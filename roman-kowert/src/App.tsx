@@ -4,6 +4,7 @@ import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
 import About from "./routes/about/about.component";
 import Projects from "./routes/projects/projects.component";
+import ProjectFeatures from "./routes/project-features/project-features.component";
 import Resume from "./routes/resume/resume.component";
 import Admin from "./routes/admin/admin.component";
 import PrivateRoute from "./routes/private-route/private-route.component";
@@ -50,7 +51,9 @@ function App() {
             <Route
               path="projects"
               element={<Projects location={location.pathname} />}
-            />
+            >
+              <Route path=":projectFeature" element={<ProjectFeatures />} />
+            </Route>
             <Route
               path="resume"
               element={<Resume location={location.pathname} />}
