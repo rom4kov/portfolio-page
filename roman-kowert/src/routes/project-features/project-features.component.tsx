@@ -3,11 +3,11 @@ import { Feature } from "../../contexts/projects.context";
 import ProjectFeature from "../../components/dashboard/feature.component";
 
 const ProjectFeatures = () => {
-  const [features] = useOutletContext();
+  const projectFeatures: Feature[] = useOutletContext();
 
   return (
     <div className="w-full h-full bg-red-500">
-      {features.map((feature: Feature, idx: number) => {
+      {projectFeatures.map((feature: Feature, idx: number) => {
         return (
           <ProjectFeature
             key={idx}

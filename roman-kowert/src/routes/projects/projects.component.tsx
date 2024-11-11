@@ -18,6 +18,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const [height, setHeight] = useState("h-0 hidden");
   const { projects } = useContext<ProjectsContextType>(ProjectsContext);
   const [projectFeatures, setProjectFeatures] = useState<Feature[] | []>([]);
+  console.log(projectFeatures);
 
   useEffect(() => {
     if (location === "/projects") {

@@ -55,22 +55,23 @@ const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
     <div key={feature.id} className="mt-3 mb-8 text-start">
       <div className="mb-1 flex justify-between">
         <h3 className="mb-2 font-bold inline">{feature.title}</h3>
-        <div>
-          {handleEditForm && (
+        {handleEditForm && (
+          <div>
             <button
               className="ms-auto me-2 h-6 p-1 leading-[0.9rem] text-xs"
               onClick={() => handleEditForm(feature)}
             >
               Edit
             </button>
-          )}
-          <button
-            className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
-            onClick={() => deleteFeature(feature.id)}
-          >
-            Delete
-          </button>
-        </div>
+
+            <button
+              className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
+              onClick={() => deleteFeature(feature.id)}
+            >
+              Delete
+            </button>
+          </div>
+        )}
       </div>
       {feature.img_file_path && (
         <img className="mb-3" src={getImageURL(feature.img_file_path)} alt="" />
