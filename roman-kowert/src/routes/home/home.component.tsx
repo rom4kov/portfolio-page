@@ -14,7 +14,7 @@ const Home = () => {
   return (
     <div id="route-container" className="h-full flex items-center">
       <div
-        className="mt-2 w-[22rem] text-2xl text-right leading-[2.15rem]"
+        className="w-[22rem] text-2xl text-right leading-[2.45rem]"
         dangerouslySetInnerHTML={{ __html: value?.body }}
       />
     </div>

@@ -35,15 +35,18 @@ const DashboardResume = () => {
   const work: Occupation[] = occupations.filter((obj) => {
     return obj.occupation_type === "work";
   });
+  const education: Occupation[] = occupations.filter((obj) => {
+    return obj.occupation_type === "course";
+  });
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 
-    const isUpdating = textContent.id === 0;
+    const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/create-occupation"
-      : "http://localhost:5000/api/update-occupation";
+      ? "http://localhost:5000/api/update-occupation"
+      : "http://localhost:5000/api/create-occupation";
 
     const formData = new FormData();
     formData.append("id", String(textContent.id));
@@ -54,31 +57,53 @@ const DashboardResume = () => {
 
     const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
 
-    console.log(response.data);
+    try {
+      if (response.data.success == true) {
+        setOccupations((prev) => {
+          if (isUpdating) {
+            return prev.map((occupation) =>
+              occupation.id === textContent.id
+                ? {
+                    id: textContent.id,
+                    title: textContent.title,
+                    time_period: textContent.time_period,
+                    description: description,
+                    occupation_type: textContent.occupation_type,
+                  }
+                : occupation,
+            );
+          } else {
+            return [
+              ...prev,
+              {
+                id: occupations.length + 1,
+                title: textContent.title,
+                time_period: textContent.time_period,
+                description: description,
+                occupation_type: textContent.occupation_type,
+              },
+            ];
+          }
+        });
 
-    // if (response.data.success == true) {
-    //   setOccupations((prev) => {
-    //     return occupations.some(text => text.page === "resume") ?
-    //       (prev.map((text) => {
-    //         if (text.page === "resume") {
-    //           text.body = textContent;
-    //         }
-    //         return text;
-    //       })) :
-    //       ([
-    //         ...prev,
-    //         {
-    //           id: prev.length + 1,
-    //           body: textContent,
-    //           page: "resume"
-    //         },
-    //       ]);
-    //   });
-    // };
-
-    setShowEditForm(false);
-    setFlash("Occupation successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
-    setShowAlert(true);
+        setShowEditForm(false);
+        setFlash(
+          "Occupation successfully updated.",
+          "bg-tokyo-22-500",
+          "text-tokyo-21-300",
+        );
+        setShowAlert(true);
+      }
+    } catch (error) {
+      console.error("Error uploading project:", error);
+      setShowEditForm(false);
+      setFlash(
+        "Occupation could not be updated.",
+        "bg-tokyo-24-500",
+        "text-tokyo-3-500",
+      );
+      setShowAlert(true);
+    }
   };
 
   const handleEditForm = (occupation: Occupation) => {
@@ -89,25 +114,45 @@ const DashboardResume = () => {
 
   return (
     <div className="w-full h-full flex flex-col items-center gap-3">
-      <h2 className="text-2xl mt-3">Edit Resume Content</h2>
+      <h2 className="text-2xl my-3">Edit Resume Content</h2>
       {!showEditForm ? (
-        <div className="w-full h-full flex flex-col justify-between flex-grow">
-          <div
-            className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-auto"
-            id="projects-edit-content"
-          >
-            {work.map((work) => {
-              return (
-                <OccupationPreview
-                  occupation={work}
-                  setOccupation={setOccupations}
-                  handleEditForm={handleEditForm}
-                />
-              );
-            })}
+        <div className="w-full h-full flex-grow">
+          <div className="w-full h-[65vh] flex flex-col justify-start flex-grow overflow-y-auto">
+            <h3 className="font-bold text-tokyo-22-500">WORK</h3>
+            <div
+              className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible"
+              id="projects-edit-content"
+            >
+              {work.map((work) => {
+                return (
+                  <OccupationPreview
+                    occupation={work}
+                    setOccupation={setOccupations}
+                    handleEditForm={handleEditForm}
+                  />
+                );
+              })}
+            </div>
+            <h3 className="mt-8 font-bold text-tokyo-22-500">
+              COURSES &amp; EDUCATION
+            </h3>
+            <div
+              className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible"
+              id="projects-edit-content"
+            >
+              {education.map((work) => {
+                return (
+                  <OccupationPreview
+                    occupation={work}
+                    setOccupation={setOccupations}
+                    handleEditForm={handleEditForm}
+                  />
+                );
+              })}
+            </div>
           </div>
           <button
-            className="h-8 w-max mt-8 mx-auto mb-5 p-2 leading-[0.9rem] text-sm"
+            className="h-8 w-max mt-5 mx-auto mb-5 p-2 leading-[0.9rem] text-sm"
             onClick={() => handleEditForm(initialState)}
           >
             Add new occupation

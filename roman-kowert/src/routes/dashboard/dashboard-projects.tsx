@@ -68,7 +68,6 @@ const DashboardProjects = () => {
             return prev.map((project) =>
               project.id === textContent.id
                 ? {
-                    ...project,
                     id: textContent.id,
                     title: textContent.title,
                     keywords: textContent.keywords,
@@ -101,6 +100,9 @@ const DashboardProjects = () => {
       }
     } catch (error) {
       console.error("Error uploading project:", error);
+      setShowEditForm(false);
+      setFlash("Project could not be updated.", "bg-tokyo-24-500", "text-tokyo-3-500");
+      setShowAlert(true);
     }
   };
 

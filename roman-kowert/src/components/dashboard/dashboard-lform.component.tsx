@@ -137,7 +137,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
       setFlash(
         "Feature could not be updated.",
         "bg-tokyo-23-500",
-        "text-tokyo-24-300",
+        "text-tokyo-24-500",
       );
       setShowAlert(true);
     }

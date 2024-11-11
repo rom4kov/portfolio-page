@@ -356,7 +356,7 @@ def create_occupation():
         title=request.form.get("title"),
         time_period=request.form.get("time_period"),
         description=request.form.get("description"),
-        occupation_type=request.form.get("occupation_type")
+        occupation_type=request.form.get("occupation_type"),
     )
     try:
         db.session.add(new_occuptation)
@@ -374,6 +374,38 @@ def get_occupations():
         return jsonify(occupations=occupations)
     except Exception as e:
         raise e
+
+
+@app.route("/api/update-occupation", methods=["POST"])
+def update_occupation():
+    occupation_id = request.form.get("id")
+    try:
+        occupation_to_update = db.session.execute(
+            db.select(Occupation).where(Occupation.id == occupation_id)
+        ).scalar()
+        if occupation_to_update:
+            occupation_to_update.title = request.form.get("title")
+            occupation_to_update.time_period = request.form.get("time_period")
+            occupation_to_update.description = request.form.get("description")
+            db.session.commit()
+            return jsonify(success=True)
+        return jsonify(success=False, error="Occupation data could not be found."), 400
+    except Exception as e:
+        return jsonify(success=False, error=str(e)), 500
+
+
+@app.route("/api/delete-occupation", methods=["POST"])
+def delete_occupation():
+    occupation_id = request.get_json()["id"]
+    try:
+        occupation_to_delete = db.session.execute(
+            db.select(Occupation).where(Occupation.id == occupation_id)
+        ).scalar()
+        db.session.delete(occupation_to_delete)
+        db.session.commit()
+        return jsonify(success=True)
+    except Exception as e:
+        return jsonify(success=True, message=e)
 
 
 if __name__ == "__main__":

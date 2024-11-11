@@ -26,7 +26,7 @@ const OccupationPreview = ({
 }: OccupationProps) => {
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
-  const deleteProject: deleteFunc = async (occupation_id: number) => {
+  const deleteOccupation: deleteFunc = async (occupation_id: number) => {
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/delete-occupation",
       { id: occupation_id },
@@ -52,7 +52,7 @@ const OccupationPreview = ({
         <span className="text-start text-xs w-[22.5%] mt-1.5">{occupation.time_period}</span>
         <div className="flex flex-col w-[77.5%]">
           <div className="mt-0 mb-2 flex gap-2">
-            <h3 className="text-[1.1rem] font-bold">{occupation.title}</h3>
+            <h3 className="w-[20rem] text-start text-[1.1rem] font-bold">{occupation.title}</h3>
             {handleEditForm && (
               <div className="ms-auto -mt-0.5">
                 <button
@@ -63,7 +63,7 @@ const OccupationPreview = ({
                 </button>
                 <button
                   className="-me-1 h-6 px-1 leading-[0.5rem] text-xs"
-                  onClick={() => deleteProject(occupation.id)}
+                  onClick={() => deleteOccupation(occupation.id)}
                 >
                   Delete
                 </button>

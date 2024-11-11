@@ -1,1 +1,1 @@
-Hello. I'm Roman, a Fullstack Web Developer versed in React, Node.js and Python. My ideal is to bring the creativity of Frontend Development together with the technical ingenuity of Backend Development.
+﻿Hello. I'm Roman, a Fullstack Web Developer versed in React, Node.js and Python. My ideal is to bring the creativity of Frontend Development together with the technical ingenuity of Backend Development.

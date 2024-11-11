@@ -7,6 +7,8 @@ import {
 } from "../../contexts/text.context";
 import TextEditor from "../../editor/editor.component";
 
+import { FlashContext } from "../../contexts/flash.context";
+
 type Result = AxiosResponse & {
   data: {
     success: boolean;
@@ -19,7 +21,8 @@ const DashboardHome = () => {
   const value = texts.find((obj) => {
     return obj.page === "home";
   }) as TextElement;
-  console.log(value?.body);
+
+  const { setFlash, setShowAlert } = useContext(FlashContext);
 
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
@@ -29,30 +32,39 @@ const DashboardHome = () => {
       page: "home",
     };
 
-    const response = await axios.post<AxiosResponse>(
-      "http://localhost:5000/api/update-text",
-      data,
-    ) as Result;
+    try {
+      const response = await axios.post<AxiosResponse>(
+        "http://localhost:5000/api/update-text",
+        data,
+      ) as Result;
 
-    if (response.data.success == true) {
-      setTexts((prev) => {
-        return texts.some(text => text.page === "home") ?
-          (prev.map((text) => {
-            if (text.page === "home") {
-              text.body = textContent;
-            }
-            return text;
-          })) :
-          ([
-            ...prev,
-            {
-              id: prev.length + 1,
-              body: textContent,
-              page: "home"
-            },
-          ]);
-      });
-    };
+      if (response.data.success == true) {
+        setTexts((prev) => {
+          return texts.some(text => text.page === "home") ?
+            (prev.map((text) => {
+              if (text.page === "home") {
+                text.body = textContent;
+              }
+              return text;
+            })) :
+            ([
+              ...prev,
+              {
+                id: prev.length + 1,
+                body: textContent,
+                page: "home"
+              },
+            ]);
+        });
+
+        setFlash("Text successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
+        setShowAlert(true);
+      };
+    } catch (error) {
+      console.error("Error uploading project:", error);
+      setFlash("Text could not be updated.", "bg-tokyo-24-500", "text-tokyo-3-500");
+      setShowAlert(true);
+    }
   };
 
   return (
