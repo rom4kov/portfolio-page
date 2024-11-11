@@ -11,6 +11,8 @@ import DashboardLongForm from "../../components/dashboard/dashboard-lform.compon
 
 import { Project } from "../../contexts/projects.context";
 
+import { getImageURL } from "../../utils/image-util";
+
 type DashboardFormProps = {
   handleSubmit: FormEventHandler;
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
@@ -67,13 +69,16 @@ const DashboardForm = ({
               })
             }
           />
-          <input
-            type="file"
-            className="flex-none my-2"
-            onChange={(event: ChangeEvent<HTMLInputElement>) => {
-              setFile(event.target.files && event.target.files[0]);
-            }}
-          />
+          <div>
+            <img src={getImageURL(textContent.img_file_path)} alt="" />
+            <input
+              type="file"
+              className="flex-none my-2"
+              onChange={(event: ChangeEvent<HTMLInputElement>) => {
+                setFile(event.target.files && event.target.files[0]);
+              }}
+            />
+          </div>
           <TextEditor
             setTextContent={setDescription}
             initialValue={textContent.description}

@@ -6,7 +6,7 @@ const ProjectFeatures = () => {
   const projectFeatures: Feature[] = useOutletContext();
 
   return (
-    <div className="w-full h-full bg-red-500">
+    <div className="mb-36 w-full h-full bg-red-500">
       {projectFeatures.map((feature: Feature, idx: number) => {
         return (
           <ProjectFeature

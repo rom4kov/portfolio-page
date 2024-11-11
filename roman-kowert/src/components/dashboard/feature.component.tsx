@@ -52,13 +52,15 @@ const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
   };
 
   return (
-    <div key={feature.id} className="mt-3 mb-8 text-start">
+    <div key={feature.id} className="mt-3 mb-5 text-start">
       <div className="mb-1 flex justify-between">
-        <h3 className="mb-2 font-bold inline">{feature.title}</h3>
+        {feature.title && (
+          <h3 className="mb-2 font-bold inline">{feature.title}</h3>
+        )}
         {handleEditForm && (
-          <div>
+          <div className="ms-auto">
             <button
-              className="ms-auto me-2 h-6 p-1 leading-[0.9rem] text-xs"
+              className="me-2 h-6 p-1 leading-[0.9rem] text-xs"
               onClick={() => handleEditForm(feature)}
             >
               Edit
