@@ -92,7 +92,9 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
                         ? {
                             ...feature,
                             title: textContent.title,
-                            img_file_path: file?.name,
+                            img_file_path: file?.name
+                              ? file.name
+                              : feature.img_file_path,
                             description,
                           }
                         : feature,
@@ -137,7 +139,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
       setFlash(
         "Feature could not be updated.",
         "bg-tokyo-23-500",
-        "text-tokyo-24-500",
+        "text-tokyo-24-300",
       );
       setShowAlert(true);
     }

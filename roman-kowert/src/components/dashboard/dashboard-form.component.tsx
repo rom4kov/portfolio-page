@@ -33,7 +33,7 @@ const DashboardForm = ({
   const [longForm, setLongForm] = useState(false);
 
   return (
-    <div className="w-full flex-grow overflow-y-auto">
+    <div className="w-full flex-grow overflow-x-hidden overflow-y-auto">
       {!longForm ? (
         <form
           action=""
@@ -69,8 +69,9 @@ const DashboardForm = ({
               })
             }
           />
-          <div>
-            <img src={getImageURL(textContent.img_file_path)} alt="" />
+          <div className="flex gap-3 items-center">
+            <img className="h-12" src={getImageURL(textContent.img_file_path)} alt="" />
+            <p>{textContent.img_file_path}</p>
             <input
               type="file"
               className="flex-none my-2"
