@@ -1,4 +1,4 @@
-import { useContext, Dispatch, SetStateAction } from "react";
+import { useEffect, useContext, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 
 import { Project } from "../../contexts/projects.context";

@@ -6,11 +6,12 @@ const ProjectFeatures = () => {
   const projectFeatures: Feature[] = useOutletContext();
 
   return (
-    <div className="mb-36 w-full h-full bg-red-500">
+    <div className="mb-36 w-full h-full bg-red-500" id="features-container">
       {projectFeatures.map((feature: Feature, idx: number) => {
         return (
           <ProjectFeature
             key={idx}
+            position={idx}
             feature={feature}
           />
         );

@@ -319,7 +319,6 @@ def update_feature():
         and isinstance(file.filename, str)
         and allowed_file(file.filename)
     ):
-        print(file)
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config["UPLOAD_FOLDER"], filename))
 
@@ -329,7 +328,6 @@ def update_feature():
         ).scalar_one()
         feature_to_update.title = title
         if file is not None and isinstance(filename, str):
-            print(file)
             feature_to_update.img_file_path = filename
         feature_to_update.description = description
         db.session.commit()

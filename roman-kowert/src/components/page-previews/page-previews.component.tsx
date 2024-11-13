@@ -15,13 +15,13 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
   const [previewPostion, setPreviewPosition] = useState("");
 
   useEffect(() => {
-    if (location === "/") setPreviewPosition("absolute");
-      else if (location === "/about") setPreviewPosition("fixed");
-        else setPreviewPosition("fixed");
+    if (location === "/") setPreviewPosition("absolute pointer-events-none");
+    else if (location === "/about") setPreviewPosition("fixed pointer-events-none");
+    else setPreviewPosition("fixed pointer-events-none");
   }, [location]);
 
   return (
-    <div className="relative w-[30vw] flex justify-end items-start inline-block">
+    <div className="relative 2xl:w-[30vw] xl:w-[40vw] w-[50vw] flex justify-end items-start inline-block">
       <div className="relative invisible h-[25vh]"></div>
       <div
         className={
@@ -48,7 +48,11 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={projectsPreview} alt="" className="w-[22rem] h-[17rem] mt-2" />
+        <img
+          src={projectsPreview}
+          alt=""
+          className="w-[22rem] h-[17rem] mt-2"
+        />
       </div>
       <div
         className={

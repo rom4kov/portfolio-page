@@ -16,11 +16,14 @@ type Result = AxiosResponse & {
 type FeatureProps = {
   feature: Feature;
   handleEditForm?: (feature: Feature) => void;
+  position?: number;
 };
 
-const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
+const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => {
   const { setProjects } = useContext(ProjectsContext);
   const { setFlash, setShowAlert } = useContext(FlashContext);
+
+  console.log(position);
 
   const deleteFeature: deleteFunc = async (feature_id: number) => {
     const response = (await axios.post<AxiosResponse>(
@@ -55,7 +58,7 @@ const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
     <div key={feature.id} className="mt-3 mb-5 text-start">
       <div className="mb-1 flex justify-between">
         {feature.title && (
-          <h3 className="mb-2 font-bold inline">{feature.title}</h3>
+          <h3 className={`mb-2 font-bold inline ${position === 0 && "text-xl"}`}>{feature.title}</h3>
         )}
         {handleEditForm && (
           <div className="ms-auto">
@@ -76,7 +79,7 @@ const ProjectFeature = ({ feature, handleEditForm }: FeatureProps) => {
         )}
       </div>
       {feature.img_file_path && (
-        <img className="mb-3" src={getImageURL(feature.img_file_path)} alt="" />
+        <img className="mb-3 rounded-lg" src={getImageURL(feature.img_file_path)} alt="" />
       )}
       <div dangerouslySetInnerHTML={{ __html: feature.description }} />
     </div>

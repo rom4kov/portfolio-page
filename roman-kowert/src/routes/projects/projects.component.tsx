@@ -18,7 +18,6 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const [height, setHeight] = useState("h-0 hidden");
   const { projects } = useContext<ProjectsContextType>(ProjectsContext);
   const [projectFeatures, setProjectFeatures] = useState<Feature[] | []>([]);
-  console.log(projectFeatures);
 
   useEffect(() => {
     if (location === "/projects") {
@@ -30,11 +29,23 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
     }
   }, [location]);
 
+  useEffect(() => {
+    const firstH3 = document.querySelector("h3");
+    console.log(firstH3);
+    if (firstH3) {
+      firstH3.setAttribute("style", "font-size:1.85rem !important");
+    }
+  }, [])
+
   return (
-    <div>
+    <div className="relative w-full h-full">
+      <div
+        className="fixed bottom-0 h-full inset-0 bg-gradient-to-b from-transparent from-40% to-[#1f2335] to-90% pointer-events-none z-10"
+        style={{ top: "80%", height: "20%", left: "50%", width: "40%" }}
+      ></div>
       <div
         id="route-container"
-        className={`${height} transition-all relative flex flex-col items-center gap-8 z-10 mb-36`}
+        className={`${height} transition-all relative flex flex-col items-center gap-8 z-10 mb-36 z-0`}
       >
         {projects.map((project) => {
           return (
