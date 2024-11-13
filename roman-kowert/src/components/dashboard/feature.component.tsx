@@ -23,8 +23,6 @@ const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => 
   const { setProjects } = useContext(ProjectsContext);
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
-  console.log(position);
-
   const deleteFeature: deleteFunc = async (feature_id: number) => {
     const response = (await axios.post<AxiosResponse>(
       "http://localhost:5000/api/delete-feature",

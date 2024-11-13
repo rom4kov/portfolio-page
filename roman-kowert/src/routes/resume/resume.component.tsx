@@ -31,16 +31,16 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   return (
     <div
       id="route-container"
-      className={`${height} transition-all relative flex flex-col gap-8 mb-36 ml-auto`}
+      className={`${height} w-[35rem] transition-all relative flex flex-col gap-8 mb-36 ml-auto`}
     >
       <h2 className="text-start text-2xl font-bold">
         Recent Work as Freelancer
       </h2>
       {work.reverse().map((work) => {
         return (
-          <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+          <div className="w-[35rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
             <div className="flex gap-5">
-              <span className="w-1/4 text-sm h-16 rounded-lg">
+              <span className="w-1/4 text-xs h-16 rounded-lg">
                 {work.time_period}
               </span>
               <div className="w-3/4">
@@ -59,9 +59,9 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       </h2>
       {education.reverse().map((course) => {
         return (
-          <div className="w-[40rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+          <div className="w-[35rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
             <div className="flex gap-5">
-              <span className="w-1/4 text-sm h-16 rounded-lg">
+              <span className="w-1/4 text-xs h-16 rounded-lg">
                 {course.time_period}
               </span>
               <div className="w-3/4">
