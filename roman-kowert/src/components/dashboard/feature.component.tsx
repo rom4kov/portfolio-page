@@ -53,7 +53,7 @@ const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => 
   };
 
   return (
-    <div key={feature.id} className="mt-3 mb-5 text-start">
+    <div key={feature.id} className="mt-3 text-start">
       <div className="mb-1 flex justify-between">
         {feature.title && (
           <h3 className={`mb-2 font-bold inline ${position === 0 && "text-xl"}`}>{feature.title}</h3>
@@ -66,7 +66,6 @@ const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => 
             >
               Edit
             </button>
-
             <button
               className="ms-auto h-6 p-1 leading-[0.9rem] text-xs"
               onClick={() => deleteFeature(feature.id)}

@@ -1,4 +1,4 @@
-import { useEffect, useContext, Dispatch, SetStateAction } from "react";
+import { useContext, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 
 import { Project } from "../../contexts/projects.context";
@@ -8,6 +8,9 @@ import { FlashContext } from "../../contexts/flash.context";
 import axios, { AxiosResponse } from "axios";
 
 import { getImageURL } from "../../utils/image-util";
+
+import ViewDetailsSVG from "../../assets/svg/view-details.tsx";
+import ExternalLinkSVG from "../../assets/svg/external-link.tsx";
 
 type ProjectProps = {
   project: Project;
@@ -58,13 +61,23 @@ const ProjectPreview = ({
         <div className={`${setFeatures && "w-full"} flex justify-between`}>
           <h3 className="font-bold">{project.title}</h3>
           {setFeatures && (
-            <Link
-              to={String(project.id)}
-              className="ms-auto me-1 h-6 p-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
-              onClick={() => setFeatures(project.features)}
-            >
-              See Project Details
-            </Link>
+            <div className="flex">
+              <Link
+                to="https://klavierunterricht-pye.de"
+                className="ms-auto me-1 h-6 p-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
+                title="Go to Website"
+              >
+                <ExternalLinkSVG />
+              </Link>
+              <Link
+                to={String(project.id)}
+                className="ms-auto me-1 h-6 py-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
+                onClick={() => setFeatures(project.features)}
+                title="See Project Details"
+              >
+                <ViewDetailsSVG />
+              </Link>
+            </div>
           )}
         </div>
         {handleEditForm && (
