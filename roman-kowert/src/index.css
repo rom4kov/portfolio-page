@@ -2,34 +2,38 @@
 @tailwind components;
 @tailwind utilities;
 
-@font-face{
+@font-face {
   font-family: "Inter";
-  src:local("Inter"),
-  url('./assets/fonts/Inter/web/Inter-Regular.woff2') format('woff2');
+  src:
+    local("Inter"),
+    url("./assets/fonts/Inter/web/Inter-Regular.woff2") format("woff2");
   font-style: normal;
   font-weight: 400 500;
 }
 
-@font-face{
+@font-face {
   font-family: "Inter";
-  src:local("Inter-Italic"),
-  url('./assets/fonts/Inter/web/Inter-Italic.woff2') format('woff2');
+  src:
+    local("Inter-Italic"),
+    url("./assets/fonts/Inter/web/Inter-Italic.woff2") format("woff2");
   font-style: italic;
   font-weight: 400 500;
 }
 
-@font-face{
+@font-face {
   font-family: "Inter";
-  src:local("Inter-Bold"),
-  url('./assets/fonts/Inter/web/Inter-Bold.woff2') format('woff2');
+  src:
+    local("Inter-Bold"),
+    url("./assets/fonts/Inter/web/Inter-Bold.woff2") format("woff2");
   font-style: bold;
   font-weight: 700 900;
 }
 
-@font-face{
+@font-face {
   font-family: "Inter";
-  src:local("Inter-Thin"),
-  url('./assets/fonts/Inter/web/Inter-Thin.woff2') format('woff2');
+  src:
+    local("Inter-Thin"),
+    url("./assets/fonts/Inter/web/Inter-Thin.woff2") format("woff2");
   font-style: thin;
   font-weight: 100 300;
 }
@@ -40,7 +44,7 @@
   font-weight: 400;
 
   color-scheme: light dark;
-  color: #ffffffB5;
+  color: #ffffffb5;
   background-color: #1f2335;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
@@ -145,8 +149,16 @@ button:focus-visible {
   flex-grow: 1 !important;
 }
 
-.tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__help-text, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__path, .tox .tox-statusbar__text-container.tox-statusbar__text-container-3-cols>.tox-statusbar__right-container {
-    flex: 1 !important;
+.tox
+  .tox-statusbar__text-container.tox-statusbar__text-container-3-cols
+  > .tox-statusbar__help-text,
+.tox
+  .tox-statusbar__text-container.tox-statusbar__text-container-3-cols
+  > .tox-statusbar__path,
+.tox
+  .tox-statusbar__text-container.tox-statusbar__text-container-3-cols
+  > .tox-statusbar__right-container {
+  flex: 1 !important;
 }
 
 .occupation-list p {
@@ -160,9 +172,19 @@ button:focus-visible {
   font-size: 1rem;
   line-height: 1.5rem;
 }
-/**/
-/* #route-containers { */
-/*   -webkit-mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 65%, transparent 85%); */
-/*   mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 65%, transparent 85%); */
-/*   z-index: 100; */
-/* } */
+
+.animated-gradient-link {
+  @apply text-tokyo-15-500 transition-all duration-300 bg-[length:200%_150%] 
+            bg-gradient-to-r from-[#ffffff05] to-[#ffffff95] 
+            animate-[gradientMove_3s_ease_infinite]
+            bg-clip-text from-tokyo-22-500 via-tokyo-22-500 via-tokyo-16-500 to-tokyo-23-500 transition-all 
+            duration-500 bg-clip-text text-transparent;
+}
+
+.animated-gradient:hover {
+  @apply text-tokyo-15-500 transition-all duration-300 bg-right bg-[length:400%_200%] 
+            bg-gradient-to-r from-[#ffffff05] to-[#ffffff95] 
+            animate-[gradientMove_3s_ease_infinite]
+            bg-clip-text from-tokyo-21-300 via-tokyo-22-500 via-tokyo-16-500 to-tokyo-23-500 transition-all 
+            duration-500 bg-clip-text text-transparent;
+}

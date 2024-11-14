@@ -44,7 +44,7 @@ const DashboardForm = ({
           <input
             type="text"
             id="title"
-            className="p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+            className="py-1 ps-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
             value={textContent.title}
             onChange={(evt) =>
               setTextContent((prev) => {
@@ -58,7 +58,7 @@ const DashboardForm = ({
           <input
             type="text"
             id="keywords"
-            className="flex-none p-1 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+            className="flex-none py-1 ps-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
             value={textContent.keywords}
             onChange={(evt) =>
               setTextContent((prev) => {
@@ -69,8 +69,12 @@ const DashboardForm = ({
               })
             }
           />
-          <div className="flex gap-3 items-center">
-            <img className="h-12" src={getImageURL(textContent.img_file_path)} alt="" />
+          <div className="flex gap-3 items-center my-1">
+            <img
+              className="h-12"
+              src={getImageURL(textContent.img_file_path)}
+              alt=""
+            />
             <p>{textContent.img_file_path}</p>
             <input
               type="file"
@@ -80,6 +84,21 @@ const DashboardForm = ({
               }}
             />
           </div>
+          <input
+            type="text"
+            id="url"
+            className="flex-none py-1 ps-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+            value={textContent.url}
+            placeholder="website url"
+            onChange={(evt) =>
+              setTextContent((prev) => {
+                return {
+                  ...prev,
+                  url: evt.target.value,
+                };
+              })
+            }
+          />
           <TextEditor
             setTextContent={setDescription}
             initialValue={textContent.description}

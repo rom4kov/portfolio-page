@@ -9,7 +9,7 @@ export type FlashMessage = {
 export type FlashContextType = {
   flashMessage: FlashMessage;
   setFlash: (
-    flashMessageTex: string,
+    flashMessageText: string,
     flashMessageBgColor: string,
     flashMessageTextColor: string,
   ) => void;

@@ -14,6 +14,7 @@ export type Project = {
   title: string,
   keywords: string[],
   img_file_path: string | undefined,
+  url: string,
   description: string,
   features: Feature[]
 }

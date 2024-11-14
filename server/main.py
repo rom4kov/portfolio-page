@@ -178,20 +178,23 @@ def create_project():
     keywords = keywords_string.split(",") if keywords_string else []
     keywords = [kw.strip() for kw in keywords]
 
+    url = request.form.get("url")
     description = request.form.get("description")
 
     file = request.files.get("img_file")
     file_path = None
+    filename = ""
     if file and isinstance(file.filename, str) and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file_path = os.path.join(app.config["UPLOAD_FOLDER"], filename)
         file.save(file_path)
 
     new_project = Project(
-        title=title,  # type: ignore
-        keywords=keywords,  # type: ignore
-        img_file_path=filename,  # type: ignore
-        description=description,  # type: ignore
+        title=title,
+        keywords=keywords,
+        img_file_path=filename,
+        url=url,
+        description=description,
     )
 
     try:
@@ -227,6 +230,7 @@ def update_project():
     keywords = keywords_string.split(",") if keywords_string else []
     keywords = [kw.strip() for kw in keywords]
 
+    url = request.form.get("url")
     description = request.form.get("description")
 
     file = request.files.get("img_file")
@@ -247,6 +251,7 @@ def update_project():
         if file is not None and isinstance(filename, str):
             project.img_file_path = filename
         project.keywords = keywords
+        project.url = url
         project.description = description
         db.session.commit()
         return jsonify(

@@ -1,7 +1,7 @@
 from __future__ import annotations
 from enum import unique
 from flask_login import UserMixin
-from sqlalchemy import JSON, Integer, String, ForeignKey
+from sqlalchemy import JSON, Integer, String, ForeignKey, desc
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.sql.elements import SQLCoreOperations
 from extensions import db
@@ -29,10 +29,18 @@ class TextContent(db.Model):  # type: ignore[name-defined]
 class Project(db.Model):  # type: ignore[name-defined]
     __tablename__ = "project_table"
 
+    def __init__(self, title, keywords, img_file_path, url, description) -> None:
+        self.title = title
+        self.keywords = keywords
+        self.img_file_path = img_file_path
+        self.url = url
+        self.description = description
+
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
     keywords: Mapped[list[str]] = mapped_column(JSON, nullable=True, unique=False)
     img_file_path: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
+    url: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     features: Mapped[List["Feature"]] = relationship(back_populates="project")
 
@@ -42,6 +50,7 @@ class Project(db.Model):  # type: ignore[name-defined]
             "title": self.title,
             "keywords": self.keywords,
             "img_file_path": self.img_file_path,
+            "url": self.url,
             "description": self.description,
             "features": sorted(
                 (feature.to_dict() for feature in self.features), key=lambda f: f["id"]

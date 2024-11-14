@@ -1,6 +1,6 @@
 import { MouseEventHandler } from "react";
-import { Link } from "react-router-dom";
 import { Page } from "../../routes/navigation/navigation.component";
+import PageLink from "../page-link/page-link.component";
 
 type PageLinksProps = {
   unblockPreview: MouseEventHandler;
@@ -8,6 +8,8 @@ type PageLinksProps = {
   handleLinkClicked: MouseEventHandler;
   location: string;
 };
+
+const links: Page[] = ["about", "projects", "resume"];
 
 const PageLinks = ({
   unblockPreview,
@@ -17,47 +19,16 @@ const PageLinks = ({
 }: PageLinksProps) => {
   return (
     <div className="flex flex-col items-start" onMouseLeave={unblockPreview}>
-      <div
-        className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/about" ? "text-tokyo-15-500 pl-4" : ""
-        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
-        onMouseEnter={() => {
-          handlePreview("about");
-        }}
-        onMouseLeave={() => {
-          handlePreview("about");
-        }}
-      >
-        <Link to="/about" onClick={handleLinkClicked}>
-          ABOUT
-        </Link>
-      </div>
-      <div
-        className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/projects" ? "text-tokyo-15-500 pl-4" : ""
-        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
-        onMouseEnter={() => handlePreview("projects")}
-        onMouseLeave={() => {
-          handlePreview("projects");
-        }}
-      >
-        <Link to="/projects" onClick={handleLinkClicked}>
-          PROJECTS
-        </Link>
-      </div>
-      <div
-        className={`py-1 text-sm font-bold relative top-0 z-50 ${
-          location === "/resume" ? "text-tokyo-15-500 pl-4" : ""
-        } hover:text-tokyo-15-500 hover:pl-4 transition-all cursor-pointer`}
-        onMouseEnter={() => handlePreview("resume")}
-        onMouseLeave={() => {
-          handlePreview("resume");
-        }}
-      >
-        <Link to="/resume" onClick={handleLinkClicked}>
-          RESUME
-        </Link>
-      </div>
+      {links.map((link) => {
+        return (
+          <PageLink
+            linkName={link}
+            location={location}
+            handlePreview={handlePreview}
+            handleLinkClicked={handleLinkClicked}
+          />
+        );
+      })}
     </div>
   );
 };

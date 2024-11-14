@@ -63,19 +63,21 @@ const ProjectPreview = ({
           {setFeatures && (
             <div className="flex">
               <Link
-                to="https://klavierunterricht-pye.de"
-                className="ms-auto me-1 h-6 p-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
-                title="Go to Website"
-              >
-                <ExternalLinkSVG />
-              </Link>
-              <Link
                 to={String(project.id)}
-                className="ms-auto me-1 h-6 py-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
+                className="ms-auto h-6 py-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
                 onClick={() => setFeatures(project.features)}
                 title="See Project Details"
               >
                 <ViewDetailsSVG />
+              </Link>
+              <Link
+                to={project.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ms-auto me-1 h-6 pt-1 px-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200 translate-y-[0.035rem]"
+                title="Go to Website"
+              >
+                <ExternalLinkSVG />
               </Link>
             </div>
           )}

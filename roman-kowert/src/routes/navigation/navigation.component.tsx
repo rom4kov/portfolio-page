@@ -83,7 +83,9 @@ const Navigation = ({ location }: NavigationProps) => {
         <div
           className={`fixed flex flex-col items-start ${titlePosition} transition-all duration-500`}
         >
-          <div className="hover:text-tokyo-15-500 transition-all duration-300">
+          <div
+            className="animated-gradient"
+          >
             <Link to="/">
               <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
               <div className="text-2xl text-left mb-8 font-normal">

@@ -85,7 +85,14 @@ export default {
         500: "#ff007c",
       },
     },
-    extend: {},
+    extend: {
+      keyframes: {
+        gradientMove: {
+          '0%, 100%': { backgroundPosition: '0% 50%'},
+          '50%': { backgroundPosition: '100% 50%'}
+        }
+      }
+    }
   },
   plugins: [],
 };

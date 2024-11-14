@@ -23,6 +23,7 @@ const initialState = {
   title: "title",
   keywords: [],
   img_file_path: "image file path",
+  url: "website url",
   description: "description",
   features: []
 };
@@ -50,6 +51,7 @@ const DashboardProjects = () => {
     formData.append("id", String(textContent.id));
     formData.append("title", textContent.title);
     formData.append("keywords", keywords);
+    formData.append("url", textContent.url);
     formData.append("description", description);
 
     if (file) {
@@ -74,6 +76,7 @@ const DashboardProjects = () => {
                     img_file_path: file?.name
                       ? file.name
                       : project.img_file_path,
+                    url: textContent.url,
                     description,
                     features: []
                   }
@@ -87,6 +90,7 @@ const DashboardProjects = () => {
                 title: textContent.title,
                 img_file_path: file?.name,
                 keywords: textContent.keywords,
+                url: textContent.url,
                 description,
                 features: []
               },
