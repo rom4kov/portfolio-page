@@ -8,17 +8,16 @@ interface AboutProps {
 
 const About: React.FC<AboutProps> = ({ location }) => {
   const [height, setHeight] = useState("h-0 hidden");
-  const { texts, setTexts } = useContext<TextContextType>(TextContext);
+  const { texts } = useContext<TextContextType>(TextContext);
   const value = texts.find((obj) => {
     return obj.page === "about";
   }) as TextElement;
-  console.log(value);
 
   useEffect(() => {
     if (location === "/about") {
       setTimeout(() => {
         setHeight("h-fit");
-      }, 300);
+      }, 500);
     } else {
       setHeight("h-0 hidden");
     }
@@ -27,7 +26,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   return (
     <div className="flex" id="route-container">
       <div
-        className={`${height} transition-all w-[40rem] text-lg text-right leading-10`}
+        className={`${height} w-[40rem] text-lg text-right leading-10`}
         dangerouslySetInnerHTML={{ __html: value?.body }}
       />
     </div>

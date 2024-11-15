@@ -4,8 +4,8 @@ import PageLink from "../page-link/page-link.component";
 
 type PageLinksProps = {
   unblockPreview: MouseEventHandler;
-  handlePreview: (arg0: Page) => void;
-  handleLinkClicked: MouseEventHandler;
+  handlePreview: (page: Page) => void;
+  handleLinkClicked: (to: Page) => void;
   location: string;
 };
 

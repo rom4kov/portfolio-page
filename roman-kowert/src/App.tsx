@@ -21,16 +21,26 @@ import "./App.css";
 
 function App() {
   const [contentPosition, setContentPosition] = useState("top-64");
+  const [maxWidth, setMaxWidth] = useState("max-w-[950px]");
 
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === "/") {
       setContentPosition("top-64");
+      setTimeout(() => {
+        setMaxWidth("max-w-[950px]")
+      }, 500);
     } else if (location.pathname === "/about") {
-      setContentPosition(`top-20`);
+      setMaxWidth("max-w-screen-xl")
+      setTimeout(() => {
+        setContentPosition(`top-20`);
+      }, 500);
     } else {
-      setContentPosition("top-12");
+      setMaxWidth("max-w-screen-xl")
+      setTimeout(() => {
+        setContentPosition("top-12");
+      }, 500);
     }
   }, [location]);
 
@@ -38,7 +48,7 @@ function App() {
     <div>
       <div
         id="app-root"
-        className={`flex justify-between ${contentPosition} transition-all duration-500 relative`}
+        className={`flex justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
       >
         <GlowCursor />
         <Routes>

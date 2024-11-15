@@ -1,11 +1,9 @@
-import React from "react";
-
 const SocialMediaLinks = () => {
   return (
     <ul className="mt-8 mb-[0.6rem] flex items-end" aria-label="Social media">
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-tokyoblue-500 transition-colors"
+          className="block opacity-70 hover:opacity-100 transition-opacity"
           href="https://github.com/rom4kov"
           target="_blank"
           rel="noreferrer noopener"
@@ -25,7 +23,7 @@ const SocialMediaLinks = () => {
       </li>
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-tokyoblue-500 transition-colors"
+          className="block opacity-70 hover:opacity-100 transition-opacity"
           href="https://www.linkedin.com/in/roman-kowert-8887599a/"
           target="_blank"
           rel="noreferrer noopener"
@@ -45,7 +43,7 @@ const SocialMediaLinks = () => {
       </li>
       <li className="mr-5 text-xs shrink-0">
         <a
-          className="block hover:text-tokyoblue-500 transition-colors"
+          className="block opacity-70 hover:opacity-100 transition-opacity"
           href="https://instagram.com/ruinsofreason"
           target="_blank"
           rel="noreferrer noopener"

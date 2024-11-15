@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { Fragment } from "react/jsx-runtime";
-import { Link, Outlet } from "react-router-dom";
+import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 
@@ -29,7 +29,9 @@ const Navigation = ({ location }: NavigationProps) => {
 
   const { currentUser } = useContext(UserContext);
 
-  const handleLinkClicked = () => {
+  const navigate = useNavigate();
+
+  const handleLinkClicked = (to: Page) => {
     setLinkClicked(true);
     setShowPreview(
       (prev): previewState =>
@@ -38,6 +40,7 @@ const Navigation = ({ location }: NavigationProps) => {
           return acc;
         }, {} as previewState),
     );
+    navigate(to);
   };
 
   const handlePreview = (hoveredPage: Page) => {
@@ -60,12 +63,10 @@ const Navigation = ({ location }: NavigationProps) => {
     if (location === "/") {
       setTitlePosition("top-72");
     } else if (location === "/about") {
-      setTitlePosition("top-28");
       setTimeout(() => {
         setTitlePosition("top-28");
       }, 500);
     } else {
-      setTitlePosition("top-20");
       setTimeout(() => {
         setTitlePosition("top-20");
       }, 500);
