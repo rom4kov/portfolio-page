@@ -184,7 +184,8 @@ button:focus-visible {
 .animated-gradient:hover {
   @apply text-tokyo-15-500 transition-all duration-300 bg-right bg-[length:400%_200%] 
             bg-gradient-to-r from-[#ffffff05] to-[#ffffff95] 
-            animate-[gradientMove_3s_ease_infinite]
+            animate-[gradientMove_3s_ease_infinite] stroke-1
             bg-clip-text from-tokyo-21-300 via-tokyo-22-500 via-tokyo-16-500 to-tokyo-23-500 transition-all 
             duration-500 bg-clip-text text-transparent;
 }
+

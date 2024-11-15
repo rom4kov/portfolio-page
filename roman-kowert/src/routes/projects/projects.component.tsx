@@ -19,6 +19,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const { projects } = useContext<ProjectsContextType>(ProjectsContext);
   const [projectFeatures, setProjectFeatures] = useState<Feature[] | []>([]);
 
+
   useEffect(() => {
     if (location === "/projects") {
       setTimeout(() => {

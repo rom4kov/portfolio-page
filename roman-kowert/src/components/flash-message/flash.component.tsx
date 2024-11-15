@@ -3,7 +3,6 @@ import { FlashContext } from "../../contexts/flash.context";
 
 const FlashMessage = () => {
   const { flashMessage, showAlert, setShowAlert } = useContext(FlashContext);
-  console.log(flashMessage);
 
   return (
     <div>

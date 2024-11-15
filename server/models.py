@@ -1,11 +1,9 @@
 from __future__ import annotations
-from enum import unique
 from flask_login import UserMixin
-from sqlalchemy import JSON, Integer, String, ForeignKey, desc
+from sqlalchemy import JSON, Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy.sql.elements import SQLCoreOperations
 from extensions import db
-from typing import List, Dict, Any, Optional
+from typing import List
 
 
 class User(db.Model, UserMixin):  # type: ignore[name-defined]

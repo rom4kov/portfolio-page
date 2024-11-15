@@ -14,12 +14,17 @@ import DashboardAbout from "./routes/dashboard/dashboard-about.component";
 import DashboardProjects from "./routes/dashboard/dashboard-projects";
 import DashboardResume from "./routes/dashboard/dashboard-resume";
 
+import useScrollRestoration from "./hooks/useScrollRestoration";
+
 import FlashMessage from "./components/flash-message/flash.component";
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
 
 import "./App.css";
 
 function App() {
+  const projectRoutePattern = /^\/projects\/\d+$/;
+  useScrollRestoration(projectRoutePattern, "/projects");
+
   const [contentPosition, setContentPosition] = useState("top-64");
   const [maxWidth, setMaxWidth] = useState("max-w-[950px]");
 

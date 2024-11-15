@@ -2,6 +2,7 @@ import { useContext, Dispatch, SetStateAction } from "react";
 import { Link } from "react-router-dom";
 
 import { Project } from "../../contexts/projects.context";
+
 import { Feature } from "../../contexts/projects.context";
 import { FlashContext } from "../../contexts/flash.context";
 
@@ -55,6 +56,12 @@ const ProjectPreview = ({
     setShowAlert(true);
   };
 
+  const showFeatures = () => {
+    if (setFeatures) {
+      setFeatures(project.features);
+    }
+  };
+
   return (
     <div className="w-[97.5%] items-start hover:bg-tokyo-4-300 p-3 rounded-lg">
       <div className="mt-0 flex gap-2">
@@ -65,7 +72,7 @@ const ProjectPreview = ({
               <Link
                 to={String(project.id)}
                 className="ms-auto h-6 py-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
-                onClick={() => setFeatures(project.features)}
+                onClick={showFeatures}
                 title="See Project Details"
               >
                 <ViewDetailsSVG />

@@ -1,9 +1,12 @@
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import type { Project, Feature } from "../../contexts/projects.context";
 import axios, { AxiosResponse } from "axios";
 import { getImageURL } from "../../utils/image-util";
 import { ProjectsContext } from "../../contexts/projects.context";
 import { FlashContext } from "../../contexts/flash.context";
+
+import GoBackSVG from "../../assets/svg/arrow-go-back";
 
 type deleteFunc = (feature_id: number) => Promise<void>;
 
@@ -19,7 +22,11 @@ type FeatureProps = {
   position?: number;
 };
 
-const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => {
+const ProjectFeature = ({
+  position,
+  feature,
+  handleEditForm,
+}: FeatureProps) => {
   const { setProjects } = useContext(ProjectsContext);
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
@@ -56,7 +63,18 @@ const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => 
     <div key={feature.id} className="mt-3 text-start">
       <div className="mb-1 flex justify-between">
         {feature.title && (
-          <h3 className={`mb-2 font-bold inline ${position === 0 && "text-xl"}`}>{feature.title}</h3>
+          <div className="flex justify-between w-full">
+            <h3
+              className={`mb-2 font-bold block ${position === 0 && "text-xl"}`}
+            >
+              {feature.title}
+            </h3>
+            {position === 0 && (
+              <Link to="/projects">
+                <GoBackSVG />
+              </Link>
+            )}
+          </div>
         )}
         {handleEditForm && (
           <div className="ms-auto">
@@ -76,7 +94,11 @@ const ProjectFeature = ({ position, feature, handleEditForm }: FeatureProps) => 
         )}
       </div>
       {feature.img_file_path && (
-        <img className="mb-3 rounded-lg" src={getImageURL(feature.img_file_path)} alt="" />
+        <img
+          className="mb-3 rounded-lg"
+          src={getImageURL(feature.img_file_path)}
+          alt=""
+        />
       )}
       <div dangerouslySetInnerHTML={{ __html: feature.description }} />
     </div>
