@@ -153,7 +153,7 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
   };
 
   return (
-    <div className="flex flex-col flex-grow h-full" id="long-form-container">
+    <div className="flex flex-col flex-grow w-full h-full" id="long-form-container">
       <h2 className="mb-3 flex-none">Long Description</h2>
       {showEditForm ? (
         <form

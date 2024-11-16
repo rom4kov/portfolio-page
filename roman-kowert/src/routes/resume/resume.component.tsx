@@ -4,6 +4,8 @@ import {
   OccupationsContext,
 } from "../../contexts/occupations.context";
 
+import CV_PDF from "../../assets/documents/Kowert_CV_Okt_2024_webdev_engl.pdf"
+
 interface ResumeProps {
   location: string;
 }
@@ -33,9 +35,17 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       id="route-container"
       className={`${height} w-[35rem] transition-all relative flex flex-col gap-8 mb-36 ml-auto`}
     >
-      <h2 className="text-start text-2xl font-bold">
-        Recent Work as Freelancer
-      </h2>
+      <div className="flex justify-between">
+        <h2 className="text-start text-2xl font-bold -mb-2">
+          Recent Work as Freelancer
+        </h2>
+        <a
+          className="text-xs mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
+          href={CV_PDF}
+        >
+          Dowload as PDF
+        </a>
+      </div>
       {work.reverse().map((work) => {
         return (
           <div className="w-[35rem] h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
@@ -67,6 +77,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
               <div className="w-3/4">
                 <h3 className="text-lg font-bold -mt-1 mb-1">{course.title}</h3>
                 <div
+                  className="courses-list"
                   dangerouslySetInnerHTML={{ __html: course.description }}
                 ></div>
               </div>

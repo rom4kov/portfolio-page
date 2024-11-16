@@ -25,7 +25,7 @@ const initialState = {
   img_file_path: "image file path",
   url: "website url",
   description: "description",
-  features: []
+  features: [],
 };
 
 const DashboardProjects = () => {
@@ -78,7 +78,7 @@ const DashboardProjects = () => {
                       : project.img_file_path,
                     url: textContent.url,
                     description,
-                    features: []
+                    features: [],
                   }
                 : project,
             );
@@ -92,20 +92,28 @@ const DashboardProjects = () => {
                 keywords: textContent.keywords,
                 url: textContent.url,
                 description,
-                features: []
+                features: [],
               },
             ];
           }
         });
 
         setShowEditForm(false);
-        setFlash("Project successfully updated.", "bg-tokyo-22-500", "text-tokyo-21-300");
+        setFlash(
+          "Project successfully updated.",
+          "bg-tokyo-22-500",
+          "text-tokyo-21-300",
+        );
         setShowAlert(true);
       }
     } catch (error) {
       console.error("Error uploading project:", error);
       setShowEditForm(false);
-      setFlash("Project could not be updated.", "bg-tokyo-24-500", "text-tokyo-3-500");
+      setFlash(
+        "Project could not be updated.",
+        "bg-tokyo-24-500",
+        "text-tokyo-3-500",
+      );
       setShowAlert(true);
     }
   };
@@ -117,12 +125,17 @@ const DashboardProjects = () => {
   };
 
   return (
-    <div id="projects-edit-container" className="w-full h-full px-5 flex flex-col items-center gap-3">
-      <h2 className="text-2xl mt-3 text-center flex-none">Edit Projects Content</h2>
+    <div
+      id="projects-edit-container"
+      className="w-full h-full px-5 flex flex-col items-center gap-3"
+    >
+      <h2 className="text-2xl mt-3 text-center flex-none">
+        Edit Projects Content
+      </h2>
       {!showEditForm ? (
         <div className="w-full h-full flex-grow">
           <div
-            className="w-full h-[63vh] mt-3 flex flex-col items-start gap-5 overflow-auto"
+            className="w-full h-[63vh] mt-3 pe-4 flex flex-col items-start gap-5 overflow-auto"
             id="projects-edit-content"
           >
             {projects.map((project) => {

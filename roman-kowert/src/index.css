@@ -76,7 +76,7 @@
 }
 
 #projects-edit-content::-webkit-scrollbar {
-  width: 0.5rem;
+  /* width: 0.5rem; */
   height: 0.5rem;
 }
 
@@ -162,8 +162,10 @@ button:focus-visible {
 }
 
 .occupation-list p {
-  font-size: 1.1rem;
+  font-size: 1rem;
+  font-style: italic;
   margin-bottom: 1rem;
+  line-height: 1.4;
 }
 
 .occupation-list ul {
@@ -173,11 +175,15 @@ button:focus-visible {
   line-height: 1.5rem;
 }
 
+.courses-list p {
+  line-height: 1.3;
+}
+
 .animated-gradient-link {
-  @apply text-tokyo-15-500 transition-all duration-300 bg-[length:200%_150%] 
+  @apply text-tokyo-15-500 transition-all duration-300 bg-[length:400%_150%] 
             bg-gradient-to-r from-[#ffffff05] to-[#ffffff95] 
-            animate-[gradientMove_3s_ease_infinite]
-            bg-clip-text from-tokyo-22-500 via-tokyo-22-500 via-tokyo-16-500 to-tokyo-23-500 transition-all 
+            animate-[gradientMove_5s_ease_infinite]
+            bg-clip-text from-tokyo-15-500 via-tokyo-12-500 to-tokyo-21-500 transition-all 
             duration-500 bg-clip-text text-transparent;
 }
 
@@ -185,7 +191,7 @@ button:focus-visible {
   @apply text-tokyo-15-500 transition-all duration-300 bg-right bg-[length:400%_200%] 
             bg-gradient-to-r from-[#ffffff05] to-[#ffffff95] 
             animate-[gradientMove_3s_ease_infinite] stroke-1
-            bg-clip-text from-tokyo-21-300 via-tokyo-22-500 via-tokyo-16-500 to-tokyo-23-500 transition-all 
+            bg-clip-text from-tokyo-15-500 via-tokyo-12-500 to-tokyo-21-500 transition-all 
             duration-500 bg-clip-text text-transparent;
 }
 

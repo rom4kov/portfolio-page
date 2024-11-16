@@ -25,7 +25,7 @@ const Navigation = ({ location }: NavigationProps) => {
   });
 
   const [linkClicked, setLinkClicked] = useState(false);
-  const [titlePosition, setTitlePosition] = useState("");
+  const [titlePosition, setTitlePosition] = useState("top-12");
 
   const { currentUser } = useContext(UserContext);
 
@@ -61,14 +61,14 @@ const Navigation = ({ location }: NavigationProps) => {
 
   useEffect(() => {
     if (location === "/") {
-      setTitlePosition("top-72");
+      setTitlePosition("xl:top-72");
     } else if (location === "/about") {
       setTimeout(() => {
-        setTitlePosition("top-28");
+        setTitlePosition("xl:top-28");
       }, 500);
     } else {
       setTimeout(() => {
-        setTitlePosition("top-20");
+        setTitlePosition("xl:top-20");
       }, 500);
     }
   }, [location]);
@@ -80,16 +80,16 @@ const Navigation = ({ location }: NavigationProps) => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </div>
       )}
-      <div className="overflow-y-auto w-fit h-fit flex items-center">
+      <div className="relative overflow-y-auto h-48 w-full xl:w-fit xl:h-fit flex items-center">
         <div
-          className={`fixed flex flex-col items-start ${titlePosition} transition-all duration-500`}
+          className={`fixed h-[30vh] xl:h-fit xl:flex xl:flex-col items-start ${titlePosition} transition-all duration-500`}
         >
           <div
             className="animated-gradient"
           >
             <Link to="/">
-              <div className="text-6xl font-extrabold mb-2">Roman Kowert</div>
-              <div className="text-2xl text-left mb-8 font-normal">
+              <div className="text-4xl xl:text-6xl text-left font-extrabold mb-1 xl:mb-2">Roman Kowert</div>
+              <div className="text-lg xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
                 Fullstack Web Engineer
               </div>
             </Link>

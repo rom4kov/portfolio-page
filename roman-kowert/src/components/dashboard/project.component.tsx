@@ -63,10 +63,10 @@ const ProjectPreview = ({
   };
 
   return (
-    <div className="w-[97.5%] items-start hover:bg-tokyo-4-300 p-3 rounded-lg">
-      <div className="mt-0 flex gap-2">
-        <div className={`${setFeatures && "w-full"} flex justify-between`}>
-          <h3 className="font-bold">{project.title}</h3>
+    <div className="w-[80vw] xl:w-full items-start hover:bg-tokyo-4-300 xl:p-3 rounded-lg">
+      <div className="mt-0 xl:w-[97.5%] flex gap-2">
+        <div className={`${setFeatures && "w-full"} flex justify-between w-[80vw] xl:w-[35rem]`}>
+          <h3 className="text-start text-sm xl:text-lg xl:w-[25rem] font-bold">{project.title}</h3>
           {setFeatures && (
             <div className="flex">
               <Link
@@ -90,7 +90,7 @@ const ProjectPreview = ({
           )}
         </div>
         {handleEditForm && (
-          <div className="ms-auto">
+          <div className="mt-1 ms-auto flex">
             <button
               className="me-1 h-6 p-1 leading-[0.9rem] text-xs"
               onClick={() => handleEditForm(project)}
@@ -106,7 +106,7 @@ const ProjectPreview = ({
           </div>
         )}
       </div>
-      <div className="mt-2 flex gap-3">
+      <div className="mt-2 w-[75vw] xl:w-[32rem] xl:flex gap-3">
         <img
           src={
             project.img_file_path !== undefined
@@ -114,21 +114,21 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 w-[25%] h-full opacity-80 rounded"
+          className="mt-1 me-2 w-[45vw] xl:w-[24%] h-full opacity-80 rounded float-left xl:float-none"
         />
         <div
-          className="w-[75%] text-start"
+          className="w-[80vw] xl:w-[75%] text-start text-xs xl:text-[1rem] xl:leading-5"
           dangerouslySetInnerHTML={{
             __html: project.description,
           }}
         />
       </div>
-      <div className="mt-3 ms-32 mb-1 ps-3 flex gap-2 flex-wrap">
+      <div className="mt-3 xl:ms-32 mb-1 xl:ps-3 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span
               key={idx}
-              className="py-1 px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-xs font-bold"
+              className="py-[0.1rem] px-[0.4rem] xl:py-1 xl:px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-[0.6rem] xl:text-xs font-bold"
             >
               {keyword}
             </span>

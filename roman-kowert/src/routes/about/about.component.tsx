@@ -16,7 +16,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   useEffect(() => {
     if (location === "/about") {
       setTimeout(() => {
-        setHeight("h-fit");
+        setHeight("h-[60vh] xl:h-fit");
       }, 500);
     } else {
       setHeight("h-0 hidden");
@@ -24,9 +24,9 @@ const About: React.FC<AboutProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div className="flex" id="route-container">
+    <div className="flex" id="about-route-container">
       <div
-        className={`${height} w-[40rem] text-lg text-right leading-10`}
+        className={`${height} xl:w-[40rem] text-lg text-left xl:text-right xl:leading-10 overflow-y-scroll`}
         dangerouslySetInnerHTML={{ __html: value?.body }}
       />
     </div>

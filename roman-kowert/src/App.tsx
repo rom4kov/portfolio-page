@@ -25,26 +25,26 @@ function App() {
   const projectRoutePattern = /^\/projects\/\d+$/;
   useScrollRestoration(projectRoutePattern, "/projects");
 
-  const [contentPosition, setContentPosition] = useState("top-64");
-  const [maxWidth, setMaxWidth] = useState("max-w-[950px]");
+  const [contentPosition, setContentPosition] = useState("xl:top-64");
+  const [maxWidth, setMaxWidth] = useState("xl:max-w-[950px]");
 
   const location = useLocation();
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("top-64");
+      setContentPosition("xl:top-64");
       setTimeout(() => {
-        setMaxWidth("max-w-[950px]")
+        setMaxWidth("xl:max-w-[950px]")
       }, 500);
     } else if (location.pathname === "/about") {
       setMaxWidth("max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition(`top-20`);
+        setContentPosition(`xl:top-20`);
       }, 500);
     } else {
-      setMaxWidth("max-w-screen-xl")
+      setMaxWidth("xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition("top-12");
+        setContentPosition("xl:top-12");
       }, 500);
     }
   }, [location]);
@@ -53,7 +53,7 @@ function App() {
     <div>
       <div
         id="app-root"
-        className={`flex justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
+        className={`h-screen xl:h-fit flex flex-col xl:flex-row xl:justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
       >
         <GlowCursor />
         <Routes>

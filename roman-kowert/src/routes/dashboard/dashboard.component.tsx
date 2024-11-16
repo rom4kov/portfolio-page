@@ -24,11 +24,11 @@ const Dashboard = () => {
 
   return (
     <div className="w-full flex">
-      <div className="w-full h-[80vh] flex flex-col justify-between mb-12">
+      <div className="w-[50%] h-[80vh] flex flex-col justify-between mb-12">
         <h1 className="text-start mb-5">Dashboard</h1>
         <DashboardNav handleLogout={handleLogout} />
       </div>
-      <div className="w-full h-[80vh] border rounded-lg">
+      <div className="w-[50%] h-[80vh] border rounded-lg">
         <Outlet />
       </div>
     </div>
