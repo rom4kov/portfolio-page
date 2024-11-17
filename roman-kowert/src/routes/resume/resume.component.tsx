@@ -23,7 +23,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   useEffect(() => {
     if (location === "/resume") {
       setTimeout(() => {
-        setHeight("h-fit");
+        setHeight("xl:h-fit");
       }, 300);
     } else {
       setHeight("h-0 hidden");
@@ -33,9 +33,9 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   return (
     <div
       id="resume-route-container"
-      className={`${height} xl:w-[35rem] h-[60vh] transition-all relative flex flex-col gap-8 mb-36 ml-auto overflow-y-scroll`}
+      className={`${height} xl:w-full h-[60vh] transition-all relative flex flex-col gap-8 xl:mb-36 ml-auto overflow-y-scroll`}
     >
-      <div className="flex justify-between -mb-5">
+      <div className="w-full flex justify-between -mb-5">
         <h2 className="text-start text-lg xl:text-2xl font-bold xl:-mb-2">
           Recent Work as Freelancer
         </h2>
@@ -48,7 +48,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       </div>
       {work.reverse().map((work) => {
         return (
-          <div className="w-full xl:w-[35rem] xl:h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer">
+          <div className="w-full xl:w-[35rem] xl:h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-sm xl:text-lg rounded-lg cursor-pointer">
             <div className="w-full flex flex-col xl:flex-row gap-1 xl:gap-5">
               <span className="xl:w-1/4 xl:h-16 mb-2 text-xs rounded-lg">
                 {work.time_period}
