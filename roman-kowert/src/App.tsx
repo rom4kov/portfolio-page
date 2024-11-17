@@ -26,7 +26,7 @@ function App() {
   useScrollRestoration(projectRoutePattern, "/projects");
 
   const [contentPosition, setContentPosition] = useState("xl:top-64");
-  const [maxWidth, setMaxWidth] = useState("xl:max-w-[950px]");
+  const [maxWidth, setMaxWidth] = useState("md:max-w-screen-md xl:max-w-[950px]");
 
   const location = useLocation();
 
@@ -34,7 +34,7 @@ function App() {
     if (location.pathname === "/") {
       setContentPosition("xl:top-64");
       setTimeout(() => {
-        setMaxWidth("xl:max-w-[950px]")
+        setMaxWidth("md:max-w-screen-md xl:max-w-[950px]")
       }, 500);
     } else if (location.pathname === "/about") {
       setMaxWidth("max-w-screen-xl")
@@ -53,7 +53,7 @@ function App() {
     <div>
       <div
         id="app-root"
-        className={`h-screen xl:h-fit flex flex-col xl:flex-row xl:justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
+        className={`h-screen xl:h-fit flex flex-col md:flex-row xl:justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
       >
         <GlowCursor />
         <Routes>

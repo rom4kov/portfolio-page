@@ -80,9 +80,9 @@ const Navigation = ({ location }: NavigationProps) => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </div>
       )}
-      <div className="relative overflow-y-auto h-48 w-full xl:w-fit xl:h-fit flex items-start xl:items-center flex-none">
+      <div className="relative overflow-y-auto h-48 w-full xl:w-fit xl:h-fit flex items-start flex-none">
         <div
-          className={`fixed xl:h-[30vh] xl:h-fit xl:flex xl:flex-col items-start xl:items-center ${titlePosition} transition-all duration-500 overflow-y-scroll`}
+          className={`fixed h-fit xl:h-[30vh] xl:flex xl:flex-col items-start xl:items-start ${titlePosition} transition-all duration-500 overflow-y-scroll`}
         >
           <div
             className="animated-gradient"
