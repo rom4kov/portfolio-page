@@ -5,4 +5,8 @@
 #app-root {
   margin-inline: auto;
   padding: 2rem;
+
+  @media screen and (max-width: 600px) {
+    padding: 2rem 2rem 0 2rem;
+  }
 }

@@ -21,13 +21,13 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
   }, [location]);
 
   return (
-    <div className="relative w-[85vw] lg:w-[50vw] 2xl:w-[30vw] xl:w-[40vw] flex-grow flex justify-end items-start inline-block">
+    <div className="relative w-[85vw] lg:w-[50vw] 2xl:w-[30vw] xl:w-[40vw] pb-8 flex-grow flex justify-end items-start inline-block overflow-y-auto">
       <div className="relative invisible h-[25vh]"></div>
       <div
         className={
           Object.values(showPreview).some(Boolean)
-            ? "xl:absolute top-0 xl:right-0 h-[65vh] w-full xl:h-fit opacity-0 translate-y-8 transition-all overflow-y-auto"
-            : "xl:absolute top-0 xl:right-0 h-[65vh] w-full xl:w-fit xl:h-fit opacity-100 transition-all delay-100 overflow-y-auto"
+            ? "xl:absolute top-0 xl:right-0 w-full xl:h-fit opacity-0 translate-y-8 transition-all overflow-y-auto flex-grow"
+            : "xl:absolute top-0 xl:right-0 w-full xl:w-fit xl:h-fit opacity-100 transition-all delay-100 overflow-y-auto flex-grow"
         }
       >
         {outlet}

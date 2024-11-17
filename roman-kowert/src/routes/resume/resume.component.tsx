@@ -33,7 +33,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   return (
     <div
       id="resume-route-container"
-      className={`${height} xl:w-full h-[60vh] transition-all relative flex flex-col gap-8 xl:mb-36 ml-auto overflow-y-scroll`}
+      className={`${height} xl:w-full xl:h-[60vh] transition-all relative flex flex-col gap-8 xl:mb-36 ml-auto overflow-y-scroll`}
     >
       <div className="w-full flex justify-between -mb-5">
         <h2 className="text-start text-lg xl:text-2xl font-bold xl:-mb-2">

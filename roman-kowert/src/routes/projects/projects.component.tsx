@@ -32,10 +32,10 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   return (
     <div
       id="projects-container"
-      className="h-[60vh] xl:h-full w-[82vw] xl:w-[35.5rem]"
+      className="xl:h-[60vh] xl:h-full w-[82vw] xl:w-[35.5rem]"
     >
       <div
-        className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 xl:mb-36 pb-8`}
+        className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 xl:mb-36`}
       >
         {projects.map((project) => {
           return (
