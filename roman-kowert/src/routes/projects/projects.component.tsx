@@ -19,7 +19,6 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const { projects } = useContext<ProjectsContextType>(ProjectsContext);
   const [projectFeatures, setProjectFeatures] = useState<Feature[] | []>([]);
 
-
   useEffect(() => {
     if (location === "/projects") {
       setTimeout(() => {
@@ -31,10 +30,12 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   }, [location]);
 
   return (
-    <div className="h-[60vh] xl:h-full w-[85vw] xl:w-[35.5rem] overflow-y-scroll" id="projects-container">
+    <div
+      id="projects-container"
+      className="h-[60vh] xl:h-full w-[85vw] xl:w-[35.5rem]"
+    >
       <div
-        id="route-container"
-        className={`${height} w-[82vw] xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 mb-36`}
+        className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 mb-36`}
       >
         {projects.map((project) => {
           return (

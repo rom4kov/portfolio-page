@@ -100,7 +100,7 @@ const ProjectFeature = ({
           alt=""
         />
       )}
-      <div dangerouslySetInnerHTML={{ __html: feature.description }} />
+      <div className="text-sm xl:text-md" dangerouslySetInnerHTML={{ __html: feature.description }} />
     </div>
   );
 };

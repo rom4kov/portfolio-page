@@ -38,6 +38,10 @@
   font-weight: 100 300;
 }
 
+/* * { */
+/*   outline: 1px solid red; */
+/* } */
+
 :root {
   font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   line-height: 1.5;
@@ -194,4 +198,3 @@ button:focus-visible {
             bg-clip-text from-tokyo-15-500 via-tokyo-12-500 to-tokyo-21-500 transition-all 
             duration-500 bg-clip-text text-transparent;
 }
-

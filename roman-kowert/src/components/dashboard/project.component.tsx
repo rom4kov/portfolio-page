@@ -63,12 +63,16 @@ const ProjectPreview = ({
   };
 
   return (
-    <div className="w-[80vw] xl:w-full items-start hover:bg-tokyo-4-300 xl:p-3 rounded-lg">
-      <div className="mt-0 xl:w-[97.5%] flex gap-2">
-        <div className={`${setFeatures && "w-full"} flex justify-between w-[80vw] xl:w-[35rem]`}>
-          <h3 className="text-start text-sm xl:text-lg xl:w-[25rem] font-bold">{project.title}</h3>
+    <div className="w-[82.5vw] xl:w-[32.5rem] items-start hover:bg-tokyo-4-300 p-4 xl:p-4 rounded-lg">
+      <div className="mt-0 w-[82.5vw] xl:w-full flex gap-2">
+        <div
+          className={`${setFeatures && "w-full"} flex flex-row justify-end w-full xl:w-full`}
+        >
+          <h3 className="text-start text-sm xl:text-lg w-[75vw] xl:w-[25rem] flex-grow font-bold">
+            {project.title}
+          </h3>
           {setFeatures && (
-            <div className="flex">
+            <div className="flex w-8 xl:w-fit justify-end scale-75 xl:scale-100 translate-x-[8px] xl:translate-x-[-8px] translate-y-[-3px] xl:translate-y-[0]">
               <Link
                 to={String(project.id)}
                 className="ms-auto h-6 py-1 leading-[0.9rem] text-xs hover:text-tokyo-15-500 transition-color duration-200"
@@ -106,7 +110,7 @@ const ProjectPreview = ({
           </div>
         )}
       </div>
-      <div className="mt-2 w-[75vw] xl:w-[32rem] xl:flex gap-3">
+      <div className="mt-2 w-[75vw] xl:w-full xl:flex gap-3">
         <img
           src={
             project.img_file_path !== undefined
@@ -117,18 +121,18 @@ const ProjectPreview = ({
           className="mt-1 me-2 w-[45vw] xl:w-[24%] h-full opacity-80 rounded float-left xl:float-none"
         />
         <div
-          className="w-[80vw] xl:w-[75%] text-start text-xs xl:text-[1rem] xl:leading-5"
+          className="w-[75vw] xl:w-[75%] text-start text-xs xl:text-[1rem] xl:leading-5"
           dangerouslySetInnerHTML={{
             __html: project.description,
           }}
         />
       </div>
-      <div className="mt-3 xl:ms-32 mb-1 xl:ps-3 flex gap-2 flex-wrap">
+      <div className="w-[75vw] xl:w-[79.5%] mt-3 xl:ms-[24%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span
               key={idx}
-              className="py-[0.1rem] px-[0.4rem] xl:py-1 xl:px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-[0.6rem] xl:text-xs font-bold"
+              className="py-[0.1rem] px-[0.4rem] xl:py-1 xl:px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-[0.6rem] xl:text-[0.7rem] font-bold"
             >
               {keyword}
             </span>
