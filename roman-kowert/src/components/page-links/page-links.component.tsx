@@ -18,7 +18,7 @@ const PageLinks = ({
   location,
 }: PageLinksProps) => {
   return (
-    <div className="flex gap-3 xl:flex-col xl:gap-0 items-start" onMouseLeave={unblockPreview}>
+    <div className="flex gap-3 md:flex-col md:gap-0 items-start" onMouseLeave={unblockPreview}>
       {links.map((link) => {
         return (
           <PageLink

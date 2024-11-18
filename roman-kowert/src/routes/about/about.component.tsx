@@ -16,7 +16,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   useEffect(() => {
     if (location === "/about") {
       setTimeout(() => {
-        setHeight("h-[60vh] xl:h-fit");
+        setHeight("xl:h-[72vh] xl:h-fit");
       }, 500);
     } else {
       setHeight("h-0 hidden");

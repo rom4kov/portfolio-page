@@ -8,6 +8,8 @@ import PageLinks from "../../components/page-links/page-links.component";
 import SocialMediaLinks from "../../components/social-media/social-media.component";
 import PagePreviews from "../../components/page-previews/page-previews.component.tsx";
 
+import useWindowSize from "../../hooks/useWindowSize.tsx";
+
 export type previewProps = string;
 
 export type Page = "about" | "projects" | "resume";
@@ -30,6 +32,8 @@ const Navigation = ({ location }: NavigationProps) => {
   const { currentUser } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  const windowWidth = useWindowSize();
 
   const handleLinkClicked = (to: Page) => {
     setLinkClicked(true);
@@ -61,17 +65,17 @@ const Navigation = ({ location }: NavigationProps) => {
 
   useEffect(() => {
     if (location === "/") {
-      setTitlePosition("xl:top-72");
+      setTitlePosition("md:top-82 xl:top-72");
     } else if (location === "/about") {
       setTimeout(() => {
-        setTitlePosition("xl:top-28");
-      }, 500);
+        setTitlePosition("md:top-44 xl:top-28");
+      }, windowWidth >= 768 && windowWidth <= 1268 ? 1000 : 500);
     } else {
       setTimeout(() => {
-        setTitlePosition("xl:top-20");
-      }, 500);
+        setTitlePosition("md:top-20");
+      }, windowWidth >= 768 && windowWidth <= 1268 ? 1000 : 500);
     }
-  }, [location]);
+  }, [location, windowWidth]);
 
   return (
     <Fragment>
@@ -80,17 +84,23 @@ const Navigation = ({ location }: NavigationProps) => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </div>
       )}
-      <div className="relative overflow-y-auto h-48 w-full xl:w-fit xl:h-fit flex items-start flex-none">
+      <div className="relative overflow-y-auto h-48 w-full md:w-44 xl:w-fit xl:h-fit 
+                      flex items-start flex-none">
         <div
-          className={`fixed h-fit xl:h-[30vh] xl:flex xl:flex-col items-start xl:items-start ${titlePosition} transition-all duration-500 overflow-y-scroll`}
+          className={`fixed h-fit xl:h-[30vh] xl:flex xl:flex-col items-start 
+                      xl:items-start ${titlePosition} transition-all duration-500 
+                      overflow-y-scroll`}
         >
-          <div
-            className="animated-gradient"
-          >
+          <div className="animated-gradient">
             <Link to="/">
-              <div className="text-4xl xl:text-6xl text-left font-extrabold mb-1 xl:mb-2">Roman Kowert</div>
+              <div
+                className="text-4xl xl:text-6xl text-left font-extrabold mb-1
+                md:mb-3 xl:mb-2"
+              >
+                Roman {windowWidth >= 768 && windowWidth <= 1268 && <br />} Kowert
+              </div>
               <div className="text-lg xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
-                Fullstack Web Engineer
+                Fullstack Web {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
               </div>
             </Link>
           </div>

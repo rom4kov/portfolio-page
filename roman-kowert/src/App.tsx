@@ -32,19 +32,19 @@ function App() {
 
   useEffect(() => {
     if (location.pathname === "/") {
-      setContentPosition("xl:top-64");
+      setContentPosition("md:top-[30vh] xl:top-64");
       setTimeout(() => {
-        setMaxWidth("md:max-w-screen-md xl:max-w-[950px]")
+        setMaxWidth("md:max-w-[77.5vw] xl:max-w-[950px]")
       }, 500);
     } else if (location.pathname === "/about") {
-      setMaxWidth("max-w-screen-xl")
+      setMaxWidth("md:max-w-[90vw] xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition(`xl:top-20`);
+        setContentPosition(`md:top-36 xl:top-20`);
       }, 500);
     } else {
       setMaxWidth("xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition("xl:top-12");
+        setContentPosition("md:top-12");
       }, 500);
     }
   }, [location]);
@@ -53,7 +53,8 @@ function App() {
     <div>
       <div
         id="app-root"
-        className={`h-screen xl:h-fit flex flex-col md:flex-row xl:justify-between ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
+        className={`h-screen md:h-fit flex flex-col md:flex-row xl:justify-between 
+              ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
       >
         <GlowCursor />
         <Routes>
