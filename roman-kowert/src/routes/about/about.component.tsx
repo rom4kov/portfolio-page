@@ -26,7 +26,7 @@ const About: React.FC<AboutProps> = ({ location }) => {
   return (
     <div className="flex" id="about-route-container">
       <div
-        className={`${height} xl:w-[40rem] text-lg text-left xl:text-right xl:leading-10 overflow-y-scroll`}
+        className={`${height} xl:w-[40rem] text-lg ml:text-xl xl:text-lg text-left xl:text-right xl:leading-10 overflow-y-scroll`}
         dangerouslySetInnerHTML={{ __html: value?.body }}
       />
     </div>

@@ -32,7 +32,7 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
   return (
     <div
       id="projects-container"
-      className="xl:h-[60vh] xl:h-full w-[82vw] xl:w-[35.5rem]"
+      className="xl:h-[60vh] xl:h-full w-[82vw] md:w-full xl:w-[35.5rem]"
     >
       <div
         className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 xl:pb-16`}

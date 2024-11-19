@@ -15,6 +15,7 @@ import DashboardProjects from "./routes/dashboard/dashboard-projects";
 import DashboardResume from "./routes/dashboard/dashboard-resume";
 
 import useScrollRestoration from "./hooks/useScrollRestoration";
+import useWindowSize from "./hooks/useWindowSize";
 
 import FlashMessage from "./components/flash-message/flash.component";
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
@@ -30,6 +31,8 @@ function App() {
 
   const location = useLocation();
 
+  const windowWidth = useWindowSize();
+
   useEffect(() => {
     if (location.pathname === "/") {
       setContentPosition("md:top-[30vh] xl:top-64");
@@ -39,21 +42,21 @@ function App() {
     } else if (location.pathname === "/about") {
       setMaxWidth("md:max-w-[90vw] xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition(`md:top-36 xl:top-20`);
+        setContentPosition(`md:top-36 ml:top-56 xl:top-20`);
       }, 500);
     } else {
-      setMaxWidth("xl:max-w-screen-xl")
+      setMaxWidth("md:max-w-screen-md xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition("md:top-12");
+        setContentPosition("md:top-2 xl:top-12");
       }, 500);
     }
-  }, [location]);
+  }, [location, windowWidth]);
 
   return (
     <div>
       <div
         id="app-root"
-        className={`h-screen md:h-fit flex flex-col md:flex-row xl:justify-between 
+        className={`h-screen md:h-fit flex flex-col md:flex-row md:justify-between 
               ${contentPosition} ${maxWidth} transition-all duration-500 relative`}
       >
         <GlowCursor />

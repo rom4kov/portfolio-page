@@ -167,6 +167,11 @@ button:focus-visible {
 
 .project-description p {
   overflow-wrap: anywhere;
+
+  @media screen and (min-width: 768px) and (max-width: 1290px) {
+    font-size: 0.9rem;
+    line-height: 1.475;
+  }
 }
 
 .occupation-list p {

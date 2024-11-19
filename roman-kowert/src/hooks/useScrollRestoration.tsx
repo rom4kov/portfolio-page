@@ -29,7 +29,6 @@ const useScrollRestoration = (fromRoute: RegExp, toRoute: string) => {
   useEffect(() => {
     const handleScroll = () => {
       scrollPositions.set(pathname, window.scrollY);
-      console.log(scrollPositions);
     };
 
     window.addEventListener("scroll", handleScroll);

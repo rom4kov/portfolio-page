@@ -85,6 +85,13 @@ export default {
         500: "#ff007c",
       },
     },
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'ml': '820px',
+      'lg': '1024px',
+      'xl': '1280px',
+    },
     extend: {
       keyframes: {
         gradientMove: {

@@ -66,9 +66,9 @@ const ProjectPreview = ({
     <div className="w-full xl:w-[32.5rem] items-start bg-tokyo-4-300 xl:bg-transparent xl:hover:bg-tokyo-4-300 p-4 xl:p-4 rounded-lg">
       <div className="mt-0 w-[75vw] xl:w-full flex gap-2">
         <div
-          className={`${setFeatures && "xl:w-full"} flex flex-row justify-between w-[72vw] xl:w-full`}
+          className={`${setFeatures && "xl:w-full"} flex flex-row justify-between w-[72vw] md:w-[65vw] ml:w-[60vw] xl:w-full`}
         >
-          <h3 className="text-left text-sm xl:text-lg w-[15rem] xl:w-[25rem] font-bold">
+          <h3 className="text-left text-sm xl:text-lg w-[15rem] md:w-[55vw] xl:w-[25rem] font-bold">
             {project.title}
           </h3>
           {setFeatures && (
@@ -118,16 +118,16 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 me-2 w-[40vw] xl:w-[24%] h-[4.5rem] xl:h-full opacity-80 rounded float-left xl:float-none"
+          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] xl:w-[24%] h-[4.5rem] xl:h-full opacity-80 rounded float-left xl:float-none"
         />
         <div
-          className="w-[95%] xl:w-[75%] text-start text-xs xl:text-[1rem] xl:leading-5 hyphens-auto text-pretty project-description"
+          className="w-[95%] md:w-[64vw] ml:w-[60vw] xl:w-[75%] text-start text-xs xl:text-[1rem] xl:leading-5 hyphens-auto text-pretty project-description"
           dangerouslySetInnerHTML={{
             __html: project.description,
           }}
         />
       </div>
-      <div className="w-[75vw] xl:w-[79.5%] mt-3 xl:ms-[24%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
+      <div className="w-[75vw] md:w-[65vw] xl:w-[79.5%] mt-3 xl:ms-[24%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span
