@@ -119,12 +119,12 @@ const Navigation = ({ location }: NavigationProps) => {
           <div className="animated-gradient">
             <Link to="/">
               <div
-                className="text-4xl xl:text-6xl text-left font-extrabold mb-1
+                className="text-4xl lg:text-5xl xl:text-6xl text-left font-extrabold mb-1
                 md:mb-3 xl:mb-2"
               >
                 Roman {windowWidth >= 768 && windowWidth <= 1268 && <br />} Kowert
               </div>
-              <div className="text-lg xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
+              <div className="text-lg lg:text-xl xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
                 Fullstack Web {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
               </div>
             </Link>

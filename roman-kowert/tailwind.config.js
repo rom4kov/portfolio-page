@@ -91,6 +91,12 @@ export default {
       'ml': '820px',
       'lg': '1024px',
       'xl': '1280px',
+      'sp': {
+        'raw': '(min-height: 1300px)'
+      },
+      'ls': {
+        'raw': '(min-width: 800px) and (max-height: 800)'
+      }
     },
     extend: {
       keyframes: {
