@@ -3,7 +3,7 @@ import { previewState } from "../../routes/navigation/navigation.component";
 
 import projectsPreview from "../../assets/images/projects_preview_mono.png";
 import asciiAvatar from "../../assets/images/ascii-art_edit4.png";
-import resumePreview from "../../assets/images/resume_preview3.png";
+import resumePreview from "../../assets/images/resume7.png";
 
 type PagePreviewProps = {
   outlet: ReactNode;
@@ -21,7 +21,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
   }, [location]);
 
   return (
-    <div className="relative w-[85vw] lg:w-[45vw] xl:w-[40vw] 2xl:w-[30vw] lg:ms-8 xl:ms-0 pb-8 flex-grow xl:flex-none flex justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible">
+    <div className="relative w-[85vw] lg:w-[65vw] xl:w-[40vw] 2xl:w-[30vw] lg:ms-8 xl:ms-0 pb-8 xl:flex-none flex justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible">
       <div className="relative invisible h-[25vh]"></div>
       <div
         className={

@@ -112,7 +112,7 @@ const Navigation = ({ location }: NavigationProps) => {
       <div className="relative overflow-y-auto h-48 w-full md:w-44 xl:w-fit xl:h-fit 
                       flex items-start flex-none">
         <div
-          className={`fixed h-fit xl:h-[30vh] xl:flex xl:flex-col items-start 
+          className={`fixed h-fit xl:h-[35vh] xl:flex xl:flex-col items-start 
                       xl:items-start transition-all duration-500 
                       overflow-y-scroll`}
         >

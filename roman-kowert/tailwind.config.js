@@ -95,7 +95,7 @@ export default {
         'raw': '(min-height: 1300px)'
       },
       'ls': {
-        'raw': '(min-width: 800px) and (max-height: 800)'
+        'raw': '(min-width: 800px) and (max-height: 800px)'
       }
     },
     extend: {

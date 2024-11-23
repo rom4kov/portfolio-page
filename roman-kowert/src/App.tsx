@@ -37,17 +37,17 @@ function App() {
     if (location.pathname === "/") {
       setContentPosition("md:top-[30vh] lg:top-[33vh] xl:top-64");
       setTimeout(() => {
-        setMaxWidth("md:max-w-[77.5vw] lg:max-w-[65vw] xl:max-w-[950px] sp:max-w-[65vw]")
+        setMaxWidth("md:max-w-[77.5vw] lg:max-w-[65vw] xl:max-w-[950px] sp:max-w-[65vw] ls:top-28")
       }, 500);
     } else if (location.pathname === "/about") {
       setMaxWidth("md:max-w-[90vw] xl:max-w-screen-xl")
       setTimeout(() => {
-        setContentPosition(`md:top-36 ml:top-56 xl:top-20 sp:top-72`);
+        setContentPosition(`md:top-36 ml:top-56 xl:top-20 sp:top-72 ls:top-3`);
       }, 500);
     } else {
       setMaxWidth("md:max-w-screen-md lg:max-w-[90vw] xl:max-w-screen-xl sp:max-w-[90vw]")
       setTimeout(() => {
-        setContentPosition("md:top-2 xl:top-12");
+        setContentPosition("md:top-2 xl:top-12 ls:top-3");
       }, 500);
     }
   }, [location, windowWidth]);
