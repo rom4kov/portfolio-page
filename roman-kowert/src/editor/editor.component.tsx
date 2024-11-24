@@ -10,13 +10,16 @@ type TextContentProps = {
 const TextEditor = ({ setTextContent, initialValue }: TextContentProps) => {
   const editorRef = useRef<TinyMCEEditor | null>(null);
   const [value, setValue] = useState<string>(initialValue);
+  const tinymceScriptSrc = process.env.REACT_APP_FLASK_ENV === 'development'
+    ? '../../public/tinymce/tinymce.min.js'
+    : '/tinymce/tinymce.min.js';
 
   return (
     <>
       <Editor
         value={value}
-        tinymceScriptSrc="../../public/tinymce/tinymce.min.js"
-        licenseKey="your-license-key"
+        tinymceScriptSrc={tinymceScriptSrc}
+        licenseKey="gpl"
         onInit={(_evt, editor) => (editorRef.current = editor)}
         onEditorChange={(newValue, editor) => {
           setValue(newValue);

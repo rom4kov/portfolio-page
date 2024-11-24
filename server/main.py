@@ -24,11 +24,20 @@ ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
 
 app = Flask(__name__)
-cors = CORS(
-    app,
-    resources={r"/api/*": {"origins": "http://localhost:5173"}},
-    supports_credentials=True,
-)
+env = os.environ.get("FLASK_ENV", "production")
+
+if env == "development":
+    cors = CORS(
+        app,
+        resources={r"/api/*": {"origins": "http://localhost:5173"}},
+        supports_credentials=True,
+    )
+else:
+    cors = CORS(
+        app,
+        resources={r"/api/*": {"origins": ["https://www.romankowert.de", "https://romankowert.de"]}},
+        supports_credentials=True,
+    )
 
 load_dotenv()
 
