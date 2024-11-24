@@ -3,7 +3,7 @@ name: Deploy to Linode
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   deploy:
@@ -16,10 +16,11 @@ jobs:
       uses: appleboy/ssh-action@v0.1.9
       with:
         host: ${{ secrets.LINODE_IP }}
+        port: ${{ secrets.LINODE_PORT }}
         username: ${{ secrets.LINODE_USER }}
         key: ${{ secrets.LINODE_SSH_KEY }}
         script: |
-          cd /path/to/project
+          cd /apps/portfolio-page
           git pull origin main
           docker-compose down
           docker-compose up --build -d
