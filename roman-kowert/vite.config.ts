@@ -13,7 +13,6 @@ export default defineConfig(({ mode }) => {
       port: 4173,
       strictPort: true,
       host: true,
-      origin: "http://0.0.0.0:4173",
     },
   }
 })
