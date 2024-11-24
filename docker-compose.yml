@@ -7,6 +7,8 @@ services:
       dockerfile: Dockerfile
     ports:
       - "4173:4173" # Maps container port 3000 to host port 80
+    env_file:
+      - ./roman-kowert/.env.production
     volumes:
       - ./roman-kowert:/app
     networks:
