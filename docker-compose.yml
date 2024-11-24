@@ -1,0 +1,31 @@
+version: "3.8"
+
+services:
+  frontend:
+    build:
+      context: ./roman-kowert
+      dockerfile: Dockerfile
+    ports:
+      - "4173:4173" # Maps container port 3000 to host port 80
+    volumes:
+      - ./roman-kowert:/app
+    networks:
+      - app-network
+
+  backend:
+    build:
+      context: ./server
+      dockerfile: Dockerfile
+    ports:
+      - "5000:5000" # Maps container port 5000 to host port 5000
+    env_file:
+      - .env.production
+    volumes:
+      - ./server:/app
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
