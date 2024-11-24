@@ -4,6 +4,8 @@ import { UserContext } from "../../contexts/user.context";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type UserData = {
   user_email: string;
 };
@@ -31,7 +33,7 @@ const SignIn = ({ loginData, setLoginData }: SignInProps) => {
       password: loginData.password,
     };
 
-    const response = await axios.post("https://www.romankowert.de/api/login", data, {
+    const response = await axios.post(`${apiUrl}/api/login`, data, {
       headers: {
         "Content-Type": "application/json",
       },

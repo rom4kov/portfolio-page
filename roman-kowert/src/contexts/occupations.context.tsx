@@ -7,6 +7,8 @@ import {
 } from "react";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export type Occupation = {
   id: number;
   title: string;
@@ -37,7 +39,7 @@ export const OccupationsProvider = ({
   useEffect(() => {
     const getOccupations = async () => {
       const response = await axios.get(
-        "https://www.romankowert.de/api/get-occupations",
+        `${apiUrl}/api/get-occupations`,
       );
       setOccupations(response.data.occupations);
     };

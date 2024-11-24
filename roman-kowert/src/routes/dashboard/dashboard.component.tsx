@@ -3,6 +3,8 @@ import { Outlet } from "react-router-dom";
 import { UserContext } from "../../contexts/user.context";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 import DashboardNav from "../../components/dashboard-nav/dashboard-nav.component";
 
 const Dashboard = () => {
@@ -10,7 +12,7 @@ const Dashboard = () => {
 
   const handleLogout: () => Promise<void> = async () => {
     const response = await axios.post(
-      "https://www.romankowert.de/api/logout",
+      `${apiUrl}/api/logout`,
       {},
       {
         withCredentials: true,

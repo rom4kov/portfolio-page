@@ -13,6 +13,8 @@ import { getImageURL } from "../../utils/image-util";
 import ViewDetailsSVG from "../../assets/svg/view-details.tsx";
 import ExternalLinkSVG from "../../assets/svg/external-link.tsx";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type ProjectProps = {
   project: Project;
   handleEditForm?: (project: Project) => void;
@@ -38,7 +40,7 @@ const ProjectPreview = ({
 
   const deleteProject: deleteFunc = async (project_id: number) => {
     const response = (await axios.post<AxiosResponse>(
-      "https://www.romankowert.de/api/delete-project",
+      `${apiUrl}/api/delete-project`,
       { id: project_id },
     )) as Result;
 

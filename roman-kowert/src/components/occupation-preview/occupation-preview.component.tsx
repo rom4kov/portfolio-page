@@ -5,6 +5,8 @@ import { FlashContext } from "../../contexts/flash.context";
 
 import axios, { AxiosResponse } from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type OccupationProps = {
   occupation: Occupation;
   handleEditForm?: (occupation: Occupation) => void;
@@ -28,7 +30,7 @@ const OccupationPreview = ({
 
   const deleteOccupation: deleteFunc = async (occupation_id: number) => {
     const response = (await axios.post<AxiosResponse>(
-      "https://www.romankowert.de/api/delete-occupation",
+      `${apiUrl}/api/delete-occupation`,
       { id: occupation_id },
     )) as Result;
 

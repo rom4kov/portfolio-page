@@ -22,6 +22,8 @@ import {
 
 import { FlashContext } from "../../contexts/flash.context";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type LongFormProps = {
   projectId: number;
   setLongForm: Dispatch<SetStateAction<boolean>>;
@@ -57,8 +59,8 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "https://www.romankowert.de/api/update-feature"
-      : "https://www.romankowert.de/api/create-feature";
+      ? `${apiUrl}/api/update-feature`
+      : `${apiUrl}/api/create-feature`;
 
     const formData = new FormData();
 

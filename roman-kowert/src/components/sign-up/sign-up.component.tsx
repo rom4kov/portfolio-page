@@ -2,6 +2,8 @@ import { Dispatch, SetStateAction, FormEvent, FormEventHandler } from "react";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type UserData = {
   user_email: string;
 };
@@ -23,7 +25,7 @@ const SignUp = ({ setLoginData, loginData, setCurrentUser }: SignUpProps) => {
   ) => {
     event.preventDefault();
 
-    const response = await axios.post("https://www.romankowert.de/api/register", {
+    const response = await axios.post(`${apiUrl}/api/register`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

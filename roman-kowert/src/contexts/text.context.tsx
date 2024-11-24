@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export type TextElement = {
   id: number,
   body: string,
@@ -26,8 +28,8 @@ export const TextProvider = ({ children }: TextProviderChildren ) => {
 
   useEffect(() => {
     const getTexts = async () => {
-      const response = await axios.get("https://www.romankowert.de/api/get-texts")
-      console.log(response);
+      const response = await axios.get(`${apiUrl}/api/get-texts`)
+      console.log(response)
       setTexts(response.data.texts);
     }
     getTexts();

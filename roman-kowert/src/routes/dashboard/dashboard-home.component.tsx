@@ -9,6 +9,8 @@ import TextEditor from "../../editor/editor.component";
 
 import { FlashContext } from "../../contexts/flash.context";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type Result = AxiosResponse & {
   data: {
     success: boolean;
@@ -34,7 +36,7 @@ const DashboardHome = () => {
 
     try {
       const response = await axios.post<AxiosResponse>(
-        "https://www.romankowert.de/api/update-text",
+        `${apiUrl}/api/update-text`,
         data,
       ) as Result;
 

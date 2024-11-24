@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
-const apiUrl = process.env.REACT_APP_API_URL;
 
+const apiUrl = process.env.REACT_APP_API_URL;
 
 import SignUp from "../../components/sign-up/sign-up.component";
 import SignIn from "../../components/sign-in/sign-in.component";
@@ -27,7 +27,7 @@ const Admin = () => {
   useEffect(() => {
     setLoading(true);
     const getUsers = async () => {
-      const response = await axios.get("https://www.romankowert.de/api/users");
+      const response = await axios.get(`${apiUrl}/api/users`);
       setUsers(response.data.users);
       setLoading(false);
     };

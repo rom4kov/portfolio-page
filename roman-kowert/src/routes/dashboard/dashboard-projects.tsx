@@ -12,6 +12,8 @@ import { FlashContext } from "../../contexts/flash.context";
 import DashboardForm from "../../components/dashboard/dashboard-form.component";
 import ProjectPreview from "../../components/dashboard/project.component";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type Result = AxiosResponse & {
   data: {
     success: boolean;
@@ -42,8 +44,8 @@ const DashboardProjects = () => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "https://www.romankowert.de/api/update-project"
-      : "https://www.romankowert.de/api/create-project";
+      ? `${apiUrl}/api/update-project`
+      : `${apiUrl}/api/create-project`;
 
     const keywords = textContent.keywords.join(",");
 

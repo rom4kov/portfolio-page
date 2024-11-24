@@ -1,6 +1,8 @@
 import { useState, useEffect, createContext, Dispatch, SetStateAction } from "react";
 import axios from "axios";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 export type Feature = {
   id: number,
   title: string,
@@ -38,7 +40,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderChildren) => {
 
   useEffect(() => {
     const getProjects = async () => {
-      const response = await axios.get("https://www.romankowert.de/api/get-projects")
+      const response = await axios.get(`${apiUrl}/api/get-projects`)
       setProjects(response.data.projects);
     }
     getProjects();

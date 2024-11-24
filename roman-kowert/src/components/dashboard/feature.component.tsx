@@ -8,6 +8,8 @@ import { FlashContext } from "../../contexts/flash.context";
 
 import GoBackSVG from "../../assets/svg/arrow-go-back";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type deleteFunc = (feature_id: number) => Promise<void>;
 
 type Result = AxiosResponse & {
@@ -32,7 +34,7 @@ const ProjectFeature = ({
 
   const deleteFeature: deleteFunc = async (feature_id: number) => {
     const response = (await axios.post<AxiosResponse>(
-      "https://www.romankowert.de/api/delete-feature",
+      `${apiUrl}/api/delete-feature`,
       { id: feature_id },
     )) as Result;
 

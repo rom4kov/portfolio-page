@@ -12,6 +12,8 @@ import OccupationForm from "../../components/dashboard/occupation-form.component
 
 import { FlashContext } from "../../contexts/flash.context";
 
+const apiUrl = process.env.REACT_APP_API_URL;
+
 type Result = AxiosResponse & {
   data: {
     success: boolean;
@@ -45,8 +47,8 @@ const DashboardResume = () => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "https://www.romankowert.de/api/update-occupation"
-      : "https://www.romankowert.de/api/create-occupation";
+      ? `${apiUrl}/api/update-occupation`
+      : `${apiUrl}/api/create-occupation`;
 
     const formData = new FormData();
     formData.append("id", String(textContent.id));
