@@ -38,7 +38,7 @@ export const ProjectsProvider = ({ children }: ProjectsProviderChildren) => {
 
   useEffect(() => {
     const getProjects = async () => {
-      const response = await axios.get("http://localhost:5000/api/get-projects")
+      const response = await axios.get("https://www.romankowert.de/api/get-projects")
       setProjects(response.data.projects);
     }
     getProjects();

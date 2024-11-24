@@ -42,8 +42,8 @@ const DashboardProjects = () => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-project"
-      : "http://localhost:5000/api/create-project";
+      ? "https://www.romankowert.de/api/update-project"
+      : "https://www.romankowert.de/api/create-project";
 
     const keywords = textContent.keywords.join(",");
 

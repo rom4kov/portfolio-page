@@ -36,7 +36,7 @@ const DashboardAbout = () => {
 
     try {
       const response = (await axios.post<AxiosResponse>(
-        "http://localhost:5000/api/update-text",
+        "https://www.romankowert.de/api/update-text",
         data,
       )) as Result;
 

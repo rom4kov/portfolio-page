@@ -10,7 +10,7 @@ const Dashboard = () => {
 
   const handleLogout: () => Promise<void> = async () => {
     const response = await axios.post(
-      "http://localhost:5000/api/logout",
+      "https://www.romankowert.de/api/logout",
       {},
       {
         withCredentials: true,

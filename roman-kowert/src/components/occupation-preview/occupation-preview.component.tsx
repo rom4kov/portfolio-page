@@ -28,7 +28,7 @@ const OccupationPreview = ({
 
   const deleteOccupation: deleteFunc = async (occupation_id: number) => {
     const response = (await axios.post<AxiosResponse>(
-      "http://localhost:5000/api/delete-occupation",
+      "https://www.romankowert.de/api/delete-occupation",
       { id: occupation_id },
     )) as Result;
 

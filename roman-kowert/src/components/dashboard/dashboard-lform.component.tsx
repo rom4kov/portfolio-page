@@ -57,8 +57,8 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-feature"
-      : "http://localhost:5000/api/create-feature";
+      ? "https://www.romankowert.de/api/update-feature"
+      : "https://www.romankowert.de/api/create-feature";
 
     const formData = new FormData();
 

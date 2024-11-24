@@ -26,7 +26,7 @@ export const TextProvider = ({ children }: TextProviderChildren ) => {
 
   useEffect(() => {
     const getTexts = async () => {
-      const response = await axios.get("http://localhost:5000/api/get-texts")
+      const response = await axios.get("https://www.romankowert.de/api/get-texts")
       console.log(response);
       setTexts(response.data.texts);
     }

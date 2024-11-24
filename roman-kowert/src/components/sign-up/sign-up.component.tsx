@@ -23,7 +23,7 @@ const SignUp = ({ setLoginData, loginData, setCurrentUser }: SignUpProps) => {
   ) => {
     event.preventDefault();
 
-    const response = await axios.post("http://localhost:5000/api/register", {
+    const response = await axios.post("https://www.romankowert.de/api/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

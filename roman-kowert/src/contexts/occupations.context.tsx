@@ -37,7 +37,7 @@ export const OccupationsProvider = ({
   useEffect(() => {
     const getOccupations = async () => {
       const response = await axios.get(
-        "http://localhost:5000/api/get-occupations",
+        "https://www.romankowert.de/api/get-occupations",
       );
       setOccupations(response.data.occupations);
     };

@@ -45,8 +45,8 @@ const DashboardResume = () => {
 
     const isUpdating = textContent.id !== 0;
     const url = isUpdating
-      ? "http://localhost:5000/api/update-occupation"
-      : "http://localhost:5000/api/create-occupation";
+      ? "https://www.romankowert.de/api/update-occupation"
+      : "https://www.romankowert.de/api/create-occupation";
 
     const formData = new FormData();
     formData.append("id", String(textContent.id));
