@@ -33,6 +33,9 @@ function App() {
 
   const windowWidth = useWindowSize();
 
+  console.log('API URL:', process.env.REACT_APP_API_URL);
+
+
   useEffect(() => {
     if (location.pathname === "/") {
       setContentPosition("md:top-[30vh] lg:top-[33vh] xl:top-64");
