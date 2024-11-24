@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Fragment } from "react/jsx-runtime";
 import { Link, Outlet, useNavigate } from "react-router-dom";
 import { useContext } from "react";
@@ -27,7 +27,6 @@ const Navigation = ({ location }: NavigationProps) => {
   });
 
   const [linkClicked, setLinkClicked] = useState(false);
-  const [titlePosition, setTitlePosition] = useState("top-12");
 
   const { currentUser } = useContext(UserContext);
 
@@ -62,45 +61,6 @@ const Navigation = ({ location }: NavigationProps) => {
   const unblockPreview = () => {
     setLinkClicked(false);
   };
-
-  useEffect(() => {
-    let timeOut;
-    switch (true) {
-      case windowWidth < 768:
-        timeOut = 500;
-        break;
-      case windowWidth >= 768:
-        timeOut = 100;
-        break;
-      case windowWidth >= 820:
-        timeOut = 1000;
-        break;
-      case windowWidth >= 1280:
-        timeOut = 500;
-        break;
-      default:
-        timeOut = 500;
-        console.log(timeOut);
-        break;
-    }
-    console.log(windowWidth);
-    if (location === "/") {
-      console.log("to home");
-      setTimeout(() => {
-        setTitlePosition("md:top-82 xl:top-72");
-      }, 500);
-    } else if (location === "/about") {
-      console.log("to about");
-      setTimeout(() => {
-        setTitlePosition("md:top-44 ml:top-60 xl:top-28");
-      }, windowWidth >= 768 && windowWidth <= 1268 ? 500 : 500);
-    } else {
-      console.log("to projects");
-      setTimeout(() => {
-        setTitlePosition("md:top-10 xl:top-20");
-      }, windowWidth >= 768 && windowWidth <= 1268 ? 500 : 500);
-    }
-  }, [location, windowWidth]);
 
   return (
     <Fragment>
