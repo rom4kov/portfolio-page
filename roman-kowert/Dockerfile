@@ -2,9 +2,9 @@ FROM node:18.20
 
 WORKDIR /app
 
-COPY package.json package-lock.json postinstall.js ./
+COPY package.json package-lock.json ./
 
-RUN npm install
+RUN npm install && node ./postinstall.js
 
 COPY . .
 
