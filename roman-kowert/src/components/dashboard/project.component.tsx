@@ -120,7 +120,7 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[4.5rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
+          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[5.5rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
         />
         <div
           className="w-[95%] md:w-[64vw] ml:w-[60vw] lg:w-[60vw] xl:w-[75%] text-start xl:leading-5 hyphens-auto text-pretty project-description"

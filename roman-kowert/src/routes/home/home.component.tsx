@@ -6,6 +6,9 @@ import {
 } from "../../contexts/text.context";
 
 const Home = () => {
+  const port = process.env.REACT_APP_ENV === "development" ? 5173 : 4173;
+  console.log(process.env.REACT_APP_ENV);
+  console.log(port);
   const { texts } = useContext<TextContextType>(TextContext);
   const value = texts.find((obj) => {
     return obj.page === "home";

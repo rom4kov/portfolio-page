@@ -12,6 +12,4 @@ RUN npm run build
 
 EXPOSE 4173
 
-RUN npm install -g serve
-
 CMD ["npm", "run", "dev"]
