@@ -1,9 +1,9 @@
-import React from "react";
 import { SquareLoader } from "react-spinners";
-import { useLoading } from "../contexts/LoadingContext";
+// import { useLoading } from "../contexts/LoadingContext";
 
 const LoadingSpinner = () => {
-  const { isLoading } = useLoading();
+  // const { isLoading } = useLoading();
+  const isLoading = true;
 
   return (
     isLoading && (
