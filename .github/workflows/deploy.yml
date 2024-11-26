@@ -23,7 +23,7 @@ jobs:
             cd apps/portfolio-page/
             git pull origin master
             docker compose down
-            docker compose up --build -d
+            docker compose up --build --no-cache -d
 
       - name: Clean up Docker
         run: docker system prune -af --volumes
