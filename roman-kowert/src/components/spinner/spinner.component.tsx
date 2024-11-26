@@ -1,14 +1,23 @@
+import { useContext } from "react";
 import { SquareLoader } from "react-spinners";
-// import { useLoading } from "../contexts/LoadingContext";
+import { TextContext } from "../../contexts/text.context";
 
 const LoadingSpinner = () => {
-  // const { isLoading } = useLoading();
-  const isLoading = true;
+  const { loading } = useContext(TextContext);
 
   return (
-    isLoading && (
-      <div style={{ display: "flex", justifyContent: "center", alignItems: "center", height: "100vh" }}>
-        <SquareLoader color="#4A90E2" loading={true} size={50} />
+    loading && (
+      <div
+        style={{
+          position: "absolute",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          width: "100vw",
+          height: "100vh",
+        }}
+      >
+        <SquareLoader color="#3b4261" loading={true} size={150} />
       </div>
     )
   );

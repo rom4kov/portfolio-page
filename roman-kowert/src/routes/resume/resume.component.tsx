@@ -35,15 +35,16 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       id="resume-route-container"
       className={`${height} xl:w-full transition-all relative flex flex-col gap-8 xl:mb-16 ml-auto overflow-y-scroll xl:overflow-y-visible`}
     >
-      <div className="w-full flex justify-between -mb-5">
+      <div className="w-full flex justify-between -mb-6 xl:-mb-2">
         <h2 className="text-start text-lg xl:text-2xl font-bold xl:-mb-2">
           Recent Work as Freelancer
         </h2>
         <a
-          className="w-12 xl:w-20 text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
+          className="w-16 xl:w-48 text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
           href={CV_PDF}
+          title="Download CV as PDF"
         >
-          Dowload as PDF
+          Dowload CV as PDF
         </a>
       </div>
       {work.reverse().map((work) => {

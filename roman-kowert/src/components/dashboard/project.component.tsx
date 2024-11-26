@@ -68,7 +68,7 @@ const ProjectPreview = ({
     <div className="w-full xl:w-[32.5rem] items-start bg-tokyo-4-300 xl:bg-transparent xl:hover:bg-tokyo-4-300 p-4 xl:p-4 rounded-lg">
       <div className="w-full flex gap-2">
         <div
-          className={`flex flex-row justify-between md:w-full`}
+          className={`flex flex-row justify-between w-full`}
         >
           <h3 className="flex-grow text-left text-sm lg:text-lg font-bold">
             {project.title}
@@ -120,7 +120,7 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[5.5rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
+          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[5.5rem] ml:h-[4.85rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
         />
         <div
           className="w-[95%] md:w-[64vw] ml:w-[60vw] lg:w-[60vw] xl:w-[75%] text-start xl:leading-5 hyphens-auto text-pretty project-description"
@@ -129,12 +129,12 @@ const ProjectPreview = ({
           }}
         />
       </div>
-      <div className="w-[75vw] md:w-[65vw] lg:w-full xl:w-[79.5%] mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
+      <div className="w-[75vw] md:w-[65vw] ml:w-[60vw] lg:w-[77%] xl:w-[79.5%] mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span
               key={idx}
-              className="py-[0.1rem] px-[0.4rem] xl:py-1 xl:px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-[0.6rem] lg:text-[0.75rem] xl:text-[0.7rem] font-bold"
+              className="py-[0.15rem] px-[0.5rem] xl:py-1 xl:px-3 bg-tokyo-15-100 text-tokyo-15-500 rounded-xl text-[0.7rem] lg:text-[0.75rem] xl:text-[0.7rem] font-bold"
             >
               {keyword}
             </span>

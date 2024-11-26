@@ -12,9 +12,6 @@ export default defineConfig(({ mode }) => {
       "process.env.REACT_APP_API_URL": JSON.stringify(env.REACT_APP_API_URL),
       "process.env.REACT_APP_ENV": JSON.stringify(env.REACT_APP_ENV),
     },
-    build: {
-      minify: "terser"
-    },
     plugins: [
       react(),
       compression({

@@ -73,8 +73,7 @@ const Navigation = ({ location }: NavigationProps) => {
                       flex items-start flex-none">
         <div
           className={`fixed h-fit xl:h-[35vh] xl:flex xl:flex-col items-start 
-                      xl:items-start transition-all duration-500 
-                      overflow-y-scroll`}
+                      xl:items-start transition-all duration-500`}
         >
           <div className="animated-gradient">
             <Link to="/">

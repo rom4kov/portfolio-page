@@ -29,7 +29,6 @@ export const TextProvider = ({ children }: TextProviderChildren ) => {
   useEffect(() => {
     const getTexts = async () => {
       const response = await axios.get(`${apiUrl}/api/get-texts`)
-      console.log(response)
       setTexts(response.data.texts);
     }
     getTexts();
