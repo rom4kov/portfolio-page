@@ -1,4 +1,4 @@
-import { useState, useEffect, useContext } from "react";
+import { useState, useEffect } from "react";
 import { Routes, Route, useLocation } from "react-router-dom";
 import Navigation from "./routes/navigation/navigation.component";
 import Home from "./routes/home/home.component";
@@ -19,7 +19,6 @@ import useWindowSize from "./hooks/useWindowSize";
 
 import FlashMessage from "./components/flash-message/flash.component";
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
-import LoadingSpinner from "./components/spinner/spinner.component";
 
 import "./App.css";
 
