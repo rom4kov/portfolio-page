@@ -25,6 +25,7 @@ type TextProviderChildren = {
 
 export const TextProvider = ({ children }: TextProviderChildren ) => {
   const [texts, setTexts] = useState<TextElement[] | []>([]);
+  console.log(texts);
 
   useEffect(() => {
     const getTexts = async () => {
