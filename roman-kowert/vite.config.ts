@@ -16,7 +16,7 @@ export default defineConfig(({ mode }) => {
       react(),
       {
         name: "custom-index-html",
-        async transformIndexHtml(html) {
+        transformIndexHtml(html) {
           return html.replace(
             `<div id="animation-wrapper">`,
             `<div class="loading-cube"></div>
