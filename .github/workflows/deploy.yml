@@ -25,3 +25,5 @@ jobs:
             docker compose down
             docker compose up --build -d
 
+      - name: Clean up Docker
+        run: docker system prune -af --volumes
