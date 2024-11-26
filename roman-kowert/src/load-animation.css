@@ -14,16 +14,15 @@
   }
 }
 
-/* Styles for the loading cube */
 .loading-cube {
   width: 150px;
   height: 150px;
-  background-color: #3b4261; /* Change color as desired */
+  background-color: #3b4261; 
   margin: auto;
   position: absolute;
   top: calc(50% - 100px);
   left: calc(51% - 100px);
-  animation: cubeRotate 3s infinite linear; /* Adjust duration as needed */
+  animation: cubeRotate 3s infinite linear; 
 
   @media screen and (max-width: 600px) {
     left: 30%;
