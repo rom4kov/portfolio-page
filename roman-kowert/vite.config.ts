@@ -13,10 +13,10 @@ export default defineConfig(({ mode }) => {
       "process.env.REACT_APP_ENV": JSON.stringify(env.REACT_APP_ENV),
     },
     plugins: [
-      react(),
       {
-        name: "custom-index-html",
+        name: "html-transform",
         transformIndexHtml(html) {
+          console.log("Transform hook running on:\n\n", html)
           return html.replace(
             `<div id="animation-wrapper">`,
             `<div class="loading-cube"></div>
@@ -24,6 +24,7 @@ export default defineConfig(({ mode }) => {
           );
         },
       },
+      react(),
       compression({
         algorithm: "gzip", // Use gzip compression
         filename: "[path][base].gz", // Set the filename template for compressed files
