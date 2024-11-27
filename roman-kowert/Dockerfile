@@ -6,9 +6,15 @@ RUN adduser --disabled-password appuser
 
 USER appuser
 
-COPY --chown=appuser:appuser package.json package-lock.json postinstall.js ./
+RUN whoami
+
+COPY package.json package-lock.json postinstall.js ./
+
+RUN whoami
 
 RUN npm install
+
+RUN whoami
 
 COPY --chown=appuser:appuser . .
 
