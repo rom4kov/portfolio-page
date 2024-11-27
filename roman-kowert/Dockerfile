@@ -2,15 +2,19 @@ FROM node:18.20
 
 WORKDIR /app
 
-RUN chown -R node:node /app/dist
+RUN adduser --disabled-password appuser
 
-COPY package.json package-lock.json postinstall.js ./
+USER appuser
 
-RUN npm install
+COPY --chown=appuser:appuser package.json package-lock.json postinstall.js ./
 
-COPY . .
+RUN --chown=appuser:appuser npm install
 
-RUN npm run build
+COPY --chown=appuser:appuser . .
+
+RUN whoami
+
+RUN --chown=appuser:appuser npm run build
 
 EXPOSE 4173
 
