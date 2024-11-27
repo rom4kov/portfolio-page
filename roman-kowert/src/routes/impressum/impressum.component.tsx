@@ -1,6 +1,6 @@
 const Impressum = () => {
   return (
-    <div>Impressum</div>
+    <div>Impressum Test</div>
   )
 }
 
