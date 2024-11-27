@@ -9,6 +9,7 @@ services:
       - ./roman-kowert/.env.production
     volumes:
       - ./roman-kowert:/app
+      - /app/dist
     networks:
       - app-network
 
