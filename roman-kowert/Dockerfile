@@ -1,8 +1,8 @@
 FROM node:18.20
 
-USER node
-
 WORKDIR /app
+
+RUN chown -R node:node /app
 
 COPY package.json package-lock.json postinstall.js ./
 
