@@ -8,6 +8,8 @@ RUN npm install
 
 COPY . .
 
+RUN whoami > whoami.txt
+
 RUN npm run build
 
 EXPOSE 4173
