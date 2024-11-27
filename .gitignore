@@ -4,6 +4,7 @@ server/__pycache__
 server/.env
 
 roman-kowert/node_modules/
+roman-kowert/dist/
 # roman-kowert/public/tinymce
 
 materials/
