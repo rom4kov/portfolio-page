@@ -2,7 +2,7 @@ FROM node:18.20
 
 WORKDIR /app
 
-RUN chown -R node:node /app
+RUN chown -R node:node /app/dist
 
 COPY package.json package-lock.json postinstall.js ./
 
