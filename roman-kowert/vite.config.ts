@@ -16,7 +16,6 @@ export default defineConfig(({ mode }) => {
       {
         name: "html-transform",
         transformIndexHtml(html) {
-          console.log("Transform hook running on:\n\n", html)
           return html.replace(
             `<div id="animation-wrapper">`,
             `<div class="loading-cube"></div>
