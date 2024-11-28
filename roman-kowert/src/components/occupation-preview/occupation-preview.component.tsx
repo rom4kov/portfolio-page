@@ -72,6 +72,9 @@ const OccupationPreview = ({
               </div>
             )}
           </div>
+          {occupation.occupation_type === "course" && (
+            <p className="me-auto mb-2 text-sm font-bold">Instructor(s): {occupation.instructor}</p>
+          )}
           <div
             className="w-full text-start text-sm"
             dangerouslySetInnerHTML={{

@@ -20,6 +20,9 @@ const OccupationForm = ({
   setDescription,
 }: OccupationFormProps) => {
   const [arrowUp, setArrowUp] = useState<boolean>(false);
+  const [showInstructorField, setShowInstructorField] = useState(
+    textContent.occupation_type === "course" ? true : false,
+  );
 
   return (
     <div className="w-full flex-grow overflow-y-auto px-4">
@@ -66,7 +69,6 @@ const OccupationForm = ({
               onFocus={() => setArrowUp(true)}
               onBlur={() => setArrowUp(false)}
               onChange={(evt) => {
-                console.log(evt.target.value);
                 setTextContent((prev) => {
                   return {
                     ...prev,
@@ -74,21 +76,42 @@ const OccupationForm = ({
                   };
                 });
                 setArrowUp(false);
+                if (evt.target.value === "course") {
+                  setShowInstructorField(true);
+                } else {
+                  setShowInstructorField(false);
+                }
               }}
             >
               <option value="work">Work</option>
               <option value="course">Course</option>
-              <span>a</span>
             </select>
           </div>
         </div>
+        {showInstructorField && (
+          <input
+            type="text"
+            id="instructor"
+            placeholder="Instructor"
+            className="py-1 px-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
+            value={textContent.instructor}
+            onChange={(evt) =>
+              setTextContent((prev) => {
+                return {
+                  ...prev,
+                  instructor: evt.target.value,
+                };
+              })
+            }
+          />
+        )}
         <TextEditor
           setTextContent={setDescription}
           initialValue={textContent.description}
         />
         <div className="mb-4 flex flex-none justify-start gap-3">
           <button type="submit" className="py-2 h-8 leading-3">
-            {textContent.id === 0 ? "Add project" : "Update"}
+            {textContent.id === 0 ? "Add occupation" : "Update"}
           </button>
           <button
             onClick={() => setShowEditForm(false)}

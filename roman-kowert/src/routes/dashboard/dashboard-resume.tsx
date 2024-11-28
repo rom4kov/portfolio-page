@@ -26,6 +26,7 @@ const initialState: Occupation = {
   time_period: "time period",
   title: "occupation title",
   description: "occupation description",
+  instructor: "instructor",
 };
 
 const DashboardResume = () => {
@@ -56,6 +57,7 @@ const DashboardResume = () => {
     formData.append("time_period", textContent.time_period);
     formData.append("description", description);
     formData.append("occupation_type", textContent.occupation_type);
+    formData.append("instructor", textContent.instructor ?? "");
 
     const response = (await axios.post<AxiosResponse>(url, formData)) as Result;
 
@@ -71,6 +73,7 @@ const DashboardResume = () => {
                     time_period: textContent.time_period,
                     description: description,
                     occupation_type: textContent.occupation_type,
+                    instructor: textContent.instructor
                   }
                 : occupation,
             );
@@ -83,6 +86,7 @@ const DashboardResume = () => {
                 time_period: textContent.time_period,
                 description: description,
                 occupation_type: textContent.occupation_type,
+                instructor: textContent.instructor
               },
             ];
           }
@@ -125,9 +129,10 @@ const DashboardResume = () => {
               className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible occupation-list"
               id="projects-edit-content"
             >
-              {work.map((work) => {
+              {work.map((work, idx) => {
                 return (
                   <OccupationPreview
+                    key={idx}
                     occupation={work}
                     setOccupation={setOccupations}
                     handleEditForm={handleEditForm}
@@ -142,10 +147,11 @@ const DashboardResume = () => {
               className="w-full mt-3 flex flex-col items-start gap-5 overflow-y-visible"
               id="projects-edit-content"
             >
-              {education.map((work) => {
+              {education.map((course, idx) => {
                 return (
                   <OccupationPreview
-                    occupation={work}
+                    key={idx}
+                    occupation={course}
                     setOccupation={setOccupations}
                     handleEditForm={handleEditForm}
                   />

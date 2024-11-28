@@ -84,7 +84,7 @@ const Navigation = ({ location }: NavigationProps) => {
                 Roman {windowWidth >= 768 && windowWidth <= 1268 && <br />} Kowert
               </div>
               <div className="text-lg lg:text-xl xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
-                Fullstack Web {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
+                Full Stack Web {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
               </div>
             </Link>
           </div>

@@ -15,6 +15,7 @@ export type Occupation = {
   description: string;
   time_period: string;
   occupation_type: string;
+  instructor?: string;
 };
 
 export type OccupationsContextType = {

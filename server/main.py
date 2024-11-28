@@ -372,6 +372,7 @@ def create_occupation():
         time_period=request.form.get("time_period"),
         description=request.form.get("description"),
         occupation_type=request.form.get("occupation_type"),
+        instructor=request.form.get("instructor")
     )
     try:
         db.session.add(new_occuptation)
@@ -402,6 +403,7 @@ def update_occupation():
             occupation_to_update.title = request.form.get("title")
             occupation_to_update.time_period = request.form.get("time_period")
             occupation_to_update.description = request.form.get("description")
+            occupation_to_update.instructor = request.form.get("instructor")
             db.session.commit()
             return jsonify(success=True)
         return jsonify(success=False, error="Occupation data could not be found."), 400
