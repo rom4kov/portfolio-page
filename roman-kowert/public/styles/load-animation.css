@@ -24,8 +24,9 @@
   left: calc(51% - 100px);
   animation: cubeRotate 3s infinite linear; 
 
-  @media screen and (max-width: 600px) {
-    left: 30%;
+  @media screen and (max-width: 1024px) {
+    top: 40%;
+    left: 42.5%;
   }
 
   @media screen and (max-width: 820px) {
@@ -33,9 +34,8 @@
     left: 40%;
   }
 
-  @media screen and (max-width: 1024px) {
-    top: 40%;
-    left: 42.5%;
+  @media screen and (max-width: 600px) {
+    left: 30%;
   }
 }
 
