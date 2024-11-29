@@ -76,10 +76,8 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
                 {course.time_period}
               </span>
               <div className="xl:w-3/4">
-                <h3 className="text-base xl:text-lg font-bold -mt-1 mb-2 xl:mb-1">{course.title}</h3>
-                {course.occupation_type === "course" && (
-                  <p className="me-auto mb-2 text-sm font-bold">Instructor(s): {course.instructor}</p>
-                )}
+                <h3 className="text-base !leading-6 xl:text-lg font-bold -mt-1 mb-2 xl:mb-2">{course.title}</h3>
+                <p className="me-auto mb-2 text-sm font-bold">Instructor(s): {course.instructor}</p>
                 <div
                   className="courses-list text-base"
                   dangerouslySetInnerHTML={{ __html: course.description }}

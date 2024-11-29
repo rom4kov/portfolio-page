@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request, make_response, redirect, url_for
+from flask import Flask, jsonify, request, make_response, redirect, url_for, send_from_directory
 from flask_cors import CORS
 from sqlalchemy.exc import NoResultFound
 from sqlalchemy.orm import joinedload
@@ -19,7 +19,7 @@ from werkzeug.utils import secure_filename
 import os
 from dotenv import load_dotenv
 
-UPLOAD_FOLDER = "../roman-kowert/src/assets/images/"
+UPLOAD_FOLDER = os.path.join(os.getcwd(), 'uploads')
 ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
 
@@ -423,6 +423,11 @@ def delete_occupation():
         return jsonify(success=True)
     except Exception as e:
         return jsonify(success=True, message=e)
+
+
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
 
 
 if __name__ == "__main__":

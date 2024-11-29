@@ -79,7 +79,7 @@ const ProjectFeature = ({
           </div>
         )}
         {handleEditForm && (
-          <div className="ms-auto">
+          <div className="ms-auto flex">
             <button
               className="me-2 h-6 p-1 leading-[0.9rem] text-xs"
               onClick={() => handleEditForm(feature)}
