@@ -1,6 +1,6 @@
 server/.venv/
 server/instance/
-server/__pycache__
+server/__pycache__/
 server/.env
 
 roman-kowert/node_modules/

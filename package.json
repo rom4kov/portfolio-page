@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@peterek/vite-plugin-favicons": "^2.0.0",
     "@types/node": "^22.9.3"
   }
 }
