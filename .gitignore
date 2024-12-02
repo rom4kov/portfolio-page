@@ -2,6 +2,7 @@ server/.venv/
 server/instance/
 server/__pycache__/
 server/.env
+server/uploads/
 
 roman-kowert/node_modules/
 roman-kowert/dist/

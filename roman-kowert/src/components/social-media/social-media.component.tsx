@@ -44,7 +44,7 @@ const SocialMediaLinks = () => {
       <li className="mr-5 text-xs shrink-0">
         <a
           className="block opacity-70 hover:opacity-100 transition-opacity"
-          href="https://instagram.com/ruinsofreason"
+          href="https://www.instagram.com/rkowert_dev/"
           target="_blank"
           rel="noreferrer noopener"
           aria-label="Instagram (opens in a new tab)"
