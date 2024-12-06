@@ -21,7 +21,7 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
   }, [location]);
 
   return (
-    <div className="relative w-[85vw] lg:w-[65vw] xl:w-[25rem] lg:ms-8 xl:ms-0 pb-8 xl:flex-none flex justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible">
+    <div className="relative w-[85vw] lg:w-[65vw] xl:w-[25rem] lg:ms-8 xl:ms-0 pb-8 xl:flex-none flex justify-center sm:justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible">
       <div className="relative invisible h-[25vh]"></div>
       <div
         className={
