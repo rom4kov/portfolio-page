@@ -72,8 +72,8 @@ const Navigation = ({ location }: NavigationProps) => {
         </div>
       )}
       <div
-        className={`relative overflow-y-auto h-52 w-full md:w-44 xl:w-fit xl:h-fit flex items-start flex-none transition-[background]
-                    ${isScrolled ? 'w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]' : ''}`}
+        className={`relative overflow-y-auto h-52 xl:h-fit flex items-start flex-none transition-[background]
+                    ${isScrolled ? "w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]" : "w-full md:w-44 xl:w-fit"}`}
       >
         <div
           className={`fixed h-fit xl:h-[35vh] xl:flex xl:flex-col items-start 
