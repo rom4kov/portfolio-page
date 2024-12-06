@@ -1,4 +1,10 @@
-import { useState, useEffect, ReactNode } from "react";
+import {
+  useState,
+  useEffect,
+  ReactNode,
+  Dispatch,
+  SetStateAction,
+} from "react";
 import { previewState } from "../../routes/navigation/navigation.component";
 
 import projectsPreview from "../../assets/images/projects_preview_mono.png";
@@ -9,19 +15,35 @@ type PagePreviewProps = {
   outlet: ReactNode;
   showPreview: previewState;
   location: string;
+  setIsScrolled: Dispatch<SetStateAction<boolean>>;
 };
 
-const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
+const PagePreviews = ({
+  outlet,
+  showPreview,
+  location,
+  setIsScrolled,
+}: PagePreviewProps) => {
   const [previewPostion, setPreviewPosition] = useState("");
 
   useEffect(() => {
     if (location === "/") setPreviewPosition("absolute pointer-events-none");
-    else if (location === "/about") setPreviewPosition("fixed pointer-events-none");
+    else if (location === "/about")
+      setPreviewPosition("fixed pointer-events-none");
     else setPreviewPosition("fixed pointer-events-none");
   }, [location]);
 
   return (
-    <div className="relative w-[85vw] lg:w-[65vw] xl:w-[25rem] lg:ms-8 xl:ms-0 pb-8 xl:flex-none flex justify-center sm:justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible">
+    <div
+      className="relative w-[85vw] lg:w-[65vw] xl:w-[25rem] -mt-[2rem] sm:mt-0 lg:ms-8 xl:ms-0 pb-8 xl:flex-none flex justify-center sm:justify-end items-start inline-block overflow-y-auto xl:overflow-y-visible"
+      onScroll={(evt) => {
+        if (evt.currentTarget.scrollTop > 0) {
+          setIsScrolled(true);
+        } else {
+          setIsScrolled(false);
+        }
+      }}
+    >
       <div className="relative invisible h-[25vh]"></div>
       <div
         className={
@@ -61,7 +83,11 @@ const PagePreviews = ({ outlet, showPreview, location }: PagePreviewProps) => {
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={resumePreview} alt="" className="w-[17rem] h-[17rem] mt-2 opacity-75" />
+        <img
+          src={resumePreview}
+          alt=""
+          className="w-[17rem] h-[17rem] mt-2 opacity-75"
+        />
       </div>
     </div>
   );

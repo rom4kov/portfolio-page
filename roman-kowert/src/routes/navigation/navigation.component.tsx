@@ -26,6 +26,8 @@ const Navigation = ({ location }: NavigationProps) => {
     resume: false,
   });
 
+  const [isScrolled, setIsScrolled] = useState(false);
+
   const [linkClicked, setLinkClicked] = useState(false);
 
   const { currentUser } = useContext(UserContext);
@@ -69,8 +71,10 @@ const Navigation = ({ location }: NavigationProps) => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </div>
       )}
-      <div className="relative overflow-y-auto h-48 w-full md:w-44 xl:w-fit xl:h-fit 
-                      flex items-start flex-none">
+      <div
+        className={`relative overflow-y-auto h-52 w-full md:w-44 xl:w-fit xl:h-fit flex items-start flex-none transition-[background]
+                    ${isScrolled ? 'w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]' : ''}`}
+      >
         <div
           className={`fixed h-fit xl:h-[35vh] xl:flex xl:flex-col items-start 
                       xl:items-start transition-all duration-500`}
@@ -81,10 +85,12 @@ const Navigation = ({ location }: NavigationProps) => {
                 className="text-4xl lg:text-5xl xl:text-6xl text-left font-extrabold mb-1
                 md:mb-3 xl:mb-2"
               >
-                Roman {windowWidth >= 768 && windowWidth <= 1268 && <br />} Kowert
+                Roman {windowWidth >= 768 && windowWidth <= 1268 && <br />}{" "}
+                Kowert
               </div>
               <div className="text-lg lg:text-xl xl:text-2xl text-left mb-3 xl:mb-8 font-normal">
-                Full Stack Web {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
+                Full Stack Web{" "}
+                {windowWidth >= 768 && windowWidth <= 1268 && <br />} Developer
               </div>
             </Link>
           </div>
@@ -101,6 +107,7 @@ const Navigation = ({ location }: NavigationProps) => {
         outlet={<Outlet />}
         showPreview={showPreview}
         location={location}
+        setIsScrolled={setIsScrolled}
       />
     </Fragment>
   );
