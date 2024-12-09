@@ -71,7 +71,6 @@ const Navigation = ({ location }: NavigationProps) => {
           <Link to="/admin/dashboard">Dashboard</Link>
         </div>
       )}
-      <div className="absolute top-0 left-0">{windowWidth}</div>
       <div
         className={`relative overflow-y-auto h-52 xl:h-fit flex items-start flex-none transition-[background]
                     ${isScrolled ? "w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]" : "w-full md:w-44 xl:w-fit"}`}
