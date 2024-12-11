@@ -127,7 +127,7 @@ const ProjectPreview = ({
               : ""
           }
           alt="thumbnail of web site project landing page"
-          className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[5.5rem] ml:h-[4.85rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
+          className="mt-1 me-2 md:me-3 w-[11rem] xl:w-[24%] h-[5.5rem] md:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
         />
         <div
           className="w-full text-start xl:leading-5 hyphens-auto text-pretty project-description"
@@ -136,7 +136,7 @@ const ProjectPreview = ({
           }}
         />
       </div>
-      <div className="w-full mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
+      <div className="w-full xl:w-[77.5%] mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span
