@@ -126,7 +126,6 @@ const DashboardProjects = () => {
 
   const handleEditForm = (project: Project) => {
     setShowEditForm(true);
-    console.log(project.project_type);
     setTextContent(project);
     setDescription(project.description);
   };
