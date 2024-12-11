@@ -3,6 +3,9 @@ server/instance/
 server/__pycache__/
 server/.env
 server/uploads/
+server/portfolio-backup.db
+server/portfolio.sql
+server/portfolio_backup.db
 
 roman-kowert/node_modules/
 roman-kowert/dist/

@@ -40,7 +40,6 @@ const SignIn = ({ loginData, setLoginData }: SignInProps) => {
       withCredentials: true,
     });
     setCurrentUser(response.data);
-    console.log(response.data);
     const userData = JSON.stringify(response.data);
     localStorage.setItem("user", userData);
     navigate("/admin/dashboard");
