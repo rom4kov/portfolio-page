@@ -99,7 +99,14 @@ const ProjectPreview = ({
           <div className="mt-1 ms-auto flex">
             <button
               className="me-1 h-6 p-1 leading-[0.9rem] text-xs"
-              onClick={() => handleEditForm(project)}
+              onClick={() => { 
+                if (project.project_type === "null") {
+                  project.project_type = "work";
+                  console.log(project.project_type);
+                }
+                console.log(project.project_type);
+                handleEditForm(project) 
+              }}
             >
               Edit
             </button>
@@ -112,7 +119,7 @@ const ProjectPreview = ({
           </div>
         )}
       </div>
-      <div className="mt-2 w-[75vw] xl:w-full xl:flex gap-3 lg:gap-1">
+      <div className="mt-2 w-full xl:flex gap-3 lg:gap-1">
         <img
           src={
             project.img_file_path !== undefined
@@ -123,13 +130,13 @@ const ProjectPreview = ({
           className="mt-1 me-2 md:me-3 w-[40vw] md:w-[22vw] lg:w-[20%] xl:w-[24%] h-[5.5rem] ml:h-[4.85rem] lg:h-[4.75rem] xl:h-full opacity-80 rounded float-left"
         />
         <div
-          className="w-[95%] md:w-[64vw] ml:w-[60vw] lg:w-[60vw] xl:w-[75%] text-start xl:leading-5 hyphens-auto text-pretty project-description"
+          className="w-full text-start xl:leading-5 hyphens-auto text-pretty project-description"
           dangerouslySetInnerHTML={{
             __html: project.description,
           }}
         />
       </div>
-      <div className="w-[75vw] md:w-[65vw] ml:w-[60vw] lg:w-[77%] xl:w-[79.5%] mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
+      <div className="w-full mt-3 xl:ms-[23%] mb-1 xl:ps-5 flex gap-2 flex-wrap">
         {project.keywords.map((keyword, idx) => {
           return (
             <span

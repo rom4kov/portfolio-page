@@ -2,6 +2,7 @@ import React, { useState, useEffect, useContext } from "react";
 import { Outlet } from "react-router-dom";
 
 import {
+  Project,
   ProjectsContext,
   ProjectsContextType,
 } from "../../contexts/projects.context";
@@ -17,6 +18,12 @@ interface ProjectsProps {
 const Projects: React.FC<ProjectsProps> = ({ location }) => {
   const [height, setHeight] = useState("h-0 hidden");
   const { projects } = useContext<ProjectsContextType>(ProjectsContext);
+  const work_projects: Project[] = projects.filter((obj) => {
+    return obj.project_type === "work";
+  });
+  const personal_projects: Project[] = projects.filter((obj) => {
+    return obj.project_type === "project";
+  });
   const [projectFeatures, setProjectFeatures] = useState<Feature[] | []>([]);
 
   useEffect(() => {
@@ -35,9 +42,26 @@ const Projects: React.FC<ProjectsProps> = ({ location }) => {
       className="xl:h-[60vh] xl:h-full w-[82vw] md:w-full xl:w-[35.5rem]"
     >
       <div
-        className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-center gap-8 xl:pb-16`}
+        className={`${height} w-full xl:w-[35rem] transition-all relative flex flex-col items-start gap-8 xl:pb-16`}
       >
-        {projects.map((project) => {
+        <h3 className="mt-1 xl:ms-4 -mb-6 text-xl text-end text-[#ffffffb5] font-bold">
+          WORK EXPERIENCE
+        </h3>
+        <hr className="text-tokyo-15-500 w-full xl:w-[30.5rem] xl:ms-4"/>
+        {work_projects.map((project) => {
+          return (
+            <ProjectPreview
+              key={project.id}
+              project={project}
+              setFeatures={setProjectFeatures}
+            />
+          );
+        })}
+        <h3 className="mt-8 xl:ms-4 -mb-6 text-xl text-start text-[#ffffffb5] font-bold">
+          PERSONAL PROJECTS
+        </h3>
+        <hr className="text-tokyo-15-500 w-full xl:w-[30.5rem] xl:ms-4"/>
+        {personal_projects.map((project) => {
           return (
             <ProjectPreview
               key={project.id}

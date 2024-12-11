@@ -66,6 +66,7 @@ const DashboardForm = ({
                 onFocus={() => setArrowUp(true)}
                 onBlur={() => setArrowUp(false)}
                 onChange={(evt) => {
+                  console.log(evt.target.value);
                   setTextContent((prev) => {
                     return {
                       ...prev,
