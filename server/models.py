@@ -27,12 +27,13 @@ class TextContent(db.Model):  # type: ignore[name-defined]
 class Project(db.Model):  # type: ignore[name-defined]
     __tablename__ = "project_table"
 
-    def __init__(self, title, keywords, img_file_path, url, description) -> None:
+    def __init__(self, title, keywords, img_file_path, url, description, project_type) -> None:
         self.title = title
         self.keywords = keywords
         self.img_file_path = img_file_path
         self.url = url
         self.description = description
+        self.project_type = project_type
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True)
     title: Mapped[str] = mapped_column(String(255), nullable=False, unique=True)
@@ -41,6 +42,7 @@ class Project(db.Model):  # type: ignore[name-defined]
     url: Mapped[str] = mapped_column(String(255), nullable=False)
     description: Mapped[str] = mapped_column(String(255), nullable=True, unique=True)
     features: Mapped[List["Feature"]] = relationship(back_populates="project")
+    project_type: Mapped[str] = mapped_column(String(255), nullable=True)
 
     def to_dict(self):
         return {
@@ -53,6 +55,7 @@ class Project(db.Model):  # type: ignore[name-defined]
             "features": sorted(
                 (feature.to_dict() for feature in self.features), key=lambda f: f["id"]
             ),
+            "project_type": self.project_type,
         }
 
 

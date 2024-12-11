@@ -31,6 +31,7 @@ const DashboardForm = ({
   setDescription,
 }: DashboardFormProps) => {
   const [longForm, setLongForm] = useState(false);
+  const [arrowUp, setArrowUp] = useState<boolean>(false);
 
   return (
     <div className="w-full flex-grow overflow-x-hidden overflow-y-auto">
@@ -41,20 +42,44 @@ const DashboardForm = ({
           onSubmit={handleSubmit}
           encType="mulipart/form-data"
         >
-          <input
-            type="text"
-            id="title"
-            className="py-1 ps-2 text-sm bg-tokyo-1-500 border rounded-lg w-full"
-            value={textContent.title}
-            onChange={(evt) =>
-              setTextContent((prev) => {
-                return {
-                  ...prev,
-                  title: evt.target.value,
-                };
-              })
-            }
-          />
+          <div className="flex flex-row gap-3 w-full">
+            <input
+              type="text"
+              id="title"
+              className="py-1 ps-2 text-sm bg-tokyo-1-500 border rounded-lg flex-grow"
+              value={textContent.title}
+              onChange={(evt) =>
+                setTextContent((prev) => {
+                  return {
+                    ...prev,
+                    title: evt.target.value,
+                  };
+                })
+              }
+            />
+            <div
+              className={`border rounded-lg w-[5rem] ${arrowUp ? "after:content-['⌃'] after:translate-y-[0.5rem]" : "after:content-['⌄'] after:translate-y-[0.2rem]"} after:absolute after:text-md after:text-tokyo-14-500 after:w-3 after:h-3 after:leading-4 after:translate-x-[-1.25rem]`}
+            >
+              <select
+                className="py-1 px-2 text-sm align-middle bg-tokyo-1-500 border-none rounded-lg w-full appearance-none"
+                value={textContent.project_type}
+                onFocus={() => setArrowUp(true)}
+                onBlur={() => setArrowUp(false)}
+                onChange={(evt) => {
+                  setTextContent((prev) => {
+                    return {
+                      ...prev,
+                      project_type: evt.target.value,
+                    };
+                  });
+                  setArrowUp(false);
+                }}
+              >
+                <option value="work">Work</option>
+                <option value="project">Project</option>
+              </select>
+            </div>
+          </div>
           <input
             type="text"
             id="keywords"

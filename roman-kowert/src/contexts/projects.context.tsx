@@ -19,6 +19,7 @@ export type Project = {
   url: string,
   description: string,
   features: Feature[]
+  project_type: string,
 }
 
 export type ProjectsContextType = {

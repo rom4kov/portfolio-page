@@ -195,6 +195,7 @@ def create_project():
 
     url = request.form.get("url")
     description = request.form.get("description")
+    project_type = request.form.get("project_type")
 
     file = request.files.get("img_file")
     file_path = None
@@ -210,6 +211,7 @@ def create_project():
         img_file_path=filename,
         url=url,
         description=description,
+        project_type=project_type,
     )
 
     try:
@@ -247,6 +249,7 @@ def update_project():
 
     url = request.form.get("url")
     description = request.form.get("description")
+    project_type = request.form.get("project_type")
 
     file = request.files.get("img_file")
     filename = ""
@@ -268,6 +271,7 @@ def update_project():
         project.keywords = keywords
         project.url = url
         project.description = description
+        project.project_type = project_type
         db.session.commit()
         return jsonify(
             success=True, title=project.title, description=project.description

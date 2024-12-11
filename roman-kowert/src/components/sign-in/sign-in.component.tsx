@@ -51,6 +51,7 @@ const SignIn = ({ loginData, setLoginData }: SignInProps) => {
       <h1 className="text-center mb-5">Login</h1>
       <form action="" className="flex flex-col gap-2" onSubmit={handleSignIn}>
         <input
+          className="text-[#000000]"
           type="email"
           name="email"
           onChange={(evt) => {
@@ -63,6 +64,7 @@ const SignIn = ({ loginData, setLoginData }: SignInProps) => {
           }}
         />
         <input
+          className="text-[#000000]"
           type="password"
           name="password"
           onChange={(evt) => {

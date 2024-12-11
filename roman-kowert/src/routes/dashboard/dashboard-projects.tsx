@@ -28,6 +28,7 @@ const initialState = {
   url: "website url",
   description: "description",
   features: [],
+  project_type: "work"
 };
 
 const DashboardProjects = () => {
@@ -55,6 +56,7 @@ const DashboardProjects = () => {
     formData.append("keywords", keywords);
     formData.append("url", textContent.url);
     formData.append("description", description);
+    formData.append("project_type", textContent.project_type);
 
     if (file) {
       formData.append("img_file", file);
@@ -81,6 +83,7 @@ const DashboardProjects = () => {
                     url: textContent.url,
                     description,
                     features: [],
+                    project_type: textContent.project_type,
                   }
                 : project,
             );
@@ -95,6 +98,7 @@ const DashboardProjects = () => {
                 url: textContent.url,
                 description,
                 features: [],
+                project_type: textContent.project_type,
               },
             ];
           }
