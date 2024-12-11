@@ -40,9 +40,6 @@ const DashboardProjects = () => {
     useContext<ProjectsContextType>(ProjectsContext);
   const { setFlash, setShowAlert } = useContext(FlashContext);
 
-  console.log(initialState);
-  console.log(textContent);
-
   const handleSubmit: FormEventHandler = async (evt) => {
     evt.preventDefault();
 

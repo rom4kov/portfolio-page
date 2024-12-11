@@ -151,7 +151,6 @@ const DashboardLongForm = ({ projectId, setLongForm }: LongFormProps) => {
     setShowEditForm(true);
     setTextContent(feature);
     setDescription(feature.description);
-    console.log(feature);
   };
 
   return (
