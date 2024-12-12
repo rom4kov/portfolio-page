@@ -35,12 +35,12 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       id="resume-route-container"
       className={`${height} xl:w-full xl:w-[35rem] transition-all relative flex flex-col gap-8 xl:mb-16 ml-auto overflow-y-auto xl:overflow-y-visible`}
     >
-      <div className="w-full xl:w-[35rem] relative flex gap-6 items-start justify-between -mb-6 xl:-mb-2">
-        <h3 className="mt-1 -mb-6 text-xl text-start text-[#ffffffb5] font-bold">
+      <div className="w-full -mb-6 xl:w-[35rem] relative flex gap-6 items-end xs:items-start justify-between">
+        <h3 className="mt-1 text-xl text-start text-[#ffffffb5] font-bold">
           RECENT WORK AS FREELANCER
         </h3>
         <a
-          className="w-16 xl:w-48 text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
+          className="w-16 xl:w-48 mb-[0.1rem] text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
           href={CV_PDF}
           title="Download CV as PDF"
         >
