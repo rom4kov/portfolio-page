@@ -33,12 +33,12 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   return (
     <div
       id="resume-route-container"
-      className={`${height} xl:w-full transition-all relative flex flex-col gap-8 xl:mb-16 ml-auto overflow-y-auto xl:overflow-y-visible`}
+      className={`${height} xl:w-full xl:w-[35rem] transition-all relative flex flex-col gap-8 xl:mb-16 ml-auto overflow-y-auto xl:overflow-y-visible`}
     >
-      <div className="w-full flex justify-between -mb-6 xl:-mb-2">
-        <h2 className="text-start text-lg xl:text-2xl font-bold xl:-mb-2">
-          Recent Work as Freelancer
-        </h2>
+      <div className="w-full xl:w-[35rem] relative flex gap-6 items-start justify-between -mb-6 xl:-mb-2">
+        <h3 className="mt-1 -mb-6 text-xl text-start text-[#ffffffb5] font-bold">
+          RECENT WORK AS FREELANCER
+        </h3>
         <a
           className="w-16 xl:w-48 text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
           href={CV_PDF}
@@ -47,6 +47,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
           Dowload CV as PDF
         </a>
       </div>
+      <hr className="text-tokyo-15-500 w-full xl:w-[35rem]" />
       {work.reverse().map((work, idx) => {
         return (
           <div
@@ -70,9 +71,10 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
           </div>
         );
       })}
-      <h2 className="text-start text-2xl font-bold mt-4 -mb-4 xl:-mb-2">
-        Courses {"&"} Education
-      </h2>
+      <h3 className="mt-12 -mb-6 text-xl text-start text-[#ffffffb5] font-bold">
+        COURSES {"&"} EDUCATION
+      </h3>
+      <hr className="text-tokyo-15-500 w-full xl:w-[35rem]" />
       {education.reverse().map((course, idx) => {
         return (
           <div

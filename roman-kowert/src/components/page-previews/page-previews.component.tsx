@@ -61,7 +61,7 @@ const PagePreviews = ({
             : `${previewPostion} opacity-0 transition-opacity duration-200`
         }
       >
-        <img src={asciiAvatar} alt="" className="w-[17.5rem] h-[17.5rem]" />
+        <img src={asciiAvatar} alt="" className="w-[17rem] h-[17rem]" />
       </div>
       <div
         className={
@@ -73,7 +73,7 @@ const PagePreviews = ({
         <img
           src={projectsPreview}
           alt=""
-          className="w-[22rem] h-[17rem] mt-2"
+          className="w-[21rem] h-[16rem] mt-2"
         />
       </div>
       <div
@@ -86,7 +86,7 @@ const PagePreviews = ({
         <img
           src={resumePreview}
           alt=""
-          className="w-[17rem] h-[17rem] mt-2 opacity-75"
+          className="w-[17rem] h-[17rem] mt-1 opacity-75"
         />
       </div>
     </div>
