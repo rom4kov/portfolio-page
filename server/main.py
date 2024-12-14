@@ -367,7 +367,7 @@ def delete_feature():
     try:
         feature_to_delete = db.session.execute(
             db.select(Feature).where(Feature.id == feature_id)
-        ).scalar()
+        ).scalar_one()
         db.session.delete(feature_to_delete)
         db.session.commit()
         return jsonify(success=True)

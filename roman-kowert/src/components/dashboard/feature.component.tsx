@@ -63,12 +63,15 @@ const ProjectFeature = ({
   };
 
   return (
-    <div key={feature.id} className="mt-3 text-start">
+    <div
+      key={feature.id}
+      className={`${position === 0 ? "mt-3" : "mt-8"} text-start`}
+    >
       <div className="mb-1 flex justify-between">
         {feature.title && (
           <div className="flex justify-between w-full">
             <h3
-              className={`mb-2 font-bold block ${position === 0 && "text-xl"}`}
+              className={`font-bold block ${position === 0 ? "text-xl mb-2" : "mb-1"}`}
             >
               {feature.title}
             </h3>
@@ -103,7 +106,10 @@ const ProjectFeature = ({
           alt=""
         />
       )}
-      <div className="text-sm xl:text-md" dangerouslySetInnerHTML={{ __html: feature.description }} />
+      <div
+        className="text-sm xl:text-md"
+        dangerouslySetInnerHTML={{ __html: feature.description }}
+      />
     </div>
   );
 };
