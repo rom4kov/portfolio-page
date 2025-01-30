@@ -9,6 +9,8 @@ server/portfolio_backup.db
 
 roman-kowert/node_modules/
 roman-kowert/dist/
+roman-kowert/.env
+roman-kowert/.env.production
 
 materials/
 node_modules/

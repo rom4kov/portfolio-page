@@ -37,7 +37,7 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
     >
       <div className="w-full -mb-6 xl:w-[35rem] relative flex gap-6 items-end xs:items-start justify-between">
         <h3 className="mt-1 text-xl text-start text-[#ffffffb5] font-bold">
-          RECENT WORK AS FREELANCER
+          RECENT WORK EXPERIENCE
         </h3>
         <a
           className="w-16 xl:w-48 mb-[0.1rem] text-[0.6rem] xl:text-xs text-right mt-2 hover:text-tokyo-15-500 transition-colors duration-200"
