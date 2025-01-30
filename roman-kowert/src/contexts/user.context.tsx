@@ -27,11 +27,13 @@ export const UserProvider = ({ children }: UserProviderChildren) => {
 
   useEffect(() => {
     setLoading(true);
+
     const loggedInUser = localStorage.getItem("user");
     if (loggedInUser) {
       const foundUser = JSON.parse(loggedInUser);
       setCurrentUser(foundUser);
     }
+
     setLoading(false);
   }, []);
 
