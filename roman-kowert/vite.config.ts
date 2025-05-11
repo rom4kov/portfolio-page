@@ -17,7 +17,8 @@ export default defineConfig(({ mode }) => {
         transformIndexHtml(html) {
           return html.replace(
             `<div id="animation-wrapper">`,
-            `<div class="loading-cube"></div>
+            `<div id="loading" class="loading-cube" alt></div>
+             <div class="loading-text"><p>Loading. please wait...</p></div>
              <div id="animation-wrapper">`
           );
         },

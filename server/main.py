@@ -77,7 +77,6 @@ def load_user(user_id):
     print(user_id)
     return db.get_or_404(User, user_id)
 
-
 @app.route("/api/users", methods=["GET"])
 def get_users():
     count = db.session.query(User).count()

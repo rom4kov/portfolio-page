@@ -3,12 +3,15 @@
   25% {
     transform: rotateX(180deg) rotateY(0);
   }
+
   50% {
     transform: rotateX(180deg) rotateY(180deg);
   }
+
   75% {
     transform: rotateX(0) rotateY(180deg);
   }
+
   100% {
     transform: rotateX(0) rotateY(0);
   }
@@ -17,12 +20,12 @@
 .loading-cube {
   width: 150px;
   height: 150px;
-  background-color: #3b4261; 
+  background-color: #3b4261;
   margin: auto;
   position: absolute;
   top: calc(50% - 100px);
   left: calc(51% - 100px);
-  animation: cubeRotate 3s infinite linear; 
+  animation: cubeRotate 3s infinite linear;
 
   @media screen and (max-width: 1024px) {
     top: 40%;
@@ -39,8 +42,22 @@
   }
 }
 
+.loading-text {
+  position: absolute;
+  bottom: 5rem;
+  left: 42%
+}
+
+.loading-text p {
+  color: #1f2335 !important;
+}
+
 /* Hide the cube when React is injected */
 body.react-injected .loading-cube {
+  display: none;
+}
+
+body.react-injected .loading-text {
   display: none;
 }
 
