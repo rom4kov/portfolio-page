@@ -73,7 +73,7 @@ const ProjectFeature = ({
               {feature.title}
             </h3>
             {position === 0 && (
-              <Link to="/projects" title="Go back to project overview">
+              <Link to="/projects" title="Go back to project overview" className="relative bottom-1">
                 <GoBackSVG />
               </Link>
             )}
