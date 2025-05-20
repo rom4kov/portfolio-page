@@ -102,6 +102,7 @@ const ProjectPreview = ({
               onClick={() => { 
                 if (project.project_type === "null") {
                   project.project_type = "work";
+                  console.log(project.project_type);
                 }
                 handleEditForm(project) 
               }}

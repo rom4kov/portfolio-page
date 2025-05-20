@@ -19,6 +19,7 @@ import useWindowSize from "./hooks/useWindowSize";
 
 import FlashMessage from "./components/flash-message/flash.component";
 import GlowCursor from "./components/glow-cursor/glow-cursor.component";
+import Footer from "./components/footer/footer.component";
 
 import "./App.css";
 
@@ -53,7 +54,7 @@ function App() {
   }, [location, windowWidth]);
 
   return (
-    <div>
+    <div className="relative h-[100vh]">
       <div
         id="app-root"
         className={`app-root h-screen md:h-fit flex flex-col md:flex-row md:justify-between 
@@ -95,6 +96,7 @@ function App() {
         </Routes>
       </div>
       <FlashMessage />
+      <Footer />
     </div>
   );
 }

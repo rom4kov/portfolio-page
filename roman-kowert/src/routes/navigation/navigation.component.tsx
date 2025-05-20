@@ -5,8 +5,8 @@ import { useContext } from "react";
 import { UserContext } from "../../contexts/user.context";
 
 import PageLinks from "../../components/page-links/page-links.component";
-import SocialMediaLinks from "../../components/social-media/social-media.component";
 import PagePreviews from "../../components/page-previews/page-previews.component.tsx";
+import SocialMediaLinks from "../../components/social-media/social-media.component";
 
 import useWindowSize from "../../hooks/useWindowSize.tsx";
 
@@ -73,7 +73,9 @@ const Navigation = ({ location }: NavigationProps) => {
       )}
       <div
         className={`relative overflow-y-auto h-52 xl:h-fit flex items-start flex-none transition-[background]
-                    ${isScrolled ? "w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]" : "w-full md:w-44 xl:w-fit"}`}
+                    ${isScrolled
+            ? "w-[100vw] bg-tokyo-2-500 p-[2rem] translate-x-[-2rem] translate-y-[-2rem]"
+            : "w-full md:w-44 xl:w-fit"}`}
       >
         <div
           className={`fixed h-fit xl:h-[35vh] xl:flex xl:flex-col items-start 
