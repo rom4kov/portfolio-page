@@ -23,7 +23,7 @@ ALLOWED_EXTENSIONS = {"txt", "pdf", "png", "jpg", "jpeg", "gif"}
 
 
 app = Flask(__name__)
-env = os.environ.get("FLASK_ENV", "production")
+env = os.environ.get("FLASK_ENV", "development")
 
 if env == "development":
     cors = CORS(
