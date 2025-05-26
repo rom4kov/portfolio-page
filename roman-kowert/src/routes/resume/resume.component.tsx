@@ -20,6 +20,12 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
     return obj.occupation_type === "course";
   });
 
+  const initialCertsArr: Array<boolean> = new Array(education.length).fill(false);
+
+  const [certsToShow, setCertsToShow] = useState(initialCertsArr);
+
+  console.log(certsToShow);
+
   useEffect(() => {
     if (location === "/resume") {
       setTimeout(() => {
@@ -29,6 +35,14 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
       setHeight("h-0 hidden");
     }
   }, [location]);
+
+  const handleShowCert = (idx: number) => {
+    setCertsToShow(prev => {
+      prev[idx] = !prev[idx];
+      return prev;
+    });
+    console.log(certsToShow);
+  }
 
   return (
     <div
@@ -95,7 +109,8 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
                 <div
                   className="courses-list text-base"
                   dangerouslySetInnerHTML={{ __html: course.description }}
-                ></div>
+                  onClick={() => { handleShowCert(idx) }}
+                />
               </div>
             </div>
           </div>

@@ -22,7 +22,7 @@ const Footer = () => {
         setPrevPath(location.pathname);
       }
     }
-  }, [location]);
+  }, [location, prevPath]);
 
   return (
     <footer
