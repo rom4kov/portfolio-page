@@ -1,8 +1,10 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect, useContext, useRef } from "react";
 import {
   Occupation,
   OccupationsContext,
 } from "../../contexts/occupations.context";
+
+import { getImageURL } from "../../utils/image-util";
 
 import CV_PDF from "../../assets/documents/Kowert_CV_Okt_2024_webdev_engl.pdf";
 
@@ -11,7 +13,7 @@ interface ResumeProps {
 }
 
 const Resume: React.FC<ResumeProps> = ({ location }) => {
-  const [height, setHeight] = useState("h-0 hidden");
+  const [height, setHeight] = useState<string>("h-0 hidden");
   const { occupations } = useContext(OccupationsContext);
   const work: Occupation[] = occupations.filter((obj) => {
     return obj.occupation_type === "work";
@@ -20,11 +22,16 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
     return obj.occupation_type === "course";
   });
 
-  const initialCertsArr: Array<boolean> = new Array(education.length).fill(false);
+  const [certsToShow, setCertsToShow] = useState<boolean[]>([]);
+  const cardRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const imgRefs = useRef<Array<HTMLDivElement | null>>([]);
 
-  const [certsToShow, setCertsToShow] = useState(initialCertsArr);
-
-  console.log(certsToShow);
+  useEffect(() => {
+    const initCertsToShow = new Array(
+      occupations.filter((obj) => obj.occupation_type === "course").length,
+    ).fill(false);
+    setCertsToShow(initCertsToShow);
+  }, [occupations]);
 
   useEffect(() => {
     if (location === "/resume") {
@@ -37,12 +44,30 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
   }, [location]);
 
   const handleShowCert = (idx: number) => {
-    setCertsToShow(prev => {
-      prev[idx] = !prev[idx];
-      return prev;
-    });
-    console.log(certsToShow);
-  }
+    const newCertsToShow = [...certsToShow];
+    newCertsToShow[idx] = !newCertsToShow[idx];
+    setCertsToShow(newCertsToShow);
+    const cardElem = cardRefs.current[idx];
+    if (cardElem && cardElem.style.height === "15rem") {
+      cardElem.style.height = "23rem";
+    } else if (cardElem && cardElem.style.height === "12.5rem") {
+      cardElem.style.height = "21.5rem";
+    } else if (cardElem && cardElem.style.height === "23rem") {
+      cardElem.style.height = "15rem";
+    } else if (cardElem && cardElem.style.height === "21.5rem") {
+      cardElem.style.height = "12.5rem";
+    };
+    setTimeout(() => {
+      const imgElem = imgRefs.current[idx];
+      if (imgElem && imgElem.classList.contains("opacity-0")) { 
+        imgElem.classList.remove("opacity-0");
+        imgElem.classList.add("opacity-75");
+      } else if (imgElem && imgElem.classList.contains("opacity-75")) {
+        imgElem.classList.remove("opacity-75");
+        imgElem.classList.add("opacity-0");
+      };
+    }, 200);
+  };
 
   return (
     <div
@@ -93,23 +118,35 @@ const Resume: React.FC<ResumeProps> = ({ location }) => {
         return (
           <div
             key={idx}
-            className="xl:w-[35rem] xl:h-fit p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 transition-all text-left text-lg rounded-lg cursor-pointer"
+            className={`xl:w-[35rem] transition-all duration-300 p-5 bg-tokyo-3-500 hover:bg-tokyo-4-500 text-left text-lg rounded-lg cursor-pointer`}
+            ref={(el) => (cardRefs.current[idx] = el)}
+            style={{ height: `${course.description.length < 250 ? '12.5rem' : '15rem'}`}}
           >
             <div className="flex flex-col xl:flex-row gap-5">
               <span className="xl:w-1/4 text-xs h-2 xl:h-16 rounded-lg">
                 {course.time_period}
               </span>
-              <div className="xl:w-3/4">
+              <div className="relative xl:w-3/4 h-full">
                 <h3 className="text-base !leading-6 xl:text-lg font-bold -mt-1 mb-2 xl:mb-2">
                   {course.title}
                 </h3>
-                <p className="me-auto mb-2 text-sm font-bold">
+                <p className={`me-auto mb-2 text-sm ${certsToShow[idx] ? `hidden opacity-0` : `opacity-100`} font-bold transition-opacity delay-200`}>
                   Instructor(s): {course.instructor}
                 </p>
                 <div
-                  className="courses-list text-base"
+                  className={`courses-list text-base ${certsToShow[idx] ? `hidden opacity-0` : `opacity-100`} transition-all duration-300 cursor-pointer`}
                   dangerouslySetInnerHTML={{ __html: course.description }}
-                  onClick={() => { handleShowCert(idx) }}
+                  onClick={() => {
+                    handleShowCert(idx);
+                  }}
+                />
+                <img
+                  ref={(el) => (imgRefs.current[idx] = el)}
+                  className={`mt-4 w-full h-full ${certsToShow[idx] ? `` : `hidden`} transition-all duration-200 object-contain opacity-0 rounded-lg`}
+                  src={getImageURL("certificate-java-programming-i.png")}
+                  onClick={() => {
+                    handleShowCert(idx);
+                  }}
                 />
               </div>
             </div>

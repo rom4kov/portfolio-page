@@ -4,6 +4,8 @@ import TextEditor from "../../editor/editor.component";
 
 import { Occupation } from "../../contexts/occupations.context";
 
+import { getImageURL } from "../../utils/image-util";
+
 type OccupationFormProps = {
   handleSubmit: FormEventHandler;
   setShowEditForm: Dispatch<SetStateAction<boolean>>;
@@ -105,6 +107,21 @@ const OccupationForm = ({
             }
           />
         )}
+        <div className="flex gap-3 items-center my-1">
+          <img
+            className="h-12"
+            src={getImageURL(textContent.img_file_path)}
+            alt=""
+          />
+          <p>{textContent.img_file_path}</p>
+          <input
+            type="file"
+            className="flex-none my-2"
+            onChange={(event: ChangeEvent<HTMLInputElement>) => {
+              setFile(event.target.files && event.target.files[0]);
+            }}
+          />
+        </div>
         <TextEditor
           setTextContent={setDescription}
           initialValue={textContent.description}
